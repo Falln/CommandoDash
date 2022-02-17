@@ -13,17 +13,21 @@
     <None Remove="CommandoLogov1_preview_rev_1.png" />
     <None Remove="favicon-16x16.png" />
     <None Remove="favicon-32x32.png" />
+    <None Remove="gear-white-transparent_85x90.png.png" />
     <None Remove="gear_white_transparent.png" />
+    <None Remove="gear_white_transparent_80x80.png" />
     <None Remove="restore-down.png" />
     <None Remove="subtract.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.2.0" />
     <PackageReference Include="FRC.CameraServer" Version="2.0.0" />
     <PackageReference Include="FRC.CameraServer.DesktopLibraries" Version="2.0.0" />
     <PackageReference Include="FRC.NetworkTables.Core" Version="4.1.2" />
     <PackageReference Include="FRC.NetworkTables.Core.DesktopLibraries" Version="4.1.2" />
     <PackageReference Include="FRC.WPILib.Extras" Version="2018.1.0" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,7 +36,9 @@
     <Resource Include="CommandoLogov1_preview_rev_1.png" />
     <Resource Include="favicon-16x16.png" />
     <Resource Include="favicon-32x32.png" />
+    <Resource Include="gear-white-transparent_85x90.png.png" />
     <Resource Include="gear_white_transparent.png" />
+    <Resource Include="gear_white_transparent_80x80.png" />
     <Resource Include="restore-down.png" />
     <Resource Include="subtract.png" />
   </ItemGroup>

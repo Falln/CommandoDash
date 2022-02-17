@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using WPILib;
 
 namespace CommandoDash
 {
@@ -30,6 +31,7 @@ namespace CommandoDash
         public MainWindow()
         {
             InitializeComponent();
+            defaultStates();
             ntInst = NetworkTableInstance.Default;
             ntInst.StartClientTeam(5889);
             ntInst.StartDSClient();
@@ -38,8 +40,12 @@ namespace CommandoDash
                 (in ConnectionNotification _) => Dispatcher.Invoke(
                        new Action(() => updateRobotConnectionStatus())),
                 true);
-
             AddSimpleEntryListener(FMSInfoNT, "FMSControlData", new Action(() => updateRobotMode()));
+        }
+
+        public void defaultStates()
+        {
+            IntakeCamRadio.IsChecked = true;
         }
 
         public void AddSimpleEntryListener(NetworkTable table, String key, Action function)

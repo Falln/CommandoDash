@@ -1,5 +1,5 @@
-﻿using FRC.NetworkTables;
-using NetworkTables.Tables;
+﻿using FRC.CameraServer;
+using FRC.NetworkTables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using WPILib;
+using MjpegProcessor;
 
 namespace CommandoDash
 {
@@ -28,14 +28,30 @@ namespace CommandoDash
     {
         NetworkTableInstance ntInst;
         NetworkTable FMSInfoNT;
+        MjpegDecoder CDDCameraStream;
+
+        string cameraURI = "";
+        string robotIP = "10.58.59.2";
+        string limelightIP = "10.58.89.11";
+        string photonIP = "10.58.89.12";
+        
         public MainWindow()
         {
             InitializeComponent();
             defaultStates();
+
+            //NT Startup
             ntInst = NetworkTableInstance.Default;
             ntInst.StartClientTeam(5889);
             ntInst.StartDSClient();
+
+            //Camera Startup
+            startCamera();
+
+            //NT Tables
             FMSInfoNT = ntInst.GetTable("FMSInfo");
+
+            //NT Listeners
             ntInst.AddConnectionListener(
                 (in ConnectionNotification _) => Dispatcher.Invoke(
                        new Action(() => updateRobotConnectionStatus())),
@@ -45,7 +61,11 @@ namespace CommandoDash
 
         public void defaultStates()
         {
+            //Initialize any default states of the WPF Controls
             IntakeCamRadio.IsChecked = true;
+            cameraURI = CameraURIInput.Text;
+            robotIP = robotIPInput.Text;
+            //cameraStream.Source = new BitmapImage(new Uri("Images/Logo_Square_WhiteBackground_CommandoRobotics.png", UriKind.Relative));
         }
 
         public void AddSimpleEntryListener(NetworkTable table, String key, Action function)
@@ -53,6 +73,39 @@ namespace CommandoDash
             table.GetEntry(key).AddListener((in RefEntryNotification _) =>
                 Dispatcher.Invoke(function),
                 NotifyFlags.New | NotifyFlags.Update);
+        }
+
+        public void startCamera()
+        {
+            //Check if there is a stream already active
+            if (CDDCameraStream != null)
+            {
+                CDDCameraStream.StopStream();
+            }
+
+            //Start the new camera stream decoder
+            CDDCameraStream = new MjpegDecoder();
+            CDDCameraStream.FrameReady += cameraStream_FrameReady;
+            CDDCameraStream.Error += cameraStream_Error;
+            try
+            {
+                CDDCameraStream.ParseStream(new Uri(cameraURI));
+            } catch (Exception _)
+            {
+                CameraURIInput.Text = "Could not find URI";
+                CDDCameraStream.StopStream();
+                //cameraStream.Source = new BitmapImage(new Uri("Images/Logo_Square_WhiteBackground_CommandoRobotics.png", UriKind.Relative));
+            }
+        }
+
+        public void cameraStream_FrameReady(object sender, FrameReadyEventArgs e)
+        {
+            cameraStream.Source = e.BitmapImage;
+        }
+        public void cameraStream_Error(object sender, ErrorEventArgs e)
+        {
+            //TODO Add a default image
+            //cameraStream.Source = new BitmapImage(new Uri("Images/Logo_Square_WhiteBackground_CommandoRobotics.png", UriKind.Relative));
         }
 
         private void updateRobotMode()
@@ -96,6 +149,7 @@ namespace CommandoDash
             {
                 robotStatus.Background = Brushes.Green;
                 robotIPInput.Text = ntInst.GetConnections()[0].RemoteIp;
+                robotIP = robotIPInput.Text;
                 updateRobotMode();
             }
             else
@@ -145,6 +199,63 @@ namespace CommandoDash
                 FMSInfoNT = ntInst.GetTable("FMSInfo");
                 updateRobotMode();
             }
+        }
+
+        private void IntakeCamRadio_Checked(object sender, RoutedEventArgs e)
+        {
+            cameraURI = "http://" + photonIP + ":1181/stream.mjpg";
+            CameraURIInput.Text = cameraURI;
+            startCamera();
+        }
+
+        private void ShooterCamRadio_Checked(object sender, RoutedEventArgs e)
+        {
+            ntInst.GetTable("limelight").GetEntry("camMode").SetDouble(1);
+            cameraURI = "http://" + limelightIP + ":5800/stream.mjpg";
+            CameraURIInput.Text = cameraURI;
+            startCamera();
+        }
+
+        private void OverlayCamRadio_Checked(object sender, RoutedEventArgs e)
+        {
+            cameraURI = "No known IP";
+            CameraURIInput.Text = cameraURI;
+            startCamera();
+        }
+
+        private void IntakeThreshRadio_Checked(object sender, RoutedEventArgs e)
+        {
+            cameraURI = "http://" + photonIP + ":1181/stream.mjpg";
+            CameraURIInput.Text = cameraURI;
+            startCamera();
+        }
+
+        private void ShooterThreshRadio_Checked(object sender, RoutedEventArgs e)
+        {
+            ntInst.GetTable("limelight").GetEntry("camMode").SetDouble(1);
+            cameraURI = "http://" + limelightIP + ":5800/stream.mjpg";
+            CameraURIInput.Text = cameraURI;
+            startCamera();
+        }
+
+        private void RestartCameraConnection_Click(object sender, RoutedEventArgs e)
+        {
+            startCamera();
+            CameraURIInput.Text = cameraURI;
+        }
+
+        private void CameraURIInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                IntakeCamRadio.IsChecked = false;
+                ShooterCamRadio.IsChecked = false;
+                OverlayCamRadio.IsChecked = false;
+                IntakeThreshRadio.IsChecked = false;
+                ShooterThreshRadio.IsChecked = false;
+                cameraURI = CameraURIInput.Text;
+            }
+
         }
     }
 }

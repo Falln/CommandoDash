@@ -16,6 +16,8 @@
     <None Remove="gear-white-transparent_85x90.png.png" />
     <None Remove="gear_white_transparent.png" />
     <None Remove="gear_white_transparent_80x80.png" />
+    <None Remove="Logo_Square_DarkBackground_CommandoRobotics.png" />
+    <None Remove="Logo_Square_WhiteBackground_CommandoRobotics.png" />
     <None Remove="restore-down.png" />
     <None Remove="subtract.png" />
   </ItemGroup>
@@ -26,8 +28,8 @@
     <PackageReference Include="FRC.CameraServer.DesktopLibraries" Version="2.0.0" />
     <PackageReference Include="FRC.NetworkTables.Core" Version="4.1.2" />
     <PackageReference Include="FRC.NetworkTables.Core.DesktopLibraries" Version="4.1.2" />
-    <PackageReference Include="FRC.WPILib.Extras" Version="2018.1.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
+    <PackageReference Include="MJPEG-Decoder" Version="1.2.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +41,8 @@
     <Resource Include="gear-white-transparent_85x90.png.png" />
     <Resource Include="gear_white_transparent.png" />
     <Resource Include="gear_white_transparent_80x80.png" />
+    <Resource Include="Logo_Square_DarkBackground_CommandoRobotics.png" />
+    <Resource Include="Logo_Square_WhiteBackground_CommandoRobotics.png" />
     <Resource Include="restore-down.png" />
     <Resource Include="subtract.png" />
   </ItemGroup>

@@ -18,13 +18,13 @@
         <Brush x:Key="CommandoNavy">#0004B6</Brush>
         <Brush x:Key="CommandoMetalGray">#BCBEC0</Brush>
         <Brush x:Key="PanelGrey">#FF454545</Brush>
-        
+
         <!-- Tab Colors -->
         <Brush x:Key="TabBorderColor">#FF404040</Brush>
         <Brush x:Key="ControlBorderColor">#FF404040</Brush>
         <Color x:Key="DisabledTabColor">#FFC5CBF9</Color>
         <Color x:Key="TabSelectedColor">#FF525252</Color>
-        
+
         <!-- Button Colors -->
         <Brush x:Key="ButtonBackground">#FF343435</Brush>
         <Brush x:Key="ButtonPressed">#FF343435</Brush>
@@ -44,7 +44,7 @@
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="GroupName" Value="CameraRadioGroup"/>
         </Style>
-        
+
         <!-- Button Styles -->
         <Style TargetType="{x:Type Button}" x:Key="WindowButtons">
             <Setter Property="Background" Value="#FF2A2A2A"/>
@@ -89,7 +89,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
+
         <!-- Tab Styles -->
         <Style TargetType="{x:Type TabItem}" x:Key="TabItemBase">
             <Setter Property="BorderThickness" Value="0"/>
@@ -185,7 +185,7 @@
                             <ColumnDefinition Width="911*"/>
                         </Grid.ColumnDefinitions>
                         <Border Height="501" Margin="149,10,42,0" VerticalAlignment="Top" Background="Black">
-                            <MediaElement x:Name="cameraStream"/>
+                            <Image x:Name="cameraStream" Source="Images/Logo_Square_WhiteBackground_CommandoRobotics.png"/>
                         </Border>
                         <Rectangle Margin="9,34,851,586" Fill="{StaticResource ResourceKey=PanelGrey}"/>
                         <Rectangle Margin="9,186,851,293" Fill="{StaticResource ResourceKey=PanelGrey}"/>
@@ -235,14 +235,14 @@
                         <Label Content="Power Consumption&#xD;&#xA;&#xA;" HorizontalAlignment="Left" Margin="58,212,0,0" VerticalAlignment="Top" FontSize="36" Grid.Column="1"/>
                         <Label Content="Robot Status &#xD;&#xA;(Solenoids enabled etc)&#xD;&#xA;&#xA;" HorizontalAlignment="Left" Margin="479,212,0,0" VerticalAlignment="Top" FontSize="36" Grid.Column="1"/>
                         <Label Content="Manual Robot Control&#xD;&#xA;(Dashboard robot control)" HorizontalAlignment="Left" Margin="234,576,0,0" VerticalAlignment="Top" FontSize="36" Grid.Column="1"/>
-                        <Button Content="Restart Camera Connection" Style="{StaticResource CameraConnectionButton}" HorizontalAlignment="Left" Margin="12,123,0,0" VerticalAlignment="Top" Height="27"/>
-                        <TextBox x:Name="CameraIPInput" KeyDown="robotIPInput_KeyDown" Text="10.58.89.2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="20,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="113" Height="21" FontSize="12" Background="#FFB1B1B1" BorderBrush="{x:Null}" TextAlignment="Center"/>
-                        <Label Content="Camera IP" HorizontalAlignment="Left" Margin="49,67,0,0" VerticalAlignment="Top" FontSize="10"/>
-                        <RadioButton x:Name="IntakeCamRadio" Content="IntakeCam"  HorizontalAlignment="Left" Margin="21,227,0,0" VerticalAlignment="Top"/>
-                        <RadioButton x:Name="ShooterCamRadio" Content="ShooterCam" HorizontalAlignment="Left" Margin="21,275,0,0" VerticalAlignment="Top"/>
-                        <RadioButton x:Name="OverlayCamRadio" Content="IntakeWithOverlay" HorizontalAlignment="Left" Margin="21,323,0,0" VerticalAlignment="Top"/>
-                        <RadioButton x:Name="IntakeThreshRadio" Content="IntakeThreshold" HorizontalAlignment="Left" Margin="21,371,0,0" VerticalAlignment="Top"/>
-                        <RadioButton x:Name="ShooterThreshRadio" Content="ShooterThreshold" HorizontalAlignment="Left" Margin="21,419,0,0" VerticalAlignment="Top"/>
+                        <Button x:Name="RestartCameraConnection" Content="Restart Camera Connection" Style="{StaticResource CameraConnectionButton}" HorizontalAlignment="Left" Margin="12,123,0,0" VerticalAlignment="Top" Height="27" Click="RestartCameraConnection_Click"/>
+                        <TextBox x:Name="CameraURIInput" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="17,87,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="120" Height="22" FontSize="12" Background="#FFB1B1B1" BorderBrush="{x:Null}" TextAlignment="Center" KeyDown="CameraURIInput_KeyDown"/>
+                        <Label Content="Camera URI" HorizontalAlignment="Left" Margin="46,67,0,0" VerticalAlignment="Top" FontSize="10"/>
+                        <RadioButton x:Name="IntakeCamRadio" Content="IntakeCam"  HorizontalAlignment="Left" Margin="21,227,0,0" VerticalAlignment="Top" Checked="IntakeCamRadio_Checked"/>
+                        <RadioButton x:Name="ShooterCamRadio" Content="ShooterCam" HorizontalAlignment="Left" Margin="21,275,0,0" VerticalAlignment="Top" Checked="ShooterCamRadio_Checked"/>
+                        <RadioButton x:Name="OverlayCamRadio" Content="IntakeWithOverlay" HorizontalAlignment="Left" Margin="21,323,0,0" VerticalAlignment="Top" Checked="OverlayCamRadio_Checked"/>
+                        <RadioButton x:Name="IntakeThreshRadio" Content="IntakeThreshold" HorizontalAlignment="Left" Margin="21,371,0,0" VerticalAlignment="Top" Checked="IntakeThreshRadio_Checked"/>
+                        <RadioButton x:Name="ShooterThreshRadio" Content="ShooterThreshold" HorizontalAlignment="Left" Margin="21,419,0,0" VerticalAlignment="Top" Checked="ShooterThreshRadio_Checked"/>
 
                     </Grid>
                 </TabItem>

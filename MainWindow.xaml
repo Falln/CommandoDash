@@ -7,7 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="CommandoDash.MainWindow"
         mc:Ignorable="d"
         Icon="/favicon-16x16.png"
-        Title="MainWindow" Height="850" Width="1920" ResizeMode="NoResize"
+        Title="MainWindow" Height="840" Width="1920" ResizeMode="NoResize"
         WindowStartupLocation="Manual" Left="0" Top="0"
         WindowStyle="None" BorderThickness="0" Background="#FF343435">
 
@@ -239,7 +239,7 @@
                         <TextBox x:Name="CameraURIInput" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="17,87,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="120" Height="22" FontSize="12" Background="#FFB1B1B1" BorderBrush="{x:Null}" TextAlignment="Center" KeyDown="CameraURIInput_KeyDown"/>
                         <Label Content="Camera URI" HorizontalAlignment="Left" Margin="46,67,0,0" VerticalAlignment="Top" FontSize="10"/>
                         <RadioButton x:Name="IntakeCamRadio" Content="IntakeCam"  HorizontalAlignment="Left" Margin="21,227,0,0" VerticalAlignment="Top" Checked="IntakeCamRadio_Checked"/>
-                        <RadioButton x:Name="ShooterCamRadio" Content="ShooterCam" HorizontalAlignment="Left" Margin="21,275,0,0" VerticalAlignment="Top" Checked="ShooterCamRadio_Checked"/>
+                        <RadioButton x:Name="ShooterCamRadio" Content="ShooterCam" Unchecked="ShooterCamRadio_Unchecked" HorizontalAlignment="Left" Margin="21,275,0,0" VerticalAlignment="Top" Checked="ShooterCamRadio_Checked"/>
                         <RadioButton x:Name="OverlayCamRadio" Content="IntakeWithOverlay" HorizontalAlignment="Left" Margin="21,323,0,0" VerticalAlignment="Top" Checked="OverlayCamRadio_Checked"/>
                         <RadioButton x:Name="IntakeThreshRadio" Content="IntakeThreshold" HorizontalAlignment="Left" Margin="21,371,0,0" VerticalAlignment="Top" Checked="IntakeThreshRadio_Checked"/>
                         <RadioButton x:Name="ShooterThreshRadio" Content="ShooterThreshold" HorizontalAlignment="Left" Margin="21,419,0,0" VerticalAlignment="Top" Checked="ShooterThreshRadio_Checked"/>

@@ -216,6 +216,11 @@ namespace CommandoDash
             startCamera();
         }
 
+        private void ShooterCamRadio_Unchecked(object sender, RoutedEventArgs e)
+        {
+            ntInst.GetTable("limelight").GetEntry("camMode").SetDouble(0);
+        }ss
+
         private void OverlayCamRadio_Checked(object sender, RoutedEventArgs e)
         {
             cameraURI = "No known IP";
@@ -232,7 +237,7 @@ namespace CommandoDash
 
         private void ShooterThreshRadio_Checked(object sender, RoutedEventArgs e)
         {
-            ntInst.GetTable("limelight").GetEntry("camMode").SetDouble(1);
+            ntInst.GetTable("limelight").GetEntry("camMode").SetDouble(0);
             cameraURI = "http://" + limelightIP + ":5800/stream.mjpg";
             CameraURIInput.Text = cameraURI;
             startCamera();
@@ -257,5 +262,7 @@ namespace CommandoDash
             }
 
         }
+
+
     }
 }

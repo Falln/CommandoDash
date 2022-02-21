@@ -185,7 +185,7 @@
                             <ColumnDefinition Width="911*"/>
                         </Grid.ColumnDefinitions>
                         <Border Height="501" Margin="149,10,42,0" VerticalAlignment="Top" Background="Black">
-                            <Image x:Name="cameraStream" Source="Images/Logo_Square_WhiteBackground_CommandoRobotics.png"/>
+                            <Image x:Name="cameraStream" />
                         </Border>
                         <Rectangle Margin="9,34,851,586" Fill="{StaticResource ResourceKey=PanelGrey}"/>
                         <Rectangle Margin="9,186,851,293" Fill="{StaticResource ResourceKey=PanelGrey}"/>
@@ -243,6 +243,7 @@
                         <RadioButton x:Name="OverlayCamRadio" Content="IntakeWithOverlay" HorizontalAlignment="Left" Margin="21,323,0,0" VerticalAlignment="Top" Checked="OverlayCamRadio_Checked"/>
                         <RadioButton x:Name="IntakeThreshRadio" Content="IntakeThreshold" HorizontalAlignment="Left" Margin="21,371,0,0" VerticalAlignment="Top" Checked="IntakeThreshRadio_Checked"/>
                         <RadioButton x:Name="ShooterThreshRadio" Content="ShooterThreshold" HorizontalAlignment="Left" Margin="21,419,0,0" VerticalAlignment="Top" Checked="ShooterThreshRadio_Checked"/>
+                        <Button Grid.Column="1" Click="Button_Click" Content="TestButton" HorizontalAlignment="Left" Margin="49,561,0,0" VerticalAlignment="Top"/>
 
                     </Grid>
                 </TabItem>

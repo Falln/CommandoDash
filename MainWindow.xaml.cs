@@ -28,6 +28,7 @@ namespace CommandoDash
     {
         NetworkTableInstance ntInst;
         NetworkTable FMSInfoNT;
+        NetworkTable CommandoDashNT;
         MjpegDecoder CDDCameraStream;
 
         string cameraURI = "";
@@ -50,6 +51,7 @@ namespace CommandoDash
 
             //NT Tables
             FMSInfoNT = ntInst.GetTable("FMSInfo");
+            CommandoDashNT = ntInst.GetTable("CommandoDash");
 
             //NT Listeners
             ntInst.AddConnectionListener(
@@ -65,7 +67,7 @@ namespace CommandoDash
             IntakeCamRadio.IsChecked = true;
             cameraURI = CameraURIInput.Text;
             robotIP = robotIPInput.Text;
-            //cameraStream.Source = new BitmapImage(new Uri("Images/Logo_Square_WhiteBackground_CommandoRobotics.png", UriKind.Relative));
+            cameraStream.Source = new BitmapImage(new Uri("Images/Logo_Square_WhiteBackground_CommandoRobotics.png", UriKind.Relative));
         }
 
         public void AddSimpleEntryListener(NetworkTable table, String key, Action function)
@@ -94,7 +96,7 @@ namespace CommandoDash
             {
                 CameraURIInput.Text = "Could not find URI";
                 CDDCameraStream.StopStream();
-                //cameraStream.Source = new BitmapImage(new Uri("Images/Logo_Square_WhiteBackground_CommandoRobotics.png", UriKind.Relative));
+                cameraStream.Source = new BitmapImage(new Uri("Images/Logo_Square_WhiteBackground_CommandoRobotics.png", UriKind.Relative));
             }
         }
 
@@ -104,8 +106,7 @@ namespace CommandoDash
         }
         public void cameraStream_Error(object sender, ErrorEventArgs e)
         {
-            //TODO Add a default image
-            //cameraStream.Source = new BitmapImage(new Uri("Images/Logo_Square_WhiteBackground_CommandoRobotics.png", UriKind.Relative));
+            cameraStream.Source = new BitmapImage(new Uri("Images/Logo_Square_WhiteBackground_CommandoRobotics.png", UriKind.Relative));
         }
 
         private void updateRobotMode()
@@ -225,7 +226,7 @@ namespace CommandoDash
 
         private void IntakeThreshRadio_Checked(object sender, RoutedEventArgs e)
         {
-            cameraURI = "http://" + photonIP + ":1181/stream.mjpg";
+            cameraURI = "http://" + photonIP + ":1182/stream.mjpg";
             CameraURIInput.Text = cameraURI;
             startCamera();
         }
@@ -256,6 +257,12 @@ namespace CommandoDash
                 cameraURI = CameraURIInput.Text;
             }
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NetworkTableEntry entry = CommandoDashNT.GetEntry("testData");
+            entry.SetBoolean(!entry.GetBoolean(false));
         }
     }
 }

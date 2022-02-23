@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using MjpegProcessor;
+using System.Diagnostics;
 
 namespace CommandoDash
 {
@@ -186,6 +187,13 @@ namespace CommandoDash
                 this.WindowStyle = WindowStyle.SingleBorderWindow;
                 this.ResizeMode = ResizeMode.CanResize;
             }
+        }
+
+        private void refreshBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var currentExecutablePath = Process.GetCurrentProcess().MainModule.FileName;
+            Process.Start(currentExecutablePath);
+            Application.Current.Shutdown();
         }
 
         private void robotIPInput_KeyDown(object sender, KeyEventArgs e)

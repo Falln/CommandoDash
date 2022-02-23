@@ -17,8 +17,10 @@
     <None Remove="gear_white_transparent.png" />
     <None Remove="gear_white_transparent_80x80.png" />
     <None Remove="Images\Logo_Square_WhiteBackground_CommandoRobotics.png" />
+    <None Remove="Images\refresh_icon.png" />
     <None Remove="Logo_Square_DarkBackground_CommandoRobotics.png" />
     <None Remove="Logo_Square_WhiteBackground_CommandoRobotics.png" />
+    <None Remove="refresh_icon.png" />
     <None Remove="restore-down.png" />
     <None Remove="subtract.png" />
   </ItemGroup>
@@ -45,8 +47,12 @@
     <Content Include="Images\Logo_Square_WhiteBackground_CommandoRobotics.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\refresh_icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Logo_Square_DarkBackground_CommandoRobotics.png" />
     <Resource Include="Logo_Square_WhiteBackground_CommandoRobotics.png" />
+    <Resource Include="refresh_icon.png" />
     <Resource Include="restore-down.png" />
     <Resource Include="subtract.png" />
   </ItemGroup>

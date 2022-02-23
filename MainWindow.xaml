@@ -66,6 +66,29 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style TargetType="{x:Type Button}" x:Key="RefreshButton">
+            <Setter Property="Background" Value="#FF2A2A2A"/>
+            <Setter Property="Width" Value="19"/>
+            <Setter Property="Height" Value="19"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FF525252"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="{StaticResource ButtonPressed}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <Style TargetType="{x:Type Button}" x:Key="CameraConnectionButton">
             <Setter Property="Background" Value="{StaticResource ButtonBackground}"/>
             <Setter Property="Foreground" Value="White"/>
@@ -187,7 +210,7 @@
                         <Border Height="501" Margin="149,10,42,0" VerticalAlignment="Top" Background="Black">
                             <Image x:Name="cameraStream" />
                         </Border>
-                        <Rectangle Margin="9,34,851,586" Fill="{StaticResource ResourceKey=PanelGrey}"/>
+                        <Rectangle Margin="9,34,851,578" Fill="{StaticResource ResourceKey=PanelGrey}"/>
                         <Rectangle Margin="9,186,851,293" Fill="{StaticResource ResourceKey=PanelGrey}"/>
                         <Label Content="Camera Selector" HorizontalAlignment="Left" Margin="20,186,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="28" FontSize="14" FontWeight="SemiBold"/>
                         <Label Content="Camera Connection" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="28" FontSize="14" FontWeight="SemiBold"/>
@@ -231,7 +254,6 @@
                                 </TransformGroup>
                             </Rectangle.RenderTransform>
                         </Rectangle>
-                        <Label Content="Auto Selection&#xA;" HorizontalAlignment="Center" Margin="0,594,0,0" VerticalAlignment="Top" FontSize="36"/>
                         <Label Content="Power Consumption&#xD;&#xA;&#xA;" HorizontalAlignment="Left" Margin="58,212,0,0" VerticalAlignment="Top" FontSize="36" Grid.Column="1"/>
                         <Label Content="Robot Status &#xD;&#xA;(Solenoids enabled etc)&#xD;&#xA;&#xA;" HorizontalAlignment="Left" Margin="479,212,0,0" VerticalAlignment="Top" FontSize="36" Grid.Column="1"/>
                         <Label Content="Manual Robot Control&#xD;&#xA;(Dashboard robot control)" HorizontalAlignment="Left" Margin="234,576,0,0" VerticalAlignment="Top" FontSize="36" Grid.Column="1"/>
@@ -257,8 +279,12 @@
                     <Grid Background="#FF2A2A2A"/>
                 </TabItem>
             </TabControl>
+            <Button x:Name="refreshBtn" Style="{DynamicResource RefreshButton}" Click="refreshBtn_Click" Grid.Column="14" HorizontalAlignment="Center" Margin="0,4,0,0" VerticalAlignment="Top" Grid.Row="2">
+                <Image Source="/refresh_icon.png" />
+            </Button>
             <Image Margin="757,3,823,0" VerticalAlignment="Top" Source="/gear-white-transparent_85x90.png.png" Grid.Column="11" Grid.RowSpan="3" Width="85" Height="80"/>
             <Grid Grid.Row="2"/>
+
         </Grid>
     </Border>
 </Window>

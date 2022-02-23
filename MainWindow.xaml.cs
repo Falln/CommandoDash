@@ -40,7 +40,6 @@ namespace CommandoDash
         public MainWindow()
         {
             InitializeComponent();
-            defaultStates();
 
             //NT Startup
             ntInst = NetworkTableInstance.Default;
@@ -54,18 +53,28 @@ namespace CommandoDash
             FMSInfoNT = ntInst.GetTable("FMSInfo");
             CommandoDashNT = ntInst.GetTable("CommandoDash");
 
+            //Setup Default States
+            defaultStates();
+
             //NT Listeners
+            //Update RobotConnectionStatus on connection to the NT
             ntInst.AddConnectionListener(
                 (in ConnectionNotification _) => Dispatcher.Invoke(
                        new Action(() => updateRobotConnectionStatus())),
                 true);
+
+            //Robot Mode update listener
             AddSimpleEntryListener(FMSInfoNT, "FMSControlData", new Action(() => updateRobotMode()));
+
+            //Update the what the RIO thinks the Auto selected is
+            AddSimpleEntryListener(CommandoDashNT, "rioAutoSelection", new Action(() => rioAutoSelection_Update()));
         }
 
         public void defaultStates()
         {
             //Initialize any default states of the WPF Controls
             IntakeCamRadio.IsChecked = true;
+            IdealRadio.IsChecked = true;
             cameraURI = CameraURIInput.Text;
             robotIP = robotIPInput.Text;
             cameraStream.Source = new BitmapImage(new Uri("Images/Logo_Square_WhiteBackground_CommandoRobotics.png", UriKind.Relative));
@@ -159,6 +168,11 @@ namespace CommandoDash
                 robotStatus.Background = Brushes.Red;
                 updateRobotMode();
             }
+        }
+
+        private void rioAutoSelection_Update()
+        {
+            RioAutoBox.Text = CommandoDashNT.GetEntry("rioAutoSelection").GetString("");
         }
 
         private void closeBtn_Click(object sender, RoutedEventArgs e)
@@ -276,6 +290,36 @@ namespace CommandoDash
         {
             NetworkTableEntry entry = CommandoDashNT.GetEntry("testData");
             entry.SetBoolean(!entry.GetBoolean(false));
+        }
+
+        private void TaxiRadio_Checked(object sender, RoutedEventArgs e)
+        {
+            NetworkTableEntry entry = CommandoDashNT.GetEntry("autoSelection");
+            entry.SetString("Taxi");
+        }
+
+        private void SpareRadio_Checked(object sender, RoutedEventArgs e)
+        {
+            NetworkTableEntry entry = CommandoDashNT.GetEntry("autoSelection");
+            entry.SetString("Spare");
+        }
+
+        private void IdealRadio_Checked(object sender, RoutedEventArgs e)
+        {
+            NetworkTableEntry entry = CommandoDashNT.GetEntry("autoSelection");
+            entry.SetString("IdealAuto");
+        }
+
+        private void SecondAutoRadio_Checked(object sender, RoutedEventArgs e)
+        {
+            NetworkTableEntry entry = CommandoDashNT.GetEntry("autoSelection");
+            entry.SetString("SecondAuto");
+        }
+
+        private void FullSendRadio_Checked(object sender, RoutedEventArgs e)
+        {
+            NetworkTableEntry entry = CommandoDashNT.GetEntry("autoSelection");
+            entry.SetString("FullSend");
         }
     }
 }

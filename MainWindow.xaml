@@ -292,24 +292,30 @@
                         <RadioButton x:Name="ShooterThreshRadio" Style="{StaticResource CameraRadioButtons}" Content="ShooterThreshold" HorizontalAlignment="Left" Margin="21,419,0,0" VerticalAlignment="Top" Checked="ShooterThreshRadio_Checked"/>
 
                         <!-- Auto Selection Section -->
-                        <Rectangle Margin="32,576,793,54" Fill="{StaticResource ResourceKey=PanelGrey}"/>
-                        <RadioButton Style="{StaticResource AutoSelectionButtons}" Content="Taxi" HorizontalAlignment="Left" Margin="234,557,0,0" VerticalAlignment="Top"/>
-                        <RadioButton Style="{StaticResource AutoSelectionButtons}" Content="Spare" HorizontalAlignment="Left" Margin="234,661,0,0" VerticalAlignment="Top"/>
-                        <RadioButton Style="{StaticResource AutoSelectionButtons}" Content="IdealAuto" HorizontalAlignment="Left" Margin="366,606,0,0" VerticalAlignment="Top"/>
-                        <RadioButton Style="{StaticResource AutoSelectionButtons}" Content="SecondAuto" HorizontalAlignment="Left" Margin="820,661,0,0" VerticalAlignment="Top"/>
-                        <RadioButton Style="{StaticResource AutoSelectionButtons}" Content="FullSend" HorizontalAlignment="Left" Margin="820,557,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.005,-0.186"/>
-                        <Border Background="{StaticResource TextBoxBackground}" HorizontalAlignment="Left" Margin="66,620,0,0" VerticalAlignment="Top" Height="35" Width="102">
-                            <TextBlock x:Name="RioAutoBox" Text="RIOData" VerticalAlignment="Center" Margin="4,0,4,0" FontSize="16" Background="{Binding Mode=OneWay, Source={StaticResource TextBoxBackground}}" TextAlignment="Left"/>
+                        <Rectangle Margin="34,539,491,29" Fill="{StaticResource ResourceKey=PanelGrey}"/>
+                        <RadioButton x:Name="TaxiRadio" Style="{StaticResource AutoSelectionButtons}" Content="Taxi" Checked="TaxiRadio_Checked" HorizontalAlignment="Left" Margin="63,572,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.515,-0.229"/>
+                        <RadioButton x:Name="SpareRadio" Style="{StaticResource AutoSelectionButtons}" Content="Spare" Checked="SpareRadio_Checked" HorizontalAlignment="Left" Margin="63,658,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.495,0.114"/>
+                        <RadioButton x:Name="IdealRadio" Style="{StaticResource AutoSelectionButtons}" Content="IdealAuto" Checked="IdealRadio_Checked" HorizontalAlignment="Left" Margin="219,630,0,0" VerticalAlignment="Top"/>
+                        <RadioButton x:Name="SecondRadio" Style="{StaticResource AutoSelectionButtons}" Content="SecondAuto" Checked="SecondAutoRadio_Checked" HorizontalAlignment="Left" Margin="376,651,0,0" VerticalAlignment="Top"/>
+                        <RadioButton x:Name="FullSendRadio" Style="{StaticResource AutoSelectionButtons}" Content="FullSend" Checked="FullSendRadio_Checked"  HorizontalAlignment="Left" Margin="376,572,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.005,-0.186"/>
+                        <Border Background="{StaticResource TextBoxBackground}" HorizontalAlignment="Left" Margin="218,592,0,0" VerticalAlignment="Top" Height="18" Width="102">
+                            <TextBlock x:Name="RioAutoBox" Text="RIOData" VerticalAlignment="Center" Margin="4,0,4,0" Background="{Binding Mode=OneWay, Source={StaticResource TextBoxBackground}}" TextAlignment="Left"/>
                         </Border>
-                        <Label Content="RIO Reported Auto" HorizontalAlignment="Left" Margin="46,590,0,0" VerticalAlignment="Top" FontSize="16"/>
-                        <Image HorizontalAlignment="Left" Height="210" Margin="498,516,0,0" VerticalAlignment="Top" Width="314" Source="/FRC 2022 PathPlanner Half-Field - Ideal.png"/>
-                        
+                        <Label Content="RIO Reported Auto" HorizontalAlignment="Left" Margin="214,570,0,0" VerticalAlignment="Top"/>
+                        <Image HorizontalAlignment="Left" Height="187" Margin="564,533,0,0" VerticalAlignment="Top" Width="380" Source="/FRC 2022 PathPlanner Field - Ideal.png"/>
+                        <Label Content="Autonomous Selection" HorizontalAlignment="Left" Margin="192,541,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="28" FontSize="14" FontWeight="SemiBold"/>
+
 
 
                     </Grid>
                 </TabItem>
                 <TabItem Header="AutoLayouts"  Style="{DynamicResource TabItemBase}">
-                    <Grid Background="#FF2A2A2A"/>
+                    <Grid Background="#FF2A2A2A">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="23*"/>
+                            <ColumnDefinition Width="1883*"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
                 </TabItem>
                 <TabItem Header="PIDTuning" Style="{DynamicResource TabItemBase}">
                     <Grid Background="#FF2A2A2A"/>

@@ -40,7 +40,7 @@ namespace CommandoDash
         public MainWindow()
         {
             InitializeComponent();
-            defaultStates();
+            
 
             //NT Startup
             ntInst = NetworkTableInstance.Default;
@@ -54,12 +54,18 @@ namespace CommandoDash
             FMSInfoNT = ntInst.GetTable("FMSInfo");
             CommandoDashNT = ntInst.GetTable("CommandoDash");
 
+            defaultStates();
+
             //NT Listeners
             ntInst.AddConnectionListener(
                 (in ConnectionNotification _) => Dispatcher.Invoke(
                        new Action(() => updateRobotConnectionStatus())),
                 true);
+            //Robot Mode update listener
             AddSimpleEntryListener(FMSInfoNT, "FMSControlData", new Action(() => updateRobotMode()));
+
+            //Update the what the RIO thinks the Auto selected is
+            AddSimpleEntryListener(CommandoDashNT, "rioAutoSelection", new Action(() => rioAutoSelection_Update()));
         }
 
         public void defaultStates()
@@ -69,6 +75,7 @@ namespace CommandoDash
             cameraURI = CameraURIInput.Text;
             robotIP = robotIPInput.Text;
             cameraStream.Source = new BitmapImage(new Uri("Images/Logo_Square_WhiteBackground_CommandoRobotics.png", UriKind.Relative));
+            AutoComboBox.SelectedItem = IdealAutoCBI;
         }
 
         public void AddSimpleEntryListener(NetworkTable table, String key, Action function)
@@ -160,6 +167,12 @@ namespace CommandoDash
                 updateRobotMode();
             }
         }
+
+        private void rioAutoSelection_Update()
+        {
+            RioAutoBox.Text = CommandoDashNT.GetEntry("rioAutoSelection").GetString("");
+        }
+
 
         private void closeBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -272,10 +285,20 @@ namespace CommandoDash
 
         }
 
+        private void AutoComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            NetworkTableEntry entry = CommandoDashNT.GetEntry("autoSelection");
+            ComboBoxItem autoCBI = (ComboBoxItem)AutoComboBox.SelectedItem;
+            entry.SetString(autoCBI.Content.ToString());
+        }
+
+        //TESTING BUTTON
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             NetworkTableEntry entry = CommandoDashNT.GetEntry("testData");
             entry.SetBoolean(!entry.GetBoolean(false));
         }
+
+
     }
 }

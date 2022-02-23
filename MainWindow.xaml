@@ -201,9 +201,11 @@
                 <Image Source="/close.png" />
             </Button>
 
+            <!-- Tabs -->
             <TabControl Style="{DynamicResource TabControlBase}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="14" Margin="5,30,5,5" Grid.RowSpan="2">
                 <TabItem Header="DriveTime" Style="{DynamicResource TabItemBase}" BorderBrush="#FF2A2A2A">
                     <Grid Background="#FF2A2A2A">
+                        <!-- DriveTime -->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="995*"/>
                             <ColumnDefinition Width="911*"/>
@@ -211,10 +213,6 @@
                         <Border Height="501" Margin="149,10,42,0" VerticalAlignment="Top" Background="Black">
                             <Image x:Name="cameraStream" />
                         </Border>
-                        <Rectangle Margin="9,34,851,578" Fill="{StaticResource ResourceKey=PanelGrey}"/>
-                        <Rectangle Margin="9,186,851,293" Fill="{StaticResource ResourceKey=PanelGrey}"/>
-                        <Label Content="Camera Selector" HorizontalAlignment="Left" Margin="20,186,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="28" FontSize="14" FontWeight="SemiBold"/>
-                        <Label Content="Camera Connection" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="28" FontSize="14" FontWeight="SemiBold"/>
                         <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="497" Margin="10,16,0,0" Stroke="Black" VerticalAlignment="Top" Width="428" RenderTransformOrigin="0.5,0.5">
                             <Rectangle.RenderTransform>
                                 <TransformGroup>
@@ -248,22 +246,40 @@
                         <Label Content="Power Consumption&#xD;&#xA;&#xA;" HorizontalAlignment="Left" Margin="58,212,0,0" VerticalAlignment="Top" FontSize="36" Grid.Column="1"/>
                         <Label Content="Robot Status &#xD;&#xA;(Solenoids enabled etc)&#xD;&#xA;&#xA;" HorizontalAlignment="Left" Margin="479,212,0,0" VerticalAlignment="Top" FontSize="36" Grid.Column="1"/>
                         <Label Content="Manual Robot Control&#xD;&#xA;(Dashboard robot control)" HorizontalAlignment="Left" Margin="234,576,0,0" VerticalAlignment="Top" FontSize="36" Grid.Column="1"/>
-                        <Button x:Name="RestartCameraConnection" Content="Restart Camera Connection" Style="{StaticResource CameraConnectionButton}" HorizontalAlignment="Left" Margin="12,123,0,0" VerticalAlignment="Top" Height="27" Click="RestartCameraConnection_Click"/>
+                        <Button Grid.Column="1" Click="Button_Click" Content="TestButton" HorizontalAlignment="Left" Margin="49,561,0,0" VerticalAlignment="Top"/>
+
+                        <!-- Camera Connection -->
+                        <Rectangle Margin="9,34,851,578" Fill="{StaticResource ResourceKey=PanelGrey}"/>
+                        <Label Content="Camera Connection" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="28" FontSize="14" FontWeight="SemiBold"/>
                         <TextBox x:Name="CameraURIInput" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="17,87,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="120" Height="22" FontSize="12" Background="#FFB1B1B1" BorderBrush="{x:Null}" TextAlignment="Center" KeyDown="CameraURIInput_KeyDown"/>
                         <Label Content="Camera URI" HorizontalAlignment="Left" Margin="46,67,0,0" VerticalAlignment="Top" FontSize="10"/>
+                        <Button x:Name="RestartCameraConnection" Content="Restart Camera Connection" Style="{StaticResource CameraConnectionButton}" HorizontalAlignment="Left" Margin="12,123,0,0" VerticalAlignment="Top" Height="27" Click="RestartCameraConnection_Click"/>
+
+                        <!-- Camera Selector -->
+                        <Rectangle Margin="9,186,851,293" Fill="{StaticResource ResourceKey=PanelGrey}"/>
+                        <Label Content="Camera Selector" HorizontalAlignment="Left" Margin="20,186,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="28" FontSize="14" FontWeight="SemiBold"/>
                         <RadioButton x:Name="IntakeCamRadio" Content="IntakeCam"  HorizontalAlignment="Left" Margin="21,227,0,0" VerticalAlignment="Top" Checked="IntakeCamRadio_Checked"/>
                         <RadioButton x:Name="ShooterCamRadio" Content="ShooterCam" Unchecked="ShooterCamRadio_Unchecked" HorizontalAlignment="Left" Margin="21,275,0,0" VerticalAlignment="Top" Checked="ShooterCamRadio_Checked"/>
                         <RadioButton x:Name="OverlayCamRadio" Content="IntakeWithOverlay" HorizontalAlignment="Left" Margin="21,323,0,0" VerticalAlignment="Top" Checked="OverlayCamRadio_Checked"/>
                         <RadioButton x:Name="IntakeThreshRadio" Content="IntakeThreshold" HorizontalAlignment="Left" Margin="21,371,0,0" VerticalAlignment="Top" Checked="IntakeThreshRadio_Checked"/>
                         <RadioButton x:Name="ShooterThreshRadio" Content="ShooterThreshold" HorizontalAlignment="Left" Margin="21,419,0,0" VerticalAlignment="Top" Checked="ShooterThreshRadio_Checked"/>
-                        <Button Grid.Column="1" Click="Button_Click" Content="TestButton" HorizontalAlignment="Left" Margin="49,561,0,0" VerticalAlignment="Top"/>
 
+                        <!-- Auto Selection Section -->
+                        <Rectangle Margin="89,538,638,28" Fill="{StaticResource ResourceKey=PanelGrey}"/>
+                        <ComboBox x:Name="AutoComboBox" HorizontalAlignment="Left" Margin="112,580,0,0" VerticalAlignment="Top" Width="222" Height="32" FontSize="16" Background="{StaticResource TextBoxBackground}" SelectionChanged="AutoComboBox_SelectionChanged">
+                            <ComboBoxItem x:Name="IdealAutoCBI">Ideal Auto</ComboBoxItem>
+                            <ComboBoxItem>2nd Auto</ComboBoxItem>
+                            <ComboBoxItem>Spare</ComboBoxItem>
+                            <ComboBoxItem>Full Send</ComboBoxItem>
+                            <ComboBoxItem>Taxi</ComboBoxItem>
+                        </ComboBox>
+                        <Label Content="Autonomous Selection" HorizontalAlignment="Left" Margin="138,549,0,0" VerticalAlignment="Top" FontSize="16"/>
+                        <Border Background="{StaticResource TextBoxBackground}" HorizontalAlignment="Left" Margin="112,653,0,0" VerticalAlignment="Top" Height="32" Width="222">
+                            <TextBlock x:Name="RioAutoBox" Text="RIOData" VerticalAlignment="Center" Margin="4,0,4,0" FontSize="16" Background="{Binding Mode=OneWay, Source={StaticResource TextBoxBackground}}" TextAlignment="Left"/>
+                        </Border>
+                        <Label Content="RIO Reported Auto" HorizontalAlignment="Left" Margin="151,622,0,0" VerticalAlignment="Top" FontSize="16"/>
+                        <Image HorizontalAlignment="Left" Height="207" Margin="455,519,0,0" VerticalAlignment="Top" Width="415" Source="/Images/FRC 2022 PathPlanner Field - Ideal.png"/>
 
-                        <ComboBox HorizontalAlignment="Left" Margin="79,586,0,0" VerticalAlignment="Top" Width="222" Height="32" FontSize="16"/>
-                        <Label Content="Autonomous Selection" HorizontalAlignment="Left" Margin="105,558,0,0" VerticalAlignment="Top" FontSize="16"/>
-                        <TextBlock HorizontalAlignment="Left" Margin="79,656,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="36" Width="222" FontSize="16" Background="{Binding Mode=OneWay, Source={StaticResource TextBoxBackground}}"/>
-                        <Label Content="RIO Reported Auto" HorizontalAlignment="Left" Margin="118,630,0,0" VerticalAlignment="Top" FontSize="16"/>
-                        <Image HorizontalAlignment="Left" Height="206" Margin="410,526,0,0" VerticalAlignment="Top" Width="412" Source="/FRC 2022 PathPlanner Field.png"/>
 
                     </Grid>
                 </TabItem>

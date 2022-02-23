@@ -17,6 +17,7 @@
     <None Remove="gear-white-transparent_85x90.png.png" />
     <None Remove="gear_white_transparent.png" />
     <None Remove="gear_white_transparent_80x80.png" />
+    <None Remove="Images\FRC 2022 PathPlanner Field - Ideal.png" />
     <None Remove="Images\FRC 2022 PathPlanner Field.png" />
     <None Remove="Images\Logo_Square_WhiteBackground_CommandoRobotics.png" />
     <None Remove="Images\refresh_icon.png" />
@@ -47,6 +48,9 @@
     <Resource Include="gear-white-transparent_85x90.png.png" />
     <Resource Include="gear_white_transparent.png" />
     <Resource Include="gear_white_transparent_80x80.png" />
+    <Content Include="Images\FRC 2022 PathPlanner Field - Ideal.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\FRC 2022 PathPlanner Field.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

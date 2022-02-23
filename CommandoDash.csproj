@@ -13,9 +13,11 @@
     <None Remove="CommandoLogov1_preview_rev_1.png" />
     <None Remove="favicon-16x16.png" />
     <None Remove="favicon-32x32.png" />
+    <None Remove="FRC 2022 PathPlanner Field.png" />
     <None Remove="gear-white-transparent_85x90.png.png" />
     <None Remove="gear_white_transparent.png" />
     <None Remove="gear_white_transparent_80x80.png" />
+    <None Remove="Images\FRC 2022 PathPlanner Field.png" />
     <None Remove="Images\Logo_Square_WhiteBackground_CommandoRobotics.png" />
     <None Remove="Images\refresh_icon.png" />
     <None Remove="Logo_Square_DarkBackground_CommandoRobotics.png" />
@@ -41,9 +43,13 @@
     <Resource Include="CommandoLogov1_preview_rev_1.png" />
     <Resource Include="favicon-16x16.png" />
     <Resource Include="favicon-32x32.png" />
+    <Resource Include="FRC 2022 PathPlanner Field.png" />
     <Resource Include="gear-white-transparent_85x90.png.png" />
     <Resource Include="gear_white_transparent.png" />
     <Resource Include="gear_white_transparent_80x80.png" />
+    <Content Include="Images\FRC 2022 PathPlanner Field.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Logo_Square_WhiteBackground_CommandoRobotics.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

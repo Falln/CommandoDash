@@ -18,6 +18,7 @@
         <Brush x:Key="CommandoNavy">#0004B6</Brush>
         <Brush x:Key="CommandoMetalGray">#BCBEC0</Brush>
         <Brush x:Key="PanelGrey">#FF454545</Brush>
+        <Brush x:Key="TextBoxBackground">#FFB1B1B1</Brush>
 
         <!-- Tab Colors -->
         <Brush x:Key="TabBorderColor">#FF404040</Brush>
@@ -244,16 +245,6 @@
                                 </TransformGroup>
                             </Rectangle.RenderTransform>
                         </Rectangle>
-                        <Rectangle HorizontalAlignment="Center" Height="192" Margin="0,533,0,0" Stroke="Black" VerticalAlignment="Top" Width="926" RenderTransformOrigin="0.5,0.5">
-                            <Rectangle.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform ScaleY="-1"/>
-                                    <SkewTransform/>
-                                    <RotateTransform/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Rectangle.RenderTransform>
-                        </Rectangle>
                         <Label Content="Power Consumption&#xD;&#xA;&#xA;" HorizontalAlignment="Left" Margin="58,212,0,0" VerticalAlignment="Top" FontSize="36" Grid.Column="1"/>
                         <Label Content="Robot Status &#xD;&#xA;(Solenoids enabled etc)&#xD;&#xA;&#xA;" HorizontalAlignment="Left" Margin="479,212,0,0" VerticalAlignment="Top" FontSize="36" Grid.Column="1"/>
                         <Label Content="Manual Robot Control&#xD;&#xA;(Dashboard robot control)" HorizontalAlignment="Left" Margin="234,576,0,0" VerticalAlignment="Top" FontSize="36" Grid.Column="1"/>
@@ -266,6 +257,13 @@
                         <RadioButton x:Name="IntakeThreshRadio" Content="IntakeThreshold" HorizontalAlignment="Left" Margin="21,371,0,0" VerticalAlignment="Top" Checked="IntakeThreshRadio_Checked"/>
                         <RadioButton x:Name="ShooterThreshRadio" Content="ShooterThreshold" HorizontalAlignment="Left" Margin="21,419,0,0" VerticalAlignment="Top" Checked="ShooterThreshRadio_Checked"/>
                         <Button Grid.Column="1" Click="Button_Click" Content="TestButton" HorizontalAlignment="Left" Margin="49,561,0,0" VerticalAlignment="Top"/>
+
+
+                        <ComboBox HorizontalAlignment="Left" Margin="79,586,0,0" VerticalAlignment="Top" Width="222" Height="32" FontSize="16"/>
+                        <Label Content="Autonomous Selection" HorizontalAlignment="Left" Margin="105,558,0,0" VerticalAlignment="Top" FontSize="16"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="79,656,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="36" Width="222" FontSize="16" Background="{Binding Mode=OneWay, Source={StaticResource TextBoxBackground}}"/>
+                        <Label Content="RIO Reported Auto" HorizontalAlignment="Left" Margin="118,630,0,0" VerticalAlignment="Top" FontSize="16"/>
+                        <Image HorizontalAlignment="Left" Height="206" Margin="410,526,0,0" VerticalAlignment="Top" Width="412" Source="/FRC 2022 PathPlanner Field.png"/>
 
                     </Grid>
                 </TabItem>

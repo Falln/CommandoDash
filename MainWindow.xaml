@@ -11,7 +11,7 @@
         Icon="/favicon-16x16.png"
         Title="MainWindow" Height="840" Width="1920" ResizeMode="NoResize"
         WindowStartupLocation="Manual" Left="0" Top="0"
-        WindowStyle="None" BorderThickness="0" Background="#FFA42424">
+        WindowStyle="None" BorderThickness="0" Background="#FF0A1550">
 
     <Window.Resources>
         <!-- Default Colors -->
@@ -39,8 +39,20 @@
         <Brush x:Key="AutoButtonHovered">#FFA42424</Brush>
         <Brush x:Key="AutoButtonPressed">#FF581010</Brush>
         <Brush x:Key="AutoButtonActive">#FF0000</Brush>
-        
+
         <!-- Status Blocks Colors -->
+        <Brush x:Key="SolenoidDisabled">#FF343435</Brush>
+        <Brush x:Key="SolenoidEnabled">#FF343435</Brush>
+        <Brush x:Key="SolenoidBorder">#FF343435</Brush>
+        <Brush x:Key="LimeSeesTarget">#FF149562</Brush>
+        <Brush x:Key="LimeDefault">#FF0A5034</Brush>
+        <Brush x:Key="LimeBorder">#FF0F724B</Brush>
+        <Brush x:Key="HoundRedHounding">#FFCC1311</Brush>
+        <Brush x:Key="HoundRedDefault">#FF6C0D0C</Brush>
+        <Brush x:Key="HoundRedBorder">#FF9C100E</Brush>
+        <Brush x:Key="HoundBlueHounding">#FF0270EA</Brush>
+        <Brush x:Key="HoundBlueDefault">#FF013F84</Brush>
+        <Brush x:Key="HoundBlueBorder">#FF0157B7</Brush>
 
         <!-- Default Styles -->
         <Style TargetType="{x:Type Label}">
@@ -54,9 +66,32 @@
 
         <!-- TextBlock/Box Styles -->
         <Style TargetType="{x:Type local:StatusTextBlock}" x:Key="StatusTextBlocks">
-            
+            <Setter Property="Height" Value="76"/>
+            <!--1.428-->
+            <Setter Property="Width" Value="108"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="{StaticResource ButtonBackground}"/>
+            <Setter Property="IsEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type local:StatusTextBlock}">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="3">
+                            <ContentPresenter Content="{TemplateBinding Text}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsActive" Value="True">
+                    <Setter Property="Background" Value="{Binding ActiveBrush, RelativeSource={RelativeSource Self}}"/>
+                </Trigger>
+                <Trigger Property="IsActive" Value="False">
+                    <Setter Property="Background" Value="{Binding InactiveBrush, RelativeSource={RelativeSource Self}}"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
-        
+
         <!-- Button Styles -->
         <Style TargetType="{x:Type Button}" x:Key="WindowButtons">
             <Setter Property="Background" Value="#FF2A2A2A"/>
@@ -324,15 +359,15 @@
                         <Label Grid.Column="1" Content="Index Status" HorizontalAlignment="Left" Margin="800,19,0,0" VerticalAlignment="Top" FontSize="14" FontFamily="Segoe UI Semibold"/>
 
                         <!-- Solenoid Status -->
-                        <local:StatusTextBlock Margin="468,295,342,370" Background="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
-                        <local:StatusTextBlock Margin="574,295,236,370" Background="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
-                        <local:StatusTextBlock Margin="519,371,290,294" Background="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
+                        <local:StatusTextBlock x:Name="IntakeSolSB" Style="{StaticResource ResourceKey=StatusTextBlocks}" ActiveBrush="{StaticResource SolenoidEnabled}" InactiveBrush="{StaticResource SolenoidDisabled}" BorderBrush="{StaticResource SolenoidBorder}"  Margin="449,288,354,372" Grid.Column="1" Text="Intake"/>
+                        <local:StatusTextBlock x:Name="MidSolSB" Style="{StaticResource ResourceKey=StatusTextBlocks}" ActiveBrush="{StaticResource SolenoidEnabled}" InactiveBrush="{StaticResource SolenoidDisabled}" BorderBrush="{StaticResource SolenoidBorder}" Margin="563,288,240,372" Grid.Column="1" Text="Mid"/>
+                        <local:StatusTextBlock x:Name="TraversalSolSB" Style="{StaticResource ResourceKey=StatusTextBlocks}" ActiveBrush="{StaticResource SolenoidEnabled}" InactiveBrush="{StaticResource SolenoidDisabled}" BorderBrush="{StaticResource SolenoidBorder}" Margin="506,369,297,291" Grid.Column="1" Text="Traversal"/>
 
                         <!-- Vision Status -->
-                        <local:StatusTextBlock Margin="706,292,119,378" Background="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
-                        <local:StatusTextBlock Margin="797,292,28,378" Background="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
-                        <local:StatusTextBlock Margin="706,378,119,293" Background="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
-                        <local:StatusTextBlock Margin="797,378,28,293" Background="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
+                        <local:StatusTextBlock x:Name="LimeSeesTargetSB" Style="{StaticResource ResourceKey=StatusTextBlocks}" ActiveBrush="{StaticResource LimeSeesTarget}" InactiveBrush="{StaticResource LimeDefault}" BorderBrush="{StaticResource LimeBorder}" Margin="690,288,113,372" Grid.Column="1" Text="Seeing HUB"/>
+                        <local:StatusTextBlock x:Name="LimeTrackingTargetSB" Style="{StaticResource ResourceKey=StatusTextBlocks}" ActiveBrush="{StaticResource LimeSeesTarget}" InactiveBrush="{StaticResource LimeDefault}" BorderBrush="{StaticResource LimeBorder}" Margin="800,288,3,372" Grid.Column="1" Text="Auto Aiming"/>
+                        <local:StatusTextBlock x:Name="HoundSeesTargetSB" Style="{StaticResource ResourceKey=StatusTextBlocks}" ActiveBrush="{StaticResource HoundBlueHounding}" InactiveBrush="{StaticResource HoundBlueDefault}" BorderBrush="{StaticResource HoundBlueBorder}" Margin="690,369,113,291" Grid.Column="1" Text="Seeing Cargo"/>
+                        <local:StatusTextBlock x:Name="HoundHoundingTargetSB" Style="{StaticResource ResourceKey=StatusTextBlocks}" ActiveBrush="{StaticResource HoundBlueHounding}" InactiveBrush="{StaticResource HoundBlueDefault}" BorderBrush="{StaticResource HoundBlueBorder}" Margin="800,369,3,291" Grid.Column="1" Text="Hounding"/>
 
                         <!-- Robot Status -->
                         <Label Content="Robot Status" HorizontalAlignment="Left" Margin="627,520,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="28" FontSize="16" FontWeight="SemiBold" Grid.Column="1"/>

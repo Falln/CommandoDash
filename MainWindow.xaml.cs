@@ -67,6 +67,9 @@ namespace CommandoDash
 
             //Update the what the RIO thinks the Auto selected is
             AddSimpleEntryListener(CommandoDashNT.GetEntry("rioAutoSelection"), new Action(() => rioAutoSelection_Update()));
+
+            //Update Dash based on current Alliance Color
+            AddSimpleEntryListener(CommandoDashNT.GetSubTable("AllianceAndModeData").GetEntry("alliance"), new Action(() => alliance_Update()));
         }
 
         public void defaultStates()
@@ -77,6 +80,8 @@ namespace CommandoDash
             cameraURI = CameraURIInput.Text;
             robotIP = robotIPInput.Text;
             cameraStream.Source = new BitmapImage(new Uri("Images/Logo_Square_WhiteBackground_CommandoRobotics.png", UriKind.Relative));
+            LimeTrackingTargetSB.IsActive = true;
+            HoundHoundingTargetSB.IsActive = true;
         }
 
         public void AddSimpleEntryListener(NetworkTableEntry entry, Action function)
@@ -106,20 +111,6 @@ namespace CommandoDash
                 CameraURIInput.Text = "Could not find URI";
                 CDDCameraStream.StopStream();
                 cameraStream.Source = new BitmapImage(new Uri("Images/Logo_Square_WhiteBackground_CommandoRobotics.png", UriKind.Relative));
-            }
-        }
-
-        public class StatusTextBlock : TextBlock
-        {
-            public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register(
-                "IsActive", typeof(bool),
-                typeof(TextBlock)
-            );
-
-            public bool IsActive
-            {
-                get => (bool)GetValue(IsActiveProperty);
-                set => SetValue(IsActiveProperty, value);
             }
         }
 
@@ -186,6 +177,28 @@ namespace CommandoDash
         private void rioAutoSelection_Update()
         {
             RioAutoBox.Text = CommandoDashNT.GetEntry("rioAutoSelection").GetString("");
+        }
+
+        private void alliance_Update()
+        {
+            if (CommandoDashNT.GetSubTable("AllianceAndModeData").GetEntry("alliance").GetDouble(0) == 1)
+            {
+                HoundHoundingTargetSB.ActiveBrush = (Brush) this.Resources["HoundRedHounding"];
+                HoundHoundingTargetSB.InactiveBrush = (Brush) this.Resources["HoundRedDefault"];
+                HoundHoundingTargetSB.BorderBrush = (Brush)this.Resources["HoundRedBorder"];
+                HoundSeesTargetSB.ActiveBrush = (Brush) this.Resources["HoundRedHounding"];
+                HoundSeesTargetSB.InactiveBrush = (Brush) this.Resources["HoundRedDefault"];
+                HoundSeesTargetSB.BorderBrush = (Brush)this.Resources["HoundRedBorder"];
+            } else
+            {
+                HoundHoundingTargetSB.ActiveBrush = (Brush)this.Resources["HoundBlueHounding"];
+                HoundHoundingTargetSB.InactiveBrush = (Brush)this.Resources["HoundBlueDefault"];
+                HoundHoundingTargetSB.BorderBrush = (Brush)this.Resources["HoundBlueBorder"];
+                HoundSeesTargetSB.ActiveBrush = (Brush)this.Resources["HoundBlueHounding"];
+                HoundSeesTargetSB.InactiveBrush = (Brush)this.Resources["HoundBlueDefault"];
+                HoundSeesTargetSB.BorderBrush = (Brush)this.Resources["HoundBlueBorder"];
+            }
+            
         }
 
 
@@ -305,6 +318,8 @@ namespace CommandoDash
         {
             NetworkTableEntry entry = CommandoDashNT.GetEntry("testData");
             entry.SetBoolean(!entry.GetBoolean(false));
+            HoundHoundingTargetSB.IsActive = !HoundHoundingTargetSB.IsActive;
+            LimeTrackingTargetSB.IsActive = !LimeTrackingTargetSB.IsActive;
         }
 
         private void TaxiRadio_Checked(object sender, RoutedEventArgs e)

@@ -44,17 +44,43 @@ namespace CommandoDash
     ///     <MyNamespace:CustomControl1/>
     ///
     /// </summary>
-    public class StatusTextBlock : TextBlock
+    public class StatusTextBlock : TextBox
     {
+
+        //IsActive Property
         public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register(
            "IsActive", typeof(bool),
-           typeof(TextBlock)
+           typeof(TextBox)
         );
 
         public bool IsActive
         {
             get { return (bool)GetValue(IsActiveProperty); }
             set { SetValue(IsActiveProperty, value); }
+        }
+
+        //ActiveBrush Property
+        public static readonly DependencyProperty ActiveBrushProperty = DependencyProperty.Register(
+            "ActiveBrush", typeof(Brush),
+            typeof(TextBox)
+        );
+
+        public Brush ActiveBrush
+        {
+            get { return (Brush)GetValue(ActiveBrushProperty); }
+            set { SetValue(ActiveBrushProperty, value); }
+        }
+
+        //InactiveBrush Property
+        public static readonly DependencyProperty InactiveBrushProperty = DependencyProperty.Register(
+            "InactiveBrush", typeof(Brush),
+            typeof(TextBox)
+        );
+
+        public Brush InactiveBrush
+        {
+            get { return (Brush)GetValue(InactiveBrushProperty); }
+            set { SetValue(InactiveBrushProperty, value); }
         }
     }
 }

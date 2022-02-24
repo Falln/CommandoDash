@@ -63,10 +63,10 @@ namespace CommandoDash
                 true);
 
             //Robot Mode update listener
-            AddSimpleEntryListener(FMSInfoNT, "FMSControlData", new Action(() => updateRobotMode()));
+            AddSimpleEntryListener(CommandoDashNT.GetSubTable("AllianceAndModeData").GetEntry("robotMode"), new Action(() => updateRobotMode()));
 
             //Update the what the RIO thinks the Auto selected is
-            AddSimpleEntryListener(CommandoDashNT, "rioAutoSelection", new Action(() => rioAutoSelection_Update()));
+            AddSimpleEntryListener(CommandoDashNT.GetEntry("rioAutoSelection"), new Action(() => rioAutoSelection_Update()));
         }
 
         public void defaultStates()
@@ -79,9 +79,9 @@ namespace CommandoDash
             cameraStream.Source = new BitmapImage(new Uri("Images/Logo_Square_WhiteBackground_CommandoRobotics.png", UriKind.Relative));
         }
 
-        public void AddSimpleEntryListener(NetworkTable table, String key, Action function)
+        public void AddSimpleEntryListener(NetworkTableEntry entry, Action function)
         {
-            table.GetEntry(key).AddListener((in RefEntryNotification _) =>
+            entry.AddListener((in RefEntryNotification _) =>
                 Dispatcher.Invoke(function),
                 NotifyFlags.New | NotifyFlags.Update);
         }
@@ -109,6 +109,20 @@ namespace CommandoDash
             }
         }
 
+        public class StatusTextBlock : TextBlock
+        {
+            public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register(
+                "IsActive", typeof(bool),
+                typeof(TextBlock)
+            );
+
+            public bool IsActive
+            {
+                get => (bool)GetValue(IsActiveProperty);
+                set => SetValue(IsActiveProperty, value);
+            }
+        }
+
         public void cameraStream_FrameReady(object sender, FrameReadyEventArgs e)
         {
             cameraStream.Source = e.BitmapImage;
@@ -120,7 +134,7 @@ namespace CommandoDash
 
         private void updateRobotMode()
         {
-            double robotMode = FMSInfoNT.GetEntry("FMSControlData").GetDouble(0);
+            double robotMode = CommandoDashNT.GetSubTable("AllianceAndModeData").GetEntry("robotMode").GetDouble(0);
             if (!ntInst.IsConnected())
             {
                 robotModeBlock.Text = "DISCONNECTED";
@@ -174,6 +188,8 @@ namespace CommandoDash
             RioAutoBox.Text = CommandoDashNT.GetEntry("rioAutoSelection").GetString("");
         }
 
+
+        //Clicks
         private void closeBtn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

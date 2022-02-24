@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:CommandoDash="clr-namespace:CommandoDash"
         xmlns:local="clr-namespace:CommandoDash"
+        xmlns:MyNamespace="clr-namespace:CommandoDash;assembly=CommandoDash"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="CommandoDash.MainWindow"
         mc:Ignorable="d"
         Icon="/favicon-16x16.png"
@@ -20,6 +22,8 @@
         <Brush x:Key="PanelGrey">#FF454545</Brush>
         <Brush x:Key="TextBoxBackground">#FFB1B1B1</Brush>
 
+        <!-- Border Colors -->
+        <Brush x:Key="AutoButtonBorder">#FFC5CBF9</Brush>
 
         <!-- Tab Colors -->
         <Brush x:Key="TabBorderColor">#FF404040</Brush>
@@ -35,6 +39,8 @@
         <Brush x:Key="AutoButtonHovered">#FFA42424</Brush>
         <Brush x:Key="AutoButtonPressed">#FF581010</Brush>
         <Brush x:Key="AutoButtonActive">#FF0000</Brush>
+        
+        <!-- Status Blocks Colors -->
 
         <!-- Default Styles -->
         <Style TargetType="{x:Type Label}">
@@ -46,7 +52,11 @@
             <Setter Property="BorderBrush" Value="{x:Null}"/>
         </Style>
 
-
+        <!-- TextBlock/Box Styles -->
+        <Style TargetType="{x:Type local:StatusTextBlock}" x:Key="StatusTextBlocks">
+            
+        </Style>
+        
         <!-- Button Styles -->
         <Style TargetType="{x:Type Button}" x:Key="WindowButtons">
             <Setter Property="Background" Value="#FF2A2A2A"/>
@@ -128,7 +138,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type RadioButton}">
-                        <Border Background="{TemplateBinding Background}" BorderBrush="{StaticResource DisabledTabColor}" BorderThickness="1">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{StaticResource AutoButtonBorder}" BorderThickness="1">
                             <ContentPresenter Margin="3.5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -260,7 +270,7 @@
                                 </TransformGroup>
                             </Rectangle.RenderTransform>
                         </Rectangle>
-                        <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="497" Margin="455,16,0,0" Stroke="Black" VerticalAlignment="Top" Width="428" RenderTransformOrigin="0.5,0.5">
+                        <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="195" Margin="10,533,0,0" Stroke="Black" VerticalAlignment="Top" Width="428" RenderTransformOrigin="0.5,0.5">
                             <Rectangle.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform ScaleY="-1"/>
@@ -270,19 +280,7 @@
                                 </TransformGroup>
                             </Rectangle.RenderTransform>
                         </Rectangle>
-                        <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="195" Margin="10,533,0,0" Stroke="Black" VerticalAlignment="Top" Width="873" RenderTransformOrigin="0.5,0.5">
-                            <Rectangle.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform ScaleY="-1"/>
-                                    <SkewTransform/>
-                                    <RotateTransform/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Rectangle.RenderTransform>
-                        </Rectangle>
-                        <Label Content="Power Consumption&#xD;&#xA;&#xA;" HorizontalAlignment="Left" Margin="58,212,0,0" VerticalAlignment="Top" FontSize="36" Grid.Column="1"/>
-                        <Label Content="Robot Status &#xD;&#xA;(Solenoids enabled etc)&#xD;&#xA;&#xA;" HorizontalAlignment="Left" Margin="479,212,0,0" VerticalAlignment="Top" FontSize="36" Grid.Column="1"/>
-                        <Label Content="Manual Robot Control&#xD;&#xA;(Dashboard robot control)" HorizontalAlignment="Left" Margin="234,576,0,0" VerticalAlignment="Top" FontSize="36" Grid.Column="1"/>
+                        <Label Content="Manual Robot Control&#xD;&#xA;(Dashboard robot control)" HorizontalAlignment="Left" Margin="12,570,0,0" VerticalAlignment="Top" FontSize="36" Grid.Column="1"/>
                         <Button Grid.Column="1" Click="Button_Click" Content="TestButton" HorizontalAlignment="Left" Margin="49,561,0,0" VerticalAlignment="Top"/>
 
                         <!-- Camera Connection -->
@@ -309,14 +307,36 @@
                         <RadioButton x:Name="SecondRadio" Style="{StaticResource AutoSelectionButtons}" Content="SecondAuto" Checked="SecondAutoRadio_Checked" HorizontalAlignment="Left" Margin="376,651,0,0" VerticalAlignment="Top"/>
                         <RadioButton x:Name="FullSendRadio" Style="{StaticResource AutoSelectionButtons}" Content="FullSend" Checked="FullSendRadio_Checked"  HorizontalAlignment="Left" Margin="376,572,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.005,-0.186"/>
                         <Border Background="{StaticResource TextBoxBackground}" HorizontalAlignment="Left" Margin="218,592,0,0" VerticalAlignment="Top" Height="18" Width="102">
-                            <TextBlock x:Name="RioAutoBox" Text="RIOData" VerticalAlignment="Center" Margin="4,0,4,0" Background="{Binding Mode=OneWay, Source={StaticResource TextBoxBackground}}" TextAlignment="Left"/>
+                            <TextBlock x:Name="RioAutoBox" Text="RIOData" VerticalAlignment="Center" Margin="4,0,4,0" Background="{Binding Mode=OneWay, Source={StaticResource TextBoxBackground}}" TextAlignment="Center"/>
                         </Border>
                         <Label Content="RIO Reported Auto" HorizontalAlignment="Left" Margin="214,570,0,0" VerticalAlignment="Top"/>
-                        <Image HorizontalAlignment="Left" Height="192" Margin="559,527,0,0" VerticalAlignment="Top" Width="384" Source="/FRC 2022 PathPlanner Field - Ideal.png"/>
+                        <Image x:Name="AutoLayoutImage" HorizontalAlignment="Left" Height="192" Margin="559,527,0,0" VerticalAlignment="Top" Width="384" Source="/FRC 2022 PathPlanner Field - Ideal.png"/>
                         <Label Content="Autonomous Selection" HorizontalAlignment="Left" Margin="182,539,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="28" FontSize="16" FontWeight="SemiBold"/>
 
+                        <!-- Power Consumption -->
+                        <Rectangle Margin="12,16,473,223" Fill="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
 
+                        <!-- Index Status -->
+                        <Image Grid.Column="1" Margin="483,0,134,497" Source="/Images/5889-Index-Robot-PNG (3).png" Stretch="Fill"/>
+                        <Label Content="Power Consumption&#xA;&#xA;" HorizontalAlignment="Left" Margin="58,212,0,0" VerticalAlignment="Top" FontSize="36" Grid.Column="1"/>
+                        <Rectangle Margin="801,19,24,521" Fill="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
 
+                        <Label Grid.Column="1" Content="Index Status" HorizontalAlignment="Left" Margin="800,19,0,0" VerticalAlignment="Top" FontSize="14" FontFamily="Segoe UI Semibold"/>
+
+                        <!-- Solenoid Status -->
+                        <local:StatusTextBlock Margin="468,295,342,370" Background="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
+                        <local:StatusTextBlock Margin="574,295,236,370" Background="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
+                        <local:StatusTextBlock Margin="519,371,290,294" Background="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
+
+                        <!-- Vision Status -->
+                        <local:StatusTextBlock Margin="706,292,119,378" Background="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
+                        <local:StatusTextBlock Margin="797,292,28,378" Background="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
+                        <local:StatusTextBlock Margin="706,378,119,293" Background="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
+                        <local:StatusTextBlock Margin="797,378,28,293" Background="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
+
+                        <!-- Robot Status -->
+                        <Label Content="Robot Status" HorizontalAlignment="Left" Margin="627,520,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="28" FontSize="16" FontWeight="SemiBold" Grid.Column="1"/>
+                        <Rectangle Margin="468,520,23,29" Fill="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="AutoLayouts"  Style="{DynamicResource TabItemBase}">

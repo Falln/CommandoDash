@@ -70,6 +70,37 @@ namespace CommandoDash
 
             //Update Dash based on current Alliance Color
             AddSimpleEntryListener(CommandoDashNT.GetSubTable("AllianceAndModeData").GetEntry("alliance"), new Action(() => alliance_Update()));
+
+            //Update the status blocks with the relevant data
+            //Is Hounding
+            AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("isHounding"), new Action(() =>
+                HoundHoundingTargetSB.IsActive = CommandoDashNT.GetSubTable("SensorData").GetEntry("isHounding").GetBoolean(false)));
+
+            //Is AutoAiming
+            AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("isAutoAiming"), new Action(() =>
+                LimeTrackingTargetSB.IsActive = CommandoDashNT.GetSubTable("SensorData").GetEntry("isAutoAiming").GetBoolean(false)));
+
+            //Seeing Hub
+            ntInst.GetTable("limelight").GetEntry("tv").SetDouble(0); //TODO Delete all these testing sets
+            AddSimpleEntryListener(ntInst.GetTable("limelight").GetEntry("tv"), new Action(() => 
+                LimeSeesTargetSB.IsActive = ntInst.GetTable("limelight").GetEntry("tv").GetDouble(0) == 1 ? true:false));
+
+            //Seeing a Cargo
+            AddSimpleEntryListener(ntInst.GetTable("photonvision").GetSubTable("CargoHound").GetEntry("hasTargets"), new Action(() =>
+                HoundSeesTargetSB.IsActive = ntInst.GetTable("photonvision").GetSubTable("CargoHound").GetEntry("hasTargets").GetBoolean(false)));
+
+            //Intake Solenoid
+            AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("intakeSolenoidState"), new Action(() =>
+                IntakeSolSB.IsActive = CommandoDashNT.GetSubTable("SensorData").GetEntry("intakeSolenoidState").GetBoolean(false)));
+
+            //Mid Climb Solenoid
+            AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("midSolenoidState"), new Action(() =>
+                MidSolSB.IsActive = CommandoDashNT.GetSubTable("SensorData").GetEntry("midSolenoidState").GetBoolean(false)));
+
+            //Traversal Climb Solenoid
+            AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("traversalSolenoidState"), new Action(() =>
+                TraversalSolSB.IsActive = CommandoDashNT.GetSubTable("SensorData").GetEntry("traversalSolenoidState").GetBoolean(false)));
+
         }
 
         public void defaultStates()
@@ -80,8 +111,6 @@ namespace CommandoDash
             cameraURI = CameraURIInput.Text;
             robotIP = robotIPInput.Text;
             cameraStream.Source = new BitmapImage(new Uri("Images/Logo_Square_WhiteBackground_CommandoRobotics.png", UriKind.Relative));
-            LimeTrackingTargetSB.IsActive = true;
-            HoundHoundingTargetSB.IsActive = true;
         }
 
         public void AddSimpleEntryListener(NetworkTableEntry entry, Action function)
@@ -318,8 +347,9 @@ namespace CommandoDash
         {
             NetworkTableEntry entry = CommandoDashNT.GetEntry("testData");
             entry.SetBoolean(!entry.GetBoolean(false));
-            HoundHoundingTargetSB.IsActive = !HoundHoundingTargetSB.IsActive;
+            IntakeSolSB.IsActive = !IntakeSolSB.IsActive;
             LimeTrackingTargetSB.IsActive = !LimeTrackingTargetSB.IsActive;
+            HoundHoundingTargetSB.IsActive = !HoundHoundingTargetSB.IsActive;
         }
 
         private void TaxiRadio_Checked(object sender, RoutedEventArgs e)

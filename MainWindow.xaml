@@ -9,7 +9,7 @@
         Icon="/favicon-16x16.png"
         Title="MainWindow" Height="840" Width="1920" ResizeMode="NoResize"
         WindowStartupLocation="Manual" Left="0" Top="0"
-        WindowStyle="None" BorderThickness="0" Background="#FF901C1C">
+        WindowStyle="None" BorderThickness="0" Background="#FFA42424">
 
     <Window.Resources>
         <!-- Default Colors -->
@@ -32,8 +32,8 @@
         <Brush x:Key="ButtonPressed">#FF343435</Brush>
         <Brush x:Key="ButtonHovered">#FF525252</Brush>
         <Brush x:Key="AutoButtonBase">#FF901C1C</Brush>
-        <Brush x:Key="AutoButtonHovered">#FF901C1C</Brush>
-        <Brush x:Key="AutoButtonPressed">#FF901C1C</Brush>
+        <Brush x:Key="AutoButtonHovered">#FFA42424</Brush>
+        <Brush x:Key="AutoButtonPressed">#FF581010</Brush>
         <Brush x:Key="AutoButtonActive">#FF0000</Brush>
 
         <!-- Default Styles -->
@@ -137,6 +137,16 @@
             <Style.Triggers>
                 <Trigger Property="IsChecked" Value="True">
                     <Setter Property="Background" Value="{StaticResource AutoButtonActive}"/>
+                </Trigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsMouseOver" Value="True"/>
+                        <Condition Property="IsChecked" Value="False"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Background" Value="{StaticResource AutoButtonHovered}"/>
+                </MultiTrigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="{StaticResource AutoButtonPressed}"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -302,8 +312,8 @@
                             <TextBlock x:Name="RioAutoBox" Text="RIOData" VerticalAlignment="Center" Margin="4,0,4,0" Background="{Binding Mode=OneWay, Source={StaticResource TextBoxBackground}}" TextAlignment="Left"/>
                         </Border>
                         <Label Content="RIO Reported Auto" HorizontalAlignment="Left" Margin="214,570,0,0" VerticalAlignment="Top"/>
-                        <Image HorizontalAlignment="Left" Height="187" Margin="564,533,0,0" VerticalAlignment="Top" Width="380" Source="/FRC 2022 PathPlanner Field - Ideal.png"/>
-                        <Label Content="Autonomous Selection" HorizontalAlignment="Left" Margin="192,541,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="28" FontSize="14" FontWeight="SemiBold"/>
+                        <Image HorizontalAlignment="Left" Height="192" Margin="559,527,0,0" VerticalAlignment="Top" Width="384" Source="/FRC 2022 PathPlanner Field - Ideal.png"/>
+                        <Label Content="Autonomous Selection" HorizontalAlignment="Left" Margin="182,539,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="28" FontSize="16" FontWeight="SemiBold"/>
 
 
 

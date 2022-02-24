@@ -23,8 +23,7 @@ namespace CommandoDash
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    /// 
-    //Dashboard px: 1920*230
+    /// Dashboard px: 1920*230
     public partial class MainWindow : Window
     {
         NetworkTableInstance ntInst;

@@ -18,6 +18,7 @@
     <None Remove="gear-white-transparent_85x90.png.png" />
     <None Remove="gear_white_transparent.png" />
     <None Remove="gear_white_transparent_80x80.png" />
+    <None Remove="Image1.png" />
     <None Remove="Images\5889-Index-Robot-PNG %283%29.png" />
     <None Remove="Images\5889-Index-Robot-PNG.png" />
     <None Remove="Images\5889-Index-Robot.png" />
@@ -52,6 +53,9 @@
     <Resource Include="gear-white-transparent_85x90.png.png" />
     <Resource Include="gear_white_transparent.png" />
     <Resource Include="gear_white_transparent_80x80.png" />
+    <Content Include="Image1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\5889-Index-Robot-PNG (3).png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

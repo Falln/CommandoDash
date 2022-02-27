@@ -12,7 +12,7 @@
         Icon="/favicon-16x16.png"
         Title="MainWindow" Height="840" Width="1920" ResizeMode="NoResize"
         WindowStartupLocation="Manual" Left="0" Top="0"
-        WindowStyle="None" BorderThickness="0" Background="#FFBB0E00">
+        WindowStyle="None" BorderThickness="0" Background="#FF92C822">
 
     <Window.Resources>
         <!-- Default Colors -->
@@ -29,7 +29,7 @@
         <Brush x:Key="CurrentProgressBorder">#FF404040</Brush>
         <LinearGradientBrush x:Key="CurrentProgressBackground">
             <GradientStop Color="Red" Offset="0" />
-            <GradientStop Color="#FF87C822" Offset="0.5" />
+            <GradientStop Color="#FF92C822" Offset="0.5" />
             <GradientStop Color="Green" Offset="1" />
         </LinearGradientBrush>
         <Brush x:Key="PowerDisabled">#FFBB0E00</Brush>
@@ -453,13 +453,13 @@
                                 </TransformGroup>
                             </Label.RenderTransform>
                         </Label>
-                        <local:StatusTextBlock x:Name="IntakeSolSB_Copy" Style="{StaticResource ResourceKey=StatusTextBlocks}" ActiveBrush="{StaticResource SolenoidEnabled}" InactiveBrush="{StaticResource SolenoidDisabled}" BorderBrush="{StaticResource SolenoidBorder}"  Margin="442,259,361,401" Grid.Column="1" Text="Intake"/>
-                        <local:StatusTextBlock x:Name="ReadyToFireSB_Copy" Style="{StaticResource ResourceKey=ReadyToShootStatus}" ActiveBrush="{StaticResource SolenoidEnabled}" InactiveBrush="{StaticResource SolenoidDisabled}" BorderBrush="{StaticResource SolenoidBorder}"  Margin="240,238,549,380" Grid.Column="1" Text="Centric-&#xD;&#xA;Mode"/>
+                                             
+                        <local:StatusTextBlock x:Name="IsCentricSB" Style="{StaticResource ResourceKey=ReadyToShootStatus}" ActiveBrush="{StaticResource SolenoidEnabled}" InactiveBrush="{StaticResource SolenoidDisabled}" BorderBrush="{StaticResource SolenoidBorder}"  Margin="240,238,549,380" Grid.Column="1" Text="Centric-&#xD;&#xA;Mode"/>
 
                         <!-- Current Draw -->
                         <Rectangle Margin="38,480,409,47" Fill="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
                         <Label Grid.Column="1" Content="Drive" HorizontalAlignment="Left" Margin="47,506,0,0" VerticalAlignment="Top" Height="27" Width="66" FontSize="14" RenderTransformOrigin="0.5,0.5"/>
-                        <Label Grid.Column="1" Content="Subsystem Current Draw" HorizontalAlignment="Left" Margin="175,480,0,0" VerticalAlignment="Top"  FontSize="16" FontWeight="SemiBold"/>
+                        <Label Grid.Column="1" Content="Subsystem Current Draws" HorizontalAlignment="Left" Margin="172,480,0,0" VerticalAlignment="Top"  FontSize="16" FontWeight="SemiBold"/>
                         <TextBlock x:Name="DrivePowerText" Style="{StaticResource CurrentDrawBlock}" Grid.Column="1" HorizontalAlignment="Left" Margin="107,511,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0A"/>
                         <Label Grid.Column="1" Content="Shooter" HorizontalAlignment="Left" Margin="47,526,0,0" VerticalAlignment="Top" Height="27" Width="66" FontSize="14" RenderTransformOrigin="0.5,0.5"/>
                         <TextBlock x:Name="ShooterPowerText" Style="{StaticResource CurrentDrawBlock}" Grid.Column="1" HorizontalAlignment="Left" Margin="107,531,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0A" RenderTransformOrigin="0.641,1.593" Height="20"/>

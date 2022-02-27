@@ -255,7 +255,7 @@ namespace CommandoDash
             double driveFRCurrent = powerTable.GetEntry("driveFRCurrent").GetDouble(0);
             double driveRLCurrent = powerTable.GetEntry("driveRLCurrent").GetDouble(0);
             double driveRRCurrent = powerTable.GetEntry("driveRRCurrent").GetDouble(0);
-            double averageDriveCurrent = (driveFLCurrent + driveFRCurrent + driveRLCurrent + driveRRCurrent) / 4;
+            double averageDriveCurrent = Math.Round((driveFLCurrent + driveFRCurrent + driveRLCurrent + driveRRCurrent) / 4, 1);
             DrivePowerProgress.Value = DrivePowerProgress.Maximum - averageDriveCurrent;
             DrivePowerText.Text = averageDriveCurrent.ToString();
 
@@ -263,33 +263,33 @@ namespace CommandoDash
             double shooterLCurrent = powerTable.GetEntry("shooterLCurrent").GetDouble(0);
             double shooterRCurrent = powerTable.GetEntry("shooterRCurrent").GetDouble(0);
             ShooterPowerProgress.Value = ShooterPowerProgress.Maximum - ((shooterLCurrent + shooterRCurrent)/2);
-            ShooterPowerText.Text = ((shooterLCurrent + shooterRCurrent)/2).ToString();
+            ShooterPowerText.Text = Math.Round((shooterLCurrent + shooterRCurrent)/2, 1).ToString();
 
             //Intake
             double intakeCurrent = powerTable.GetEntry("intakeCurrent").GetDouble(0);
             IntakePowerProgress.Value = IntakePowerProgress.Maximum - intakeCurrent;
-            IntakePowerText.Text = intakeCurrent.ToString();
+            IntakePowerText.Text = Math.Round(intakeCurrent, 1).ToString();
 
             //Index
             double rampCurrent = powerTable.GetEntry("rampCurrent").GetDouble(0);
             double verticalCurrent = powerTable.GetEntry("verticalCurrent").GetDouble(0);
             IndexPowerProgress.Value = IntakePowerProgress.Maximum - ((verticalCurrent + rampCurrent)/2);
-            IndexPowerText.Text = ((verticalCurrent + rampCurrent) / 2).ToString();
+            IndexPowerText.Text = Math.Round(((verticalCurrent + rampCurrent) / 2), 1).ToString();
 
             //Transfer
             double transferLCurrent = powerTable.GetEntry("transferLCurrent").GetDouble(0);
             double transferRCurrent = powerTable.GetEntry("transferRCurrent").GetDouble(0);
             TransferPowerProgress.Value = TransferPowerProgress.Maximum - ((transferRCurrent + transferLCurrent) / 2);
-            TransferPowerText.Text = ((transferRCurrent + transferLCurrent) / 2).ToString();
+            TransferPowerText.Text = Math.Round((transferRCurrent + transferLCurrent) / 2, 1).ToString();
 
             //VRM
             double vrmCurrent = powerTable.GetEntry("VRMCurrent").GetDouble(0);
             VRMPowerProgress.Value = VRMPowerProgress.Maximum - vrmCurrent;
-            VRMPowerText.Text = vrmCurrent.ToString();
+            VRMPowerText.Text = Math.Round(vrmCurrent, 1).ToString();
 
             //Overall Current and Battery Voltage
-            TotalCurrentSB.Text = powerTable.GetEntry("totalCurrent").GetDouble(0).ToString();
-            BatteryVolatgeSB.Text = powerTable.GetEntry("batteryVoltage").GetDouble(0).ToString();
+            TotalCurrentSB.Text = Math.Round(powerTable.GetEntry("totalCurrent").GetDouble(0), 1).ToString();
+            BatteryVolatgeSB.Text = Math.Round(powerTable.GetEntry("batteryVoltage").GetDouble(0), 2).ToString();
         }
 
 

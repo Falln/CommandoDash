@@ -7,11 +7,12 @@
         xmlns:local="clr-namespace:CommandoDash"
         xmlns:MyNamespace="clr-namespace:CommandoDash;assembly=CommandoDash"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="CommandoDash.MainWindow"
+        xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"    
         mc:Ignorable="d"
         Icon="/favicon-16x16.png"
         Title="MainWindow" Height="840" Width="1920" ResizeMode="NoResize"
         WindowStartupLocation="Manual" Left="0" Top="0"
-        WindowStyle="None" BorderThickness="0" Background="#FF64FF00">
+        WindowStyle="None" BorderThickness="0" Background="#FFBB0E00">
 
     <Window.Resources>
         <!-- Default Colors -->
@@ -21,6 +22,19 @@
         <Brush x:Key="CommandoMetalGray">#BCBEC0</Brush>
         <Brush x:Key="PanelGrey">#FF454545</Brush>
         <Brush x:Key="TextBoxBackground">#FFB1B1B1</Brush>
+
+        <!-- CurrentDraw Colors -->
+        <Brush x:Key="CurrentTextForeground">#FF0000</Brush>
+        <Brush x:Key="CurrentProgressForeground">#FF363636</Brush>
+        <Brush x:Key="CurrentProgressBorder">#FF404040</Brush>
+        <LinearGradientBrush x:Key="CurrentProgressBackground">
+            <GradientStop Color="Red" Offset="0" />
+            <GradientStop Color="#FF87C822" Offset="0.5" />
+            <GradientStop Color="Green" Offset="1" />
+        </LinearGradientBrush>
+        <Brush x:Key="PowerDisabled">#FFBB0E00</Brush>
+        <Brush x:Key="PowerEnabled">#FFBB0E00</Brush>
+        <Brush x:Key="PowerBorder">#FF343435</Brush>
 
         <!-- Border Colors -->
         <Brush x:Key="AutoButtonBorder">#FFC5CBF9</Brush>
@@ -62,6 +76,17 @@
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Background" Value="#FFB1B1B1"/>
             <Setter Property="BorderBrush" Value="{x:Null}"/>
+        </Style>
+        <Style TargetType="{x:Type ProgressBar}">
+            <Setter Property="Width" Value="350"/>
+            <Setter Property="Height" Value="18"/>
+            <Setter Property="Value" Value="15"/>
+            <Setter Property="Minimum" Value="0"/>
+            <Setter Property="Maximum" Value="40"/>
+            <Setter Property="Background" Value="{StaticResource CurrentProgressBackground}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource CurrentProgressBorder}"/>
+            <Setter Property="Foreground" Value="{StaticResource CurrentProgressForeground}"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
         </Style>
 
         <!-- TextBlock/Box Styles -->
@@ -113,6 +138,36 @@
                     <Setter Property="Background" Value="{Binding InactiveBrush, RelativeSource={RelativeSource Self}}"/>
                 </Trigger>
             </Style.Triggers>
+        </Style>
+        <Style TargetType="{x:Type local:StatusTextBlock}" x:Key="PowerStatusBlocks">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Width" Value="55"/>
+            <Setter Property="Height" Value="23"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="{StaticResource ButtonBackground}"/>
+            <Setter Property="IsEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type local:StatusTextBlock}">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
+                            <ContentPresenter Content="{TemplateBinding Text}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsActive" Value="True">
+                    <Setter Property="Background" Value="{Binding ActiveBrush, RelativeSource={RelativeSource Self}}"/>
+                </Trigger>
+                <Trigger Property="IsActive" Value="False">
+                    <Setter Property="Background" Value="{Binding InactiveBrush, RelativeSource={RelativeSource Self}}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="{x:Type TextBlock}" x:Key="CurrentDrawBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="{StaticResource CurrentTextForeground}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
         </Style>
 
         <!-- Button Styles -->
@@ -318,7 +373,7 @@
                         <Border Height="501" Margin="149,10,42,0" VerticalAlignment="Top" Background="Black">
                             <Image x:Name="cameraStream" />
                         </Border>
-                        <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="252" Margin="721,465,0,0" Stroke="Black" VerticalAlignment="Top" Width="167" RenderTransformOrigin="0.5,0.5">
+                        <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="272" Margin="553,450,0,0" Stroke="Black" VerticalAlignment="Top" Width="335" RenderTransformOrigin="0.5,0.5">
                             <Rectangle.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform ScaleY="-1"/>
@@ -328,8 +383,8 @@
                                 </TransformGroup>
                             </Rectangle.RenderTransform>
                         </Rectangle>
-                        <Label Content="Manual Robot Control&#xD;&#xA;(Dashboard robot control)" HorizontalAlignment="Left" Margin="707,513,0,0" VerticalAlignment="Top" FontSize="36" Grid.Column="1" Height="135" Width="181"/>
-                        <Button Grid.Column="1" Click="Button_Click" Content="TestButton" HorizontalAlignment="Left" Margin="49,561,0,0" VerticalAlignment="Top"/>
+                        <Label Content="Manual Robot Control&#xD;&#xA;(Dashboard robot control)" HorizontalAlignment="Left" Margin="586,506,0,0" VerticalAlignment="Top" FontSize="36" Grid.Column="1" Height="170" Width="258"/>
+                        <Button Grid.Column="1" Click="Button_Click" Content="TestButton" HorizontalAlignment="Left" Margin="66,0,0,0" VerticalAlignment="Center"/>
 
                         <!-- Camera Connection -->
                         <Rectangle Margin="9,34,851,578" Fill="{StaticResource ResourceKey=PanelGrey}"/>
@@ -384,8 +439,8 @@
                         <Label Content="Shooter Status" HorizontalAlignment="Left" Margin="140,11,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="46" FontSize="16" FontWeight="SemiBold" Grid.Column="1" Width="116"/>
                         <local:StatusTextBlock x:Name="ReadyToFireSB" Style="{StaticResource ResourceKey=ReadyToShootStatus}" ActiveBrush="{StaticResource SolenoidEnabled}" InactiveBrush="{StaticResource SolenoidDisabled}" BorderBrush="{StaticResource SolenoidBorder}"  Margin="32,57,707,583" Grid.Column="1" Text="READY TO FIRE"/>
                         <Rectangle Margin="37,242,756,376" Fill="Blue" Grid.Column="1"/>
-                        <TextBox x:Name="robotIPInput_Copy1" KeyDown="robotIPInput_KeyDown" Text="Current Manual " Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="228,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="40" FontSize="14" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
-                        <TextBox x:Name="robotIPInput_Copy2" KeyDown="robotIPInput_KeyDown" Text="Shooter RPM" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="228,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136" Height="40" FontSize="14" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <TextBox x:Name="ManualCycleBox" KeyDown="robotIPInput_KeyDown" Text="Current Manual " Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="228,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="40" FontSize="14" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <TextBox x:Name="ShooterRPMBox" KeyDown="robotIPInput_KeyDown" Text="Shooter RPM" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="228,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136" Height="40" FontSize="14" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
                         <Label Grid.Column="1" Content="Manual Cycle Speed" HorizontalAlignment="Left" Margin="224,37,0,0" VerticalAlignment="Top" FontSize="14"/>
                         <Label Grid.Column="1" Content="Shooter RPM" HorizontalAlignment="Left" Margin="224,99,0,0" VerticalAlignment="Top" FontSize="14"/>
                         <Label Grid.Column="1" Content="GYRO" HorizontalAlignment="Left" Margin="48,272,0,0" VerticalAlignment="Top" Width="92" RenderTransformOrigin="0.5,0.5" FontSize="32">
@@ -400,8 +455,59 @@
                         </Label>
                         <local:StatusTextBlock x:Name="IntakeSolSB_Copy" Style="{StaticResource ResourceKey=StatusTextBlocks}" ActiveBrush="{StaticResource SolenoidEnabled}" InactiveBrush="{StaticResource SolenoidDisabled}" BorderBrush="{StaticResource SolenoidBorder}"  Margin="442,259,361,401" Grid.Column="1" Text="Intake"/>
                         <local:StatusTextBlock x:Name="ReadyToFireSB_Copy" Style="{StaticResource ResourceKey=ReadyToShootStatus}" ActiveBrush="{StaticResource SolenoidEnabled}" InactiveBrush="{StaticResource SolenoidDisabled}" BorderBrush="{StaticResource SolenoidBorder}"  Margin="240,238,549,380" Grid.Column="1" Text="Centric-&#xD;&#xA;Mode"/>
-                        <Image Margin="0,465,336,10" Source="/Image1.png" Stretch="Fill" Grid.Column="1"/>
-                        <ProgressBar Grid.Column="1" HorizontalAlignment="Left" Height="10" Margin="232,399,0,0" VerticalAlignment="Top" Width="100"/>
+
+                        <!-- Current Draw -->
+                        <Rectangle Margin="38,480,409,47" Fill="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
+                        <Label Grid.Column="1" Content="Drive" HorizontalAlignment="Left" Margin="47,506,0,0" VerticalAlignment="Top" Height="27" Width="66" FontSize="14" RenderTransformOrigin="0.5,0.5"/>
+                        <Label Grid.Column="1" Content="Subsystem Current Draw" HorizontalAlignment="Left" Margin="175,480,0,0" VerticalAlignment="Top"  FontSize="16" FontWeight="SemiBold"/>
+                        <TextBlock x:Name="DrivePowerText" Style="{StaticResource CurrentDrawBlock}" Grid.Column="1" HorizontalAlignment="Left" Margin="107,511,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0A"/>
+                        <Label Grid.Column="1" Content="Shooter" HorizontalAlignment="Left" Margin="47,526,0,0" VerticalAlignment="Top" Height="27" Width="66" FontSize="14" RenderTransformOrigin="0.5,0.5"/>
+                        <TextBlock x:Name="ShooterPowerText" Style="{StaticResource CurrentDrawBlock}" Grid.Column="1" HorizontalAlignment="Left" Margin="107,531,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0A" RenderTransformOrigin="0.641,1.593" Height="20"/>
+                        <Label Grid.Column="1" Content="Intake" HorizontalAlignment="Left" Margin="47,546,0,0" VerticalAlignment="Top" Height="27" Width="66" FontSize="14" RenderTransformOrigin="0.5,0.5"/>
+                        <TextBlock x:Name="IntakePowerText" Style="{StaticResource CurrentDrawBlock}" Grid.Column="1" HorizontalAlignment="Left" Margin="107,551,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0A" RenderTransformOrigin="0.641,1.593"/>
+                        <Label Grid.Column="1" Content="Index" HorizontalAlignment="Left" Margin="47,566,0,0" VerticalAlignment="Top" Height="27" Width="66" FontSize="14" RenderTransformOrigin="0.5,0.5"/>
+                        <TextBlock x:Name="IndexPowerText" Style="{StaticResource CurrentDrawBlock}" Grid.Column="1" HorizontalAlignment="Left" Margin="107,571,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0A" RenderTransformOrigin="0.641,1.593"/>
+                        <Label Grid.Column="1" Content="Transfer" HorizontalAlignment="Left" Margin="47,586,0,0" VerticalAlignment="Top" Height="27" Width="66" FontSize="14" RenderTransformOrigin="0.5,0.5"/>
+                        <TextBlock x:Name="TransferPowerText" Style="{StaticResource CurrentDrawBlock}" Grid.Column="1" HorizontalAlignment="Left" Margin="107,591,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0A" RenderTransformOrigin="0.641,1.593"/>
+                        <Label Grid.Column="1" Content="VRM" HorizontalAlignment="Left" Margin="47,606,0,0" VerticalAlignment="Top" Height="28" Width="66" FontSize="14" RenderTransformOrigin="0.5,0.5" />
+                        <TextBlock x:Name="VRMPowerText" Style="{StaticResource CurrentDrawBlock}" Grid.Column="1" HorizontalAlignment="Left" Margin="107,611,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0A" RenderTransformOrigin="0.641,1.593"/>
+                        <ProgressBar x:Name="DrivePowerProgress" Grid.Column="1" HorizontalAlignment="Left" Margin="133,512,0,0" VerticalAlignment="Top">
+                            <ProgressBar.RenderTransform>
+                                <RotateTransform Angle="180"/>
+                            </ProgressBar.RenderTransform>
+                        </ProgressBar>
+                        <ProgressBar x:Name="ShooterPowerProgress" Grid.Column="1" HorizontalAlignment="Left" Margin="133,532,0,0" VerticalAlignment="Top">
+                            <ProgressBar.RenderTransform>
+                                <RotateTransform Angle="180"/>
+                            </ProgressBar.RenderTransform>
+                        </ProgressBar>
+                        <ProgressBar x:Name="IntakePowerProgress" Grid.Column="1" HorizontalAlignment="Left" Margin="133,552,0,0" VerticalAlignment="Top">
+                            <ProgressBar.RenderTransform>
+                                <RotateTransform Angle="180"/>
+                            </ProgressBar.RenderTransform>
+                        </ProgressBar>
+                        <ProgressBar x:Name="IndexPowerProgress" Grid.Column="1" HorizontalAlignment="Left" Margin="133,572,0,0" VerticalAlignment="Top">
+                            <ProgressBar.RenderTransform>
+                                <RotateTransform Angle="180"/>
+                            </ProgressBar.RenderTransform>
+                        </ProgressBar>
+                        <ProgressBar x:Name="TransferPowerProgress" Grid.Column="1" HorizontalAlignment="Left" Margin="133,592,0,0" VerticalAlignment="Top">
+                            <ProgressBar.RenderTransform>
+                                <RotateTransform Angle="180"/>
+                            </ProgressBar.RenderTransform>
+                        </ProgressBar>
+                        <ProgressBar x:Name="VRMPowerProgress" Grid.Column="1" HorizontalAlignment="Left" Margin="133,612,0,0" VerticalAlignment="Top">
+                            <ProgressBar.RenderTransform>
+                                <RotateTransform Angle="180"/>
+                            </ProgressBar.RenderTransform>
+                        </ProgressBar>
+                        <Label Grid.Column="1" Content="Total Power Draw" HorizontalAlignment="Left" Margin="176,633,0,0" VerticalAlignment="Top"/>
+                        <Label Grid.Column="1" Content="Battery Voltage" HorizontalAlignment="Left" Margin="187,659,0,0" VerticalAlignment="Top"/>
+                        <local:StatusTextBlock x:Name="BatteryVolatgeSB" Style="{StaticResource ResourceKey=PowerStatusBlocks}" ActiveBrush="{StaticResource PowerEnabled}" InactiveBrush="{StaticResource PowerDisabled}" BorderBrush="{StaticResource PowerBorder}"  Margin="277,661,579,52" Grid.Column="1" Text="300A"/>
+                        <local:StatusTextBlock x:Name="TotalCurrentSB" Style="{StaticResource ResourceKey=PowerStatusBlocks}" ActiveBrush="{StaticResource PowerEnabled}" InactiveBrush="{StaticResource PowerDisabled}" BorderBrush="{StaticResource PowerBorder}"  Margin="277,634,579,79" Grid.Column="1" Text="12.7V"/>
+
+
+
                     </Grid>
                 </TabItem>
                 <TabItem Header="AutoLayouts"  Style="{DynamicResource TabItemBase}">

@@ -273,6 +273,37 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style TargetType="{x:Type RadioButton}" x:Key="AutoSelectionButtonsAL">
+            <Setter Property="Background" Value="{StaticResource AutoButtonBase}"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="GroupName" Value="AutoRadioGroupAL"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{StaticResource AutoButtonBorder}" BorderThickness="1">
+                            <ContentPresenter Margin="3.5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Background" Value="{StaticResource AutoButtonActive}"/>
+                </Trigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsMouseOver" Value="True"/>
+                        <Condition Property="IsChecked" Value="False"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Background" Value="{StaticResource AutoButtonHovered}"/>
+                </MultiTrigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="{StaticResource AutoButtonPressed}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
 
         <!-- Tab Styles -->
         <Style TargetType="{x:Type TabItem}" x:Key="TabItemBase">
@@ -404,11 +435,11 @@
 
                         <!-- Auto Selection Section -->
                         <Rectangle Margin="34,539,491,29" Fill="{StaticResource ResourceKey=PanelGrey}"/>
-                        <RadioButton x:Name="TaxiRadio" Style="{StaticResource AutoSelectionButtons}" Content="Taxi" Checked="TaxiRadio_Checked" HorizontalAlignment="Left" Margin="63,572,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.515,-0.229"/>
-                        <RadioButton x:Name="SpareRadio" Style="{StaticResource AutoSelectionButtons}" Content="Spare" Checked="SpareRadio_Checked" HorizontalAlignment="Left" Margin="63,658,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.495,0.114"/>
-                        <RadioButton x:Name="IdealRadio" Style="{StaticResource AutoSelectionButtons}" Content="IdealAuto" Checked="IdealRadio_Checked" HorizontalAlignment="Left" Margin="219,630,0,0" VerticalAlignment="Top"/>
-                        <RadioButton x:Name="SecondRadio" Style="{StaticResource AutoSelectionButtons}" Content="SecondAuto" Checked="SecondAutoRadio_Checked" HorizontalAlignment="Left" Margin="376,651,0,0" VerticalAlignment="Top"/>
-                        <RadioButton x:Name="FullSendRadio" Style="{StaticResource AutoSelectionButtons}" Content="FullSend" Checked="FullSendRadio_Checked"  HorizontalAlignment="Left" Margin="376,572,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.005,-0.186"/>
+                        <RadioButton x:Name="TaxiRadio" Style="{StaticResource AutoSelectionButtons}" Content="Taxi" Click="TaxiRadio_Clicked" HorizontalAlignment="Left" Margin="63,572,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.515,-0.229"/>
+                        <RadioButton x:Name="SpareRadio" Style="{StaticResource AutoSelectionButtons}" Content="Spare" Click="SpareRadio_Clicked" HorizontalAlignment="Left" Margin="63,658,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.495,0.114"/>
+                        <RadioButton x:Name="IdealRadio" Style="{StaticResource AutoSelectionButtons}" Content="IdealAuto" Click="IdealRadio_Clicked" HorizontalAlignment="Left" Margin="219,630,0,0" VerticalAlignment="Top"/>
+                        <RadioButton x:Name="SecondRadio" Style="{StaticResource AutoSelectionButtons}" Content="SecondAuto" Click="SecondAutoRadio_Clicked" HorizontalAlignment="Left" Margin="376,651,0,0" VerticalAlignment="Top"/>
+                        <RadioButton x:Name="FullSendRadio" Style="{StaticResource AutoSelectionButtons}" Content="FullSend" Click="FullSendRadio_Clicked"  HorizontalAlignment="Left" Margin="376,572,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.005,-0.186"/>
                         <Border Background="{StaticResource TextBoxBackground}" HorizontalAlignment="Left" Margin="218,592,0,0" VerticalAlignment="Top" Height="18" Width="102">
                             <TextBlock x:Name="RioAutoBox" Text="RIOData" VerticalAlignment="Center" Margin="4,0,4,0" Background="{Binding Mode=OneWay, Source={StaticResource TextBoxBackground}}" TextAlignment="Center"/>
                         </Border>
@@ -517,9 +548,62 @@
                 <TabItem Header="AutoLayouts"  Style="{DynamicResource TabItemBase}">
                     <Grid Background="#FF2A2A2A">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="23*"/>
+                            <ColumnDefinition Width="1136"/>
                             <ColumnDefinition Width="1883*"/>
                         </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="567"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Field -->
+                        <Border x:Name="Field" RenderTransformOrigin="0.5,0.5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Height="567" Width="1136">
+                            <Border.Background>
+                                <ImageBrush ImageSource="/FRC 2022 PathPlanner Field.png">
+                                    <ImageBrush.RelativeTransform>
+                                        <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleY="-1"/>
+                                    </ImageBrush.RelativeTransform>
+                                </ImageBrush>
+                            </Border.Background>
+                            <Border.RenderTransform>
+                                <ScaleTransform ScaleY="-1"/>
+                            </Border.RenderTransform>
+                            <Rectangle x:Name="RobotRectangle" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Height="36" Stroke="White" VerticalAlignment="Top" Width="46" Fill="#FF00FF1B" Margin="-23,-18,0,0">
+                                <Rectangle.RenderTransform>
+                                    <TransformGroup>
+                                        <RotateTransform x:Name="RobotRotateTransform" Angle="0"/>
+                                    </TransformGroup>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                        </Border>
+
+                        <!-- Robot Position Updates -->
+                        <Rectangle Margin="11,16,595,331" Fill="{StaticResource ResourceKey=PanelGrey}" RenderTransformOrigin="0.5,0.5" Grid.Column="1"/>
+                        <Label Content="Robot Position" HorizontalAlignment="Left" Margin="35,16,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="28" FontSize="16" FontWeight="SemiBold" Grid.Column="1"/>
+                        <TextBox x:Name="RobotXText" Text="0.0m" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="26,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="30" FontSize="14" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <TextBox x:Name="RobotYText" Text="0.0m" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="26,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="30" FontSize="14" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <TextBox x:Name="RobotRText" Text="0.0°" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="26,188,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="30" FontSize="14" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Grid.Column="1" Content="Robot X" HorizontalAlignment="Left" Margin="67,47,0,0" VerticalAlignment="Top"/>
+                        <Label Grid.Column="1" Content="Robot Y" HorizontalAlignment="Left" Margin="67,107,0,0" VerticalAlignment="Top"/>
+                        <Label Grid.Column="1" Content="Robot Heading" HorizontalAlignment="Left" Margin="48,167,0,0" VerticalAlignment="Top"/>
+
+                        <!-- Auto Selection Panel-->
+                        <Rectangle Margin="247,40,60,362" Fill="{StaticResource ResourceKey=PanelGrey}" RenderTransformOrigin="0.5,0.5" Grid.Column="1"/>
+                        <RadioButton x:Name="TaxiRadioAL" Style="{StaticResource AutoSelectionButtonsAL}" Content="Taxi" Click="TaxiRadioAL_Clicked" HorizontalAlignment="Left" Margin="267,73,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.515,-0.229" Grid.Column="1"/>
+                        <RadioButton x:Name="SpareRadioAL" Style="{StaticResource AutoSelectionButtonsAL}" Content="Spare" Click="SpareRadioAL_Clicked" HorizontalAlignment="Left" Margin="267,153,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.495,0.114" Grid.Column="1"/>
+                        <RadioButton x:Name="IdealRadioAL" Style="{StaticResource AutoSelectionButtonsAL}" Content="IdealAuto" Click="IdealRadioAL_Clicked" HorizontalAlignment="Left" Margin="424,117,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <RadioButton x:Name="SecondRadioAL" Style="{StaticResource AutoSelectionButtonsAL}" Content="SecondAuto" Click="SecondAutoRadioAL_Clicked" HorizontalAlignment="Left" Margin="580,152,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <RadioButton x:Name="FullSendRadioAL" Style="{StaticResource AutoSelectionButtonsAL}" Content="FullSend" Click="FullSendRadioAL_Clicked"  HorizontalAlignment="Left" Margin="580,73,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.005,-0.186" Grid.Column="1"/>
+                        <Border Background="{StaticResource TextBoxBackground}" HorizontalAlignment="Left" Margin="422,93,0,0" VerticalAlignment="Top" Height="18" Width="102" Grid.Column="1">
+                            <TextBlock x:Name="RioAutoBoxAL" Text="RIOData" VerticalAlignment="Center" Margin="4,0,4,0" Background="{Binding Mode=OneWay, Source={StaticResource TextBoxBackground}}" TextAlignment="Center"/>
+                        </Border>
+                        <Label Content="RIO Reported Auto" HorizontalAlignment="Left" Margin="419,68,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <Image x:Name="AutoLayoutImageAL" HorizontalAlignment="Left" Height="264" Margin="247,230,0,0" VerticalAlignment="Top" Width="463" Source="/FRC 2022 PathPlanner Field - Ideal.png" Grid.Column="1"/>
+                        <Label Content="Autonomous Selection" HorizontalAlignment="Left" Margin="386,40,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="28" FontSize="16" FontWeight="SemiBold" Grid.Column="1"/>
+
+
+
+
                     </Grid>
                 </TabItem>
                 <TabItem Header="PIDTuning" Style="{DynamicResource TabItemBase}">

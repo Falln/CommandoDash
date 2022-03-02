@@ -35,6 +35,9 @@ namespace CommandoDash
         string robotIP = "10.58.59.2";
         string limelightIP = "10.58.89.11";
         string photonIP = "10.58.89.12";
+
+        double robotXFieldOffset = 23;
+        double robotYFieldOffset = 18;
         
         public MainWindow()
         {
@@ -124,13 +127,20 @@ namespace CommandoDash
             AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("isCentric"), new Action(() =>
                 IsCentricSB.IsActive = CommandoDashNT.GetSubTable("SensorData").GetEntry("isCentric").GetBoolean(true)));
 
+            //AutoLayouts
+            AddSimpleEntryListener(ntInst.GetTable("SmartDashboard").GetSubTable("Field").GetEntry("Robot"), new Action(() => updateRobotPosition()));
+
         }
 
         public void defaultStates()
         {
             //Initialize any default states of the WPF Controls
             IntakeCamRadio.IsChecked = true;
+            //Auto Clicks
             IdealRadio.IsChecked = true;
+            IdealRadioAL.IsChecked = true;
+            NetworkTableEntry entry = CommandoDashNT.GetEntry("autoSelection");
+            entry.SetString("IdealAuto");
             cameraURI = CameraURIInput.Text;
             robotIP = robotIPInput.Text;
             cameraStream.Source = new BitmapImage(new Uri("Images/Logo_Square_WhiteBackground_CommandoRobotics.png", UriKind.Relative));
@@ -229,6 +239,7 @@ namespace CommandoDash
         private void rioAutoSelection_Update()
         {
             RioAutoBox.Text = CommandoDashNT.GetEntry("rioAutoSelection").GetString("");
+            RioAutoBoxAL.Text = CommandoDashNT.GetEntry("rioAutoSelection").GetString("");
         }
 
         private void alliance_Update()
@@ -315,6 +326,23 @@ namespace CommandoDash
                 newMargin.Left = 75;
                 GyroAngleText.Margin = newMargin;
             }
+
+        }
+
+        private void updateRobotPosition()
+        {
+            Thickness robotMargin = RobotRectangle.Margin;
+            double robotXMeters = ntInst.GetTable("SmartDashboard").GetSubTable("Field").GetEntry("Robot").GetDoubleArray(new double[3] { 0, 0, 0 })[0];
+            double robotYMeters = ntInst.GetTable("SmartDashboard").GetSubTable("Field").GetEntry("Robot").GetDoubleArray(new double[3] { 0, 0, 0 })[1];
+            double robotRDegrees = ntInst.GetTable("SmartDashboard").GetSubTable("Field").GetEntry("Robot").GetDoubleArray(new double[3] { 0, 0, 0 })[2];
+            robotMargin.Left = (robotXMeters * (Field.Width / 16.4592)) - robotXFieldOffset;
+            robotMargin.Top = (robotYMeters * (Field.Height / 8.2296)) - robotYFieldOffset;
+            RobotRectangle.Margin = robotMargin;
+            RobotRotateTransform.Angle = robotRDegrees;
+
+            RobotXText.Text = Math.Round(robotXMeters,4).ToString() + "m";
+            RobotYText.Text = Math.Round(robotYMeters,4).ToString() + "m";
+            RobotRText.Text = Math.Round(robotRDegrees,4).ToString() + "°";
 
         }
 
@@ -440,34 +468,75 @@ namespace CommandoDash
             HoundHoundingTargetSB.IsActive = !HoundHoundingTargetSB.IsActive;
         }
 
-        private void TaxiRadio_Checked(object sender, RoutedEventArgs e)
+        private void TaxiRadio_Clicked(object sender, RoutedEventArgs e)
         {
             NetworkTableEntry entry = CommandoDashNT.GetEntry("autoSelection");
             entry.SetString("Taxi");
+            TaxiRadioAL.IsChecked = true;
         }
 
-        private void SpareRadio_Checked(object sender, RoutedEventArgs e)
+        private void SpareRadio_Clicked(object sender, RoutedEventArgs e)
         {
             NetworkTableEntry entry = CommandoDashNT.GetEntry("autoSelection");
             entry.SetString("Spare");
+            SpareRadioAL.IsChecked = true;
         }
 
-        private void IdealRadio_Checked(object sender, RoutedEventArgs e)
+        private void IdealRadio_Clicked(object sender, RoutedEventArgs e)
         {
             NetworkTableEntry entry = CommandoDashNT.GetEntry("autoSelection");
             entry.SetString("IdealAuto");
+            IdealRadioAL.IsChecked = true;
         }
 
-        private void SecondAutoRadio_Checked(object sender, RoutedEventArgs e)
+        private void SecondAutoRadio_Clicked(object sender, RoutedEventArgs e)
         {
             NetworkTableEntry entry = CommandoDashNT.GetEntry("autoSelection");
             entry.SetString("SecondAuto");
+            SecondRadioAL.IsChecked = true;
         }
 
-        private void FullSendRadio_Checked(object sender, RoutedEventArgs e)
+        private void FullSendRadio_Clicked(object sender, RoutedEventArgs e)
         {
             NetworkTableEntry entry = CommandoDashNT.GetEntry("autoSelection");
             entry.SetString("FullSend");
+            FullSendRadioAL.IsChecked = true;
+        }
+
+        private void TaxiRadioAL_Clicked(object sender, RoutedEventArgs e)
+        {
+            NetworkTableEntry entry = CommandoDashNT.GetEntry("autoSelection");
+            entry.SetString("Taxi");
+            TaxiRadio.IsChecked = true;
+        }
+
+        private void SpareRadioAL_Clicked(object sender, RoutedEventArgs e)
+        {
+            NetworkTableEntry entry = CommandoDashNT.GetEntry("autoSelection");
+            entry.SetString("Spare");
+            SpareRadio.IsChecked = true;
+        }
+
+        private void IdealRadioAL_Clicked(object sender, RoutedEventArgs e)
+        {
+            NetworkTableEntry entry = CommandoDashNT.GetEntry("autoSelection");
+            entry.SetString("IdealAuto");
+            IdealRadio.IsChecked = true;
+            
+        }
+
+        private void SecondAutoRadioAL_Clicked(object sender, RoutedEventArgs e)
+        {
+            NetworkTableEntry entry = CommandoDashNT.GetEntry("autoSelection");
+            entry.SetString("SecondAuto");
+            SecondRadio.IsChecked = true;
+        }
+
+        private void FullSendRadioAL_Clicked(object sender, RoutedEventArgs e)
+        {
+            NetworkTableEntry entry = CommandoDashNT.GetEntry("autoSelection");
+            entry.SetString("FullSend");
+            FullSendRadio.IsChecked = true;
         }
     }
 }

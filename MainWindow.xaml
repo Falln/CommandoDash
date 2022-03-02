@@ -452,10 +452,11 @@
                                 <!-- x: 0, y: 0, width: 50, height: 100-->
                             </Ellipse.Clip>
                             <Ellipse.RenderTransform>
-                                <RotateTransform Angle="44.881"/>
+                                <RotateTransform x:Name="GyroAngleEllipseAngle" Angle="44.881"/>
                             </Ellipse.RenderTransform>
                         </Ellipse>
                         <Label Grid.Column="1" Content="Robot Angle" HorizontalAlignment="Left" Margin="63,191,0,0" VerticalAlignment="Top" Width="146" RenderTransformOrigin="0.5,0.5" FontSize="18"/>
+                        <TextBlock x:Name="GyroAngleText" Grid.Column="1" HorizontalAlignment="Left" Margin="75,280,0,0" TextWrapping="Wrap" Text="0°" VerticalAlignment="Top" Height="51" Width="96" FontSize="36" TextAlignment="Center" Foreground="White"/>
 
 
                         <!-- Current Draw -->
@@ -507,7 +508,7 @@
                         <Label Grid.Column="1" Content="Battery Voltage" HorizontalAlignment="Left" Margin="187,659,0,0" VerticalAlignment="Top"/>
                         <local:StatusTextBlock x:Name="BatteryVolatgeSB" Style="{StaticResource ResourceKey=PowerStatusBlocks}" ActiveBrush="{StaticResource PowerEnabled}" InactiveBrush="{StaticResource PowerDisabled}" BorderBrush="{StaticResource PowerBorder}"  Margin="277,661,579,52" Grid.Column="1" Text="300A"/>
                         <local:StatusTextBlock x:Name="TotalCurrentSB" Style="{StaticResource ResourceKey=PowerStatusBlocks}" ActiveBrush="{StaticResource PowerEnabled}" InactiveBrush="{StaticResource PowerDisabled}" BorderBrush="{StaticResource PowerBorder}"  Margin="277,634,579,79" Grid.Column="1" Text="12.7V"/>
-                        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="90,280,0,0" TextWrapping="Wrap" Text="0°" VerticalAlignment="Top" Height="51" Width="65" FontSize="36" TextAlignment="Center" Foreground="White"/>
+
 
 
 

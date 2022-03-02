@@ -117,6 +117,13 @@ namespace CommandoDash
             //Update Current Usage
             AddSimpleEntryListener(CommandoDashNT.GetSubTable("PowerUsage").GetEntry("batteryVoltage"), new Action(() => updatePowerUsage()));
 
+            //Update the current gyro angle
+            AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("gyroAngle"), new Action(() => updateGyroInfo()));
+
+            //Update if we're in centric mode
+            AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("isCentric"), new Action(() =>
+                IsCentricSB.IsActive = CommandoDashNT.GetSubTable("SensorData").GetEntry("isCentric").GetBoolean(true)));
+
         }
 
         public void defaultStates()
@@ -290,6 +297,25 @@ namespace CommandoDash
             //Overall Current and Battery Voltage
             TotalCurrentSB.Text = Math.Round(powerTable.GetEntry("totalCurrent").GetDouble(0), 1).ToString();
             BatteryVolatgeSB.Text = Math.Round(powerTable.GetEntry("batteryVoltage").GetDouble(0), 2).ToString();
+        }
+
+        private void updateGyroInfo()
+        {
+            double currAngle = CommandoDashNT.GetSubTable("SensorData").GetEntry("gyroAngle").GetDouble(0);
+            GyroAngleEllipseAngle.Angle = currAngle + 45;
+            GyroAngleText.Text = Math.Round(currAngle, 0).ToString() + "°";
+            if (currAngle < 0)
+            {
+                Thickness newMargin = GyroAngleText.Margin;
+                newMargin.Left = 71;
+                GyroAngleText.Margin = newMargin;
+            } else
+            {
+                Thickness newMargin = GyroAngleText.Margin;
+                newMargin.Left = 75;
+                GyroAngleText.Margin = newMargin;
+            }
+
         }
 
 

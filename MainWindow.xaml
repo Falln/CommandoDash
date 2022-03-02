@@ -384,7 +384,7 @@
                             </Rectangle.RenderTransform>
                         </Rectangle>
                         <Label Content="Manual Robot Control&#xD;&#xA;(Dashboard robot control)" HorizontalAlignment="Left" Margin="586,506,0,0" VerticalAlignment="Top" FontSize="36" Grid.Column="1" Height="170" Width="258"/>
-                        <Button Grid.Column="1" Click="Button_Click" Content="TestButton" HorizontalAlignment="Left" Margin="66,0,0,0" VerticalAlignment="Center"/>
+                        <Button Click="Button_Click" Content="TestButton" HorizontalAlignment="Left" Margin="953,702,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
 
                         <!-- Camera Connection -->
                         <Rectangle Margin="9,34,851,578" Fill="{StaticResource ResourceKey=PanelGrey}"/>
@@ -438,23 +438,25 @@
                         <Rectangle Margin="16,16,531,548" Fill="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
                         <Label Content="Shooter Status" HorizontalAlignment="Left" Margin="140,11,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="46" FontSize="16" FontWeight="SemiBold" Grid.Column="1" Width="116"/>
                         <local:StatusTextBlock x:Name="ReadyToFireSB" Style="{StaticResource ResourceKey=ReadyToShootStatus}" ActiveBrush="{StaticResource SolenoidEnabled}" InactiveBrush="{StaticResource SolenoidDisabled}" BorderBrush="{StaticResource SolenoidBorder}"  Margin="32,57,707,583" Grid.Column="1" Text="READY TO FIRE"/>
-                        <Rectangle Margin="37,242,756,376" Fill="Blue" Grid.Column="1"/>
                         <TextBox x:Name="ManualCycleBox" KeyDown="robotIPInput_KeyDown" Text="Current Manual " Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="228,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="40" FontSize="14" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
                         <TextBox x:Name="ShooterRPMBox" KeyDown="robotIPInput_KeyDown" Text="Shooter RPM" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="228,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136" Height="40" FontSize="14" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
                         <Label Grid.Column="1" Content="Manual Cycle Speed" HorizontalAlignment="Left" Margin="224,37,0,0" VerticalAlignment="Top" FontSize="14"/>
                         <Label Grid.Column="1" Content="Shooter RPM" HorizontalAlignment="Left" Margin="224,99,0,0" VerticalAlignment="Top" FontSize="14"/>
-                        <Label Grid.Column="1" Content="GYRO" HorizontalAlignment="Left" Margin="48,272,0,0" VerticalAlignment="Top" Width="92" RenderTransformOrigin="0.5,0.5" FontSize="32">
-                            <Label.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform Angle="-42.679"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Label.RenderTransform>
-                        </Label>
-                                             
+
+
                         <local:StatusTextBlock x:Name="IsCentricSB" Style="{StaticResource ResourceKey=ReadyToShootStatus}" ActiveBrush="{StaticResource SolenoidEnabled}" InactiveBrush="{StaticResource SolenoidDisabled}" BorderBrush="{StaticResource SolenoidBorder}"  Margin="240,238,549,380" Grid.Column="1" Text="Centric-&#xD;&#xA;Mode"/>
+                        <Ellipse Stroke="DimGray" StrokeThickness="12" Margin="34,221,707,346" Grid.Column="1" RenderTransformOrigin="0.5,0.5"/>
+                        <Ellipse Stroke="Red" StrokeThickness="12" Margin="34,221,707,346" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                            <Ellipse.Clip>
+                                <RectangleGeometry Rect="0,0,60,60"/>
+                                <!-- x: 0, y: 0, width: 50, height: 100-->
+                            </Ellipse.Clip>
+                            <Ellipse.RenderTransform>
+                                <RotateTransform Angle="44.881"/>
+                            </Ellipse.RenderTransform>
+                        </Ellipse>
+                        <Label Grid.Column="1" Content="Robot Angle" HorizontalAlignment="Left" Margin="63,191,0,0" VerticalAlignment="Top" Width="146" RenderTransformOrigin="0.5,0.5" FontSize="18"/>
+
 
                         <!-- Current Draw -->
                         <Rectangle Margin="38,480,409,47" Fill="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
@@ -505,6 +507,7 @@
                         <Label Grid.Column="1" Content="Battery Voltage" HorizontalAlignment="Left" Margin="187,659,0,0" VerticalAlignment="Top"/>
                         <local:StatusTextBlock x:Name="BatteryVolatgeSB" Style="{StaticResource ResourceKey=PowerStatusBlocks}" ActiveBrush="{StaticResource PowerEnabled}" InactiveBrush="{StaticResource PowerDisabled}" BorderBrush="{StaticResource PowerBorder}"  Margin="277,661,579,52" Grid.Column="1" Text="300A"/>
                         <local:StatusTextBlock x:Name="TotalCurrentSB" Style="{StaticResource ResourceKey=PowerStatusBlocks}" ActiveBrush="{StaticResource PowerEnabled}" InactiveBrush="{StaticResource PowerDisabled}" BorderBrush="{StaticResource PowerBorder}"  Margin="277,634,579,79" Grid.Column="1" Text="12.7V"/>
+                        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="90,280,0,0" TextWrapping="Wrap" Text="0°" VerticalAlignment="Top" Height="51" Width="65" FontSize="36" TextAlignment="Center" Foreground="White"/>
 
 
 

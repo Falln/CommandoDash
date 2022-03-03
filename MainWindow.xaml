@@ -67,6 +67,10 @@
         <Brush x:Key="HoundBlueHounding">#FF0270EA</Brush>
         <Brush x:Key="HoundBlueDefault">#FF032954</Brush>
         <Brush x:Key="HoundBlueBorder">#FF343435</Brush>
+        <Brush x:Key="IndexDisabled">#FF740900</Brush>
+        <Brush x:Key="IndexBlueEnabled">#FF0270EA</Brush>
+        <Brush x:Key="IndexRedEnabled">#FFCC1311</Brush>
+        <Brush x:Key="IndexBorder">Black</Brush>
 
         <!-- Default Styles -->
         <Style TargetType="{x:Type Label}">
@@ -87,6 +91,14 @@
             <Setter Property="BorderBrush" Value="{StaticResource CurrentProgressBorder}"/>
             <Setter Property="Foreground" Value="{StaticResource CurrentProgressForeground}"/>
             <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+        </Style>
+        
+        <!-- Image Styles -->
+        <Style TargetType="{x:Type Image}" x:Key="IndexCargoImages">
+            <Setter Property="Width" Value="60"/>
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="Source" Value="/Images/Blue_Cargo.png"/>
+            <Setter Property="Visibility" Value="Hidden"/>
         </Style>
 
         <!-- TextBlock/Box Styles -->
@@ -168,6 +180,40 @@
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Foreground" Value="{StaticResource CurrentTextForeground}"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        <Style TargetType="{x:Type local:StatusTextBlock}" x:Key="IndexStatusBlocks">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="{StaticResource ButtonBackground}"/>
+            <Setter Property="IsEnabled" Value="False"/>
+            <Setter Property="ActiveBrush" Value="{StaticResource IndexBlueEnabled}"/>
+            <Setter Property="InactiveBrush" Value="{x:Null}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource IndexBorder}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type local:StatusTextBlock}">
+                        <Grid>
+                            <Ellipse x:Name="InsideEllipse" StrokeDashArray="3" StrokeDashCap="Round" Grid.Row="1" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsActive" Value="True">
+                                <Setter TargetName="InsideEllipse" Property="StrokeDashArray" Value="0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsActive" Value="True">
+                    <Setter Property="Background" Value="{Binding ActiveBrush, RelativeSource={RelativeSource Self}}"/>
+                </Trigger>
+                <Trigger Property="IsActive" Value="False">
+                    <Setter Property="Background" Value="{Binding InactiveBrush, RelativeSource={RelativeSource Self}}"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
         <!-- Button Styles -->
@@ -404,17 +450,6 @@
                         <Border Height="501" Margin="149,10,42,0" VerticalAlignment="Top" Background="Black">
                             <Image x:Name="cameraStream" />
                         </Border>
-                        <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="272" Margin="553,450,0,0" Stroke="Black" VerticalAlignment="Top" Width="335" RenderTransformOrigin="0.5,0.5">
-                            <Rectangle.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform ScaleY="-1"/>
-                                    <SkewTransform/>
-                                    <RotateTransform/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Rectangle.RenderTransform>
-                        </Rectangle>
-                        <Label Content="Manual Robot Control&#xD;&#xA;(Dashboard robot control)" HorizontalAlignment="Left" Margin="586,506,0,0" VerticalAlignment="Top" FontSize="36" Grid.Column="1" Height="170" Width="258"/>
                         <Button Click="Button_Click" Content="TestButton" HorizontalAlignment="Left" Margin="953,702,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
 
                         <!-- Camera Connection -->
@@ -450,9 +485,19 @@
                         <!-- Power Consumption -->
 
                         <!-- Index Status -->
+                        <Image x:Name="IndexCargo1Image" Style="{StaticResource IndexCargoImages}" Grid.Column="1" HorizontalAlignment="Left" Margin="545,75,0,0" VerticalAlignment="Top"/>
+                        <Image x:Name="IndexCargo2Image" Style="{StaticResource IndexCargoImages}" Grid.Column="1" HorizontalAlignment="Left" Margin="590,110,0,0" VerticalAlignment="Top"/>
+                        <Image x:Name="IntakeCargoImage" Style="{StaticResource IndexCargoImages}" Grid.Column="1" HorizontalAlignment="Left" Margin="699,125,0,0" VerticalAlignment="Top"/>
                         <Image Grid.Column="1" Margin="483,0,134,497" Source="/Images/5889-Index-Robot-PNG (3).png" Stretch="Fill"/>
-                        <Rectangle Margin="801,19,24,521" Fill="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
-                        <Label Grid.Column="1" Content="Index Status" HorizontalAlignment="Left" Margin="800,19,0,0" VerticalAlignment="Top" FontSize="14" FontFamily="Segoe UI Semibold"/>
+                        <Rectangle Margin="793,19,24,521" Fill="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
+                        <Label Grid.Column="1" Content="Index Status" HorizontalAlignment="Left" Margin="796,19,0,0" VerticalAlignment="Top" FontSize="14" FontFamily="Segoe UI Semibold"/>
+                        <local:StatusTextBlock x:Name="IndexSpot1SB" Style="{StaticResource IndexStatusBlocks}" Grid.Column="1" HorizontalAlignment="Left" Margin="825,68,0,0" TextWrapping="Wrap" Text="StatusTextBlock" VerticalAlignment="Top"/>
+                        <local:StatusTextBlock x:Name="IndexSpot2SB" Style="{StaticResource IndexStatusBlocks}" Grid.Column="1" HorizontalAlignment="Left" Margin="825,121,0,0" TextWrapping="Wrap" Text="StatusTextBlock" VerticalAlignment="Top"/>
+                        <local:StatusTextBlock x:Name="IntakeSpotSB" Style="{StaticResource IndexStatusBlocks}" Grid.Column="1" HorizontalAlignment="Left" Margin="825,170,0,0" TextWrapping="Wrap" Text="StatusTextBlock" VerticalAlignment="Top"/>
+                        <Label Grid.Column="1" Content="Index 1" HorizontalAlignment="Left" Margin="816,44,0,0" VerticalAlignment="Top"/>
+                        <Label Grid.Column="1" Content="Index 2" HorizontalAlignment="Left" Margin="816,96,0,0" VerticalAlignment="Top"/>
+                        <Label Grid.Column="1" Content="Intake" HorizontalAlignment="Left" Margin="819,147,0,0" VerticalAlignment="Top"/>
+
 
                         <!-- Solenoid Status -->
                         <local:StatusTextBlock x:Name="IntakeSolSB" Style="{StaticResource ResourceKey=StatusTextBlocks}" ActiveBrush="{StaticResource SolenoidEnabled}" InactiveBrush="{StaticResource SolenoidDisabled}" BorderBrush="{StaticResource SolenoidBorder}"  Margin="442,259,361,401" Grid.Column="1" Text="Intake"/>
@@ -483,7 +528,7 @@
                                 <!-- x: 0, y: 0, width: 50, height: 100-->
                             </Ellipse.Clip>
                             <Ellipse.RenderTransform>
-                                <RotateTransform x:Name="GyroAngleEllipseAngle" Angle="44.881"/>
+                                <RotateTransform x:Name="GyroAngleEllipseAngle" Angle="45"/>
                             </Ellipse.RenderTransform>
                         </Ellipse>
                         <Label Grid.Column="1" Content="Robot Angle" HorizontalAlignment="Left" Margin="63,191,0,0" VerticalAlignment="Top" Width="146" RenderTransformOrigin="0.5,0.5" FontSize="18"/>
@@ -539,6 +584,7 @@
                         <Label Grid.Column="1" Content="Battery Voltage" HorizontalAlignment="Left" Margin="187,659,0,0" VerticalAlignment="Top"/>
                         <local:StatusTextBlock x:Name="BatteryVolatgeSB" Style="{StaticResource ResourceKey=PowerStatusBlocks}" ActiveBrush="{StaticResource PowerEnabled}" InactiveBrush="{StaticResource PowerDisabled}" BorderBrush="{StaticResource PowerBorder}"  Margin="277,661,579,52" Grid.Column="1" Text="300A"/>
                         <local:StatusTextBlock x:Name="TotalCurrentSB" Style="{StaticResource ResourceKey=PowerStatusBlocks}" ActiveBrush="{StaticResource PowerEnabled}" InactiveBrush="{StaticResource PowerDisabled}" BorderBrush="{StaticResource PowerBorder}"  Margin="277,634,579,79" Grid.Column="1" Text="12.7V"/>
+                        
 
 
 
@@ -557,35 +603,50 @@
                         </Grid.RowDefinitions>
 
                         <!-- Field -->
-                        <Border x:Name="Field" RenderTransformOrigin="0.5,0.5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Height="567" Width="1136">
+                        <Border BorderThickness="0" x:Name="Field" RenderTransformOrigin="0.5,0.5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Height="567" Width="1136">
                             <Border.Background>
-                                <ImageBrush ImageSource="/FRC 2022 PathPlanner Field.png">
+                                <ImageBrush ImageSource="/FRC 2022 Offical Field.png">
                                     <ImageBrush.RelativeTransform>
-                                        <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleY="-1"/>
+                                        <ScaleTransform x:Name="FieldImageScale" CenterX="0.5" CenterY="0.5" ScaleY="-1"/>
                                     </ImageBrush.RelativeTransform>
                                 </ImageBrush>
                             </Border.Background>
                             <Border.RenderTransform>
                                 <ScaleTransform ScaleY="-1"/>
                             </Border.RenderTransform>
-                            <Rectangle x:Name="RobotRectangle" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Height="36" Stroke="White" VerticalAlignment="Top" Width="46" Fill="#FF00FF1B" Margin="-23,-18,0,0">
-                                <Rectangle.RenderTransform>
-                                    <TransformGroup>
-                                        <RotateTransform x:Name="RobotRotateTransform" Angle="0"/>
-                                    </TransformGroup>
-                                </Rectangle.RenderTransform>
-                            </Rectangle>
+                            <Grid>
+                                <Rectangle x:Name="RobotRectangle" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Height="36" Stroke="White" VerticalAlignment="Top" Width="46" Fill="#FF00FF1B" Margin="-23,-18,0,0">
+                                    <Rectangle.RenderTransform>
+                                        <TransformGroup>
+                                            <RotateTransform x:Name="RobotRotateTransform" Angle="0"/>
+                                        </TransformGroup>
+                                    </Rectangle.RenderTransform>
+                                </Rectangle>
+                                <Rectangle  x:Name="CargoRectangle" VerticalAlignment="Top" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Height="30" Width="30" Margin="-15,-15,0,0">
+                                    <Rectangle.Fill>
+                                        <ImageBrush x:Name="FieldCargo" ImageSource="Images/Blue_Cargo.png"/>
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </Grid>
                         </Border>
 
                         <!-- Robot Position Updates -->
                         <Rectangle Margin="11,16,595,331" Fill="{StaticResource ResourceKey=PanelGrey}" RenderTransformOrigin="0.5,0.5" Grid.Column="1"/>
                         <Label Content="Robot Position" HorizontalAlignment="Left" Margin="35,16,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="28" FontSize="16" FontWeight="SemiBold" Grid.Column="1"/>
-                        <TextBox x:Name="RobotXText" Text="0.0m" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="26,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="30" FontSize="14" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
-                        <TextBox x:Name="RobotYText" Text="0.0m" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="26,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="30" FontSize="14" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
-                        <TextBox x:Name="RobotRText" Text="0.0°" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="26,188,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="30" FontSize="14" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <TextBox x:Name="RobotXText" Text="0.0m" IsEnabled="False" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="26,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="30" FontSize="14" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <TextBox x:Name="RobotYText" Text="0.0m" IsEnabled="False" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="26,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="30" FontSize="14" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <TextBox x:Name="RobotRText" Text="0.0°" IsEnabled="False" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="26,188,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="30" FontSize="14" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
                         <Label Grid.Column="1" Content="Robot X" HorizontalAlignment="Left" Margin="67,47,0,0" VerticalAlignment="Top"/>
                         <Label Grid.Column="1" Content="Robot Y" HorizontalAlignment="Left" Margin="67,107,0,0" VerticalAlignment="Top"/>
                         <Label Grid.Column="1" Content="Robot Heading" HorizontalAlignment="Left" Margin="48,167,0,0" VerticalAlignment="Top"/>
+
+                        <!-- Cargo Position Updates-->
+                        <Rectangle Margin="11,251,595,155" Fill="{StaticResource ResourceKey=PanelGrey}" RenderTransformOrigin="0.5,0.5" Grid.Column="1"/>
+                        <Label Content="Cargo Position" HorizontalAlignment="Left" Margin="35,251,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="33" FontSize="16" FontWeight="SemiBold" Grid.Column="1"/>
+                        <TextBox x:Name="CargoXText" Text="0.0m" IsEnabled="False" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="26,303,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="30" FontSize="14" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <TextBox x:Name="CargoYText" Text="0.0m" IsEnabled="False" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="26,363,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="30" FontSize="14" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Grid.Column="1" Content="Cargo X" HorizontalAlignment="Left" Margin="67,282,0,0" VerticalAlignment="Top"/>
+                        <Label Grid.Column="1" Content="Cargo Y" HorizontalAlignment="Left" Margin="67,342,0,0" VerticalAlignment="Top"/>
 
                         <!-- Auto Selection Panel-->
                         <Rectangle Margin="247,40,60,362" Fill="{StaticResource ResourceKey=PanelGrey}" RenderTransformOrigin="0.5,0.5" Grid.Column="1"/>
@@ -600,10 +661,6 @@
                         <Label Content="RIO Reported Auto" HorizontalAlignment="Left" Margin="419,68,0,0" VerticalAlignment="Top" Grid.Column="1"/>
                         <Image x:Name="AutoLayoutImageAL" HorizontalAlignment="Left" Height="264" Margin="247,230,0,0" VerticalAlignment="Top" Width="463" Source="/FRC 2022 PathPlanner Field - Ideal.png" Grid.Column="1"/>
                         <Label Content="Autonomous Selection" HorizontalAlignment="Left" Margin="386,40,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="28" FontSize="16" FontWeight="SemiBold" Grid.Column="1"/>
-
-
-
-
                     </Grid>
                 </TabItem>
                 <TabItem Header="PIDTuning" Style="{DynamicResource TabItemBase}">

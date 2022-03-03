@@ -8,11 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Blue_Cargo.png" />
     <None Remove="close.png" />
     <None Remove="CommandoLogov1.png" />
     <None Remove="CommandoLogov1_preview_rev_1.png" />
     <None Remove="favicon-16x16.png" />
     <None Remove="favicon-32x32.png" />
+    <None Remove="FRC 2022 Offical Field.png" />
     <None Remove="FRC 2022 PathPlanner Field - Ideal.png" />
     <None Remove="FRC 2022 PathPlanner Field.png" />
     <None Remove="FRC 2022 PathPlanner Half-Field - Ideal.png" />
@@ -23,12 +25,16 @@
     <None Remove="Images\5889-Index-Robot-PNG %283%29.png" />
     <None Remove="Images\5889-Index-Robot-PNG.png" />
     <None Remove="Images\5889-Index-Robot.png" />
+    <None Remove="Images\Blue_Cargo.png" />
+    <None Remove="Images\FRC 2022 Offical Field.png" />
     <None Remove="Images\FRC 2022 PathPlanner Field.png" />
     <None Remove="Images\FRC 2022 PathPlanner Half-Field - Ideal.png" />
     <None Remove="Images\Logo_Square_WhiteBackground_CommandoRobotics.png" />
+    <None Remove="Images\Red_Cargo.png" />
     <None Remove="Images\refresh_icon.png" />
     <None Remove="Logo_Square_DarkBackground_CommandoRobotics.png" />
     <None Remove="Logo_Square_WhiteBackground_CommandoRobotics.png" />
+    <None Remove="Red_Cargo.png" />
     <None Remove="refresh_icon.png" />
     <None Remove="restore-down.png" />
     <None Remove="subtract.png" />
@@ -45,11 +51,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Blue_Cargo.png" />
     <Resource Include="close.png" />
     <Resource Include="CommandoLogov1.png" />
     <Resource Include="CommandoLogov1_preview_rev_1.png" />
     <Resource Include="favicon-16x16.png" />
     <Resource Include="favicon-32x32.png" />
+    <Resource Include="FRC 2022 Offical Field.png" />
     <Resource Include="FRC 2022 PathPlanner Field - Ideal.png" />
     <Resource Include="FRC 2022 PathPlanner Field.png" />
     <Resource Include="FRC 2022 PathPlanner Half-Field - Ideal.png" />
@@ -68,6 +76,12 @@
     <Content Include="Images\5889-Index-Robot.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Blue_Cargo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\FRC 2022 Offical Field.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\FRC 2022 PathPlanner Field.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -77,11 +91,15 @@
     <Content Include="Images\Logo_Square_WhiteBackground_CommandoRobotics.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Red_Cargo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\refresh_icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Logo_Square_DarkBackground_CommandoRobotics.png" />
     <Resource Include="Logo_Square_WhiteBackground_CommandoRobotics.png" />
+    <Resource Include="Red_Cargo.png" />
     <Resource Include="refresh_icon.png" />
     <Resource Include="restore-down.png" />
     <Resource Include="subtract.png" />

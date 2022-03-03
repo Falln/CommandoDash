@@ -127,9 +127,22 @@ namespace CommandoDash
             AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("isCentric"), new Action(() =>
                 IsCentricSB.IsActive = CommandoDashNT.GetSubTable("SensorData").GetEntry("isCentric").GetBoolean(true)));
 
+            //Update Index Spot 1
+            AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("indexSpot1HasCargo"), new Action(() => updateIndexSpot1()));
+
+            //Update Index Spot 2
+            AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("indexSpot2HasCargo"), new Action(() => updateIndexSpot2()));
+
+            //Update Intake Spot 
+            AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("intakeSpotHasCargo"), new Action(() => updateIntakeSpot()));
+
             //AutoLayouts
+
+            //Update Robot Field2d position
             AddSimpleEntryListener(ntInst.GetTable("SmartDashboard").GetSubTable("Field").GetEntry("Robot"), new Action(() => updateRobotPosition()));
 
+            //Update Cargo Field2d position
+            AddSimpleEntryListener(ntInst.GetTable("SmartDashboard").GetSubTable("Field").GetEntry("SeenCargo"), new Action(() => updateCargoPosition()));
         }
 
         public void defaultStates()
@@ -252,6 +265,18 @@ namespace CommandoDash
                 HoundSeesTargetSB.ActiveBrush = (Brush) this.Resources["HoundRedHounding"];
                 HoundSeesTargetSB.InactiveBrush = (Brush) this.Resources["HoundRedDefault"];
                 HoundSeesTargetSB.BorderBrush = (Brush)this.Resources["HoundRedBorder"];
+
+                FieldCargo.ImageSource = new BitmapImage(new Uri("Images/Red_Cargo.png", UriKind.Relative));
+                FieldImageScale.ScaleX = -1;
+                FieldImageScale.ScaleY = 1;
+
+                IndexCargo1Image.Source = new BitmapImage(new Uri("Images/Red_Cargo.png", UriKind.Relative));
+                IndexCargo2Image.Source = new BitmapImage(new Uri("Images/Red_Cargo.png", UriKind.Relative));
+                IntakeCargoImage.Source = new BitmapImage(new Uri("Images/Red_Cargo.png", UriKind.Relative));
+
+                IndexSpot1SB.ActiveBrush = (Brush)this.Resources["IndexRedEnabled"];
+                IndexSpot2SB.ActiveBrush = (Brush)this.Resources["IndexRedEnabled"];
+                IntakeSpotSB.ActiveBrush = (Brush)this.Resources["IndexRedEnabled"];
             } else
             {
                 HoundHoundingTargetSB.ActiveBrush = (Brush)this.Resources["HoundBlueHounding"];
@@ -260,6 +285,18 @@ namespace CommandoDash
                 HoundSeesTargetSB.ActiveBrush = (Brush)this.Resources["HoundBlueHounding"];
                 HoundSeesTargetSB.InactiveBrush = (Brush)this.Resources["HoundBlueDefault"];
                 HoundSeesTargetSB.BorderBrush = (Brush)this.Resources["HoundBlueBorder"];
+
+                FieldCargo.ImageSource = new BitmapImage(new Uri("Images/Blue_Cargo.png", UriKind.Relative));
+                FieldImageScale.ScaleX = 1;
+                FieldImageScale.ScaleY = -1;
+
+                IndexCargo1Image.Source = new BitmapImage(new Uri("Images/Blue_Cargo.png", UriKind.Relative));
+                IndexCargo2Image.Source = new BitmapImage(new Uri("Images/Blue_Cargo.png", UriKind.Relative));
+                IntakeCargoImage.Source = new BitmapImage(new Uri("Images/Blue_Cargo.png", UriKind.Relative));
+
+                IndexSpot1SB.ActiveBrush = (Brush)this.Resources["IndexBlueEnabled"];
+                IndexSpot2SB.ActiveBrush = (Brush)this.Resources["IndexBlueEnabled"];
+                IntakeSpotSB.ActiveBrush = (Brush)this.Resources["IndexBlueEnabled"];
             }
             
         }
@@ -343,7 +380,60 @@ namespace CommandoDash
             RobotXText.Text = Math.Round(robotXMeters,4).ToString() + "m";
             RobotYText.Text = Math.Round(robotYMeters,4).ToString() + "m";
             RobotRText.Text = Math.Round(robotRDegrees,4).ToString() + "°";
+        }
 
+        private void updateCargoPosition()
+        {
+            Thickness cargoMargin = CargoRectangle.Margin;
+            double cargoXMeters = ntInst.GetTable("SmartDashboard").GetSubTable("Field").GetEntry("SeenCargo").GetDoubleArray(new double[3] { 0, 0, 0 })[0];
+            double cargoYMeters = ntInst.GetTable("SmartDashboard").GetSubTable("Field").GetEntry("SeenCargo").GetDoubleArray(new double[3] { 0, 0, 0 })[1];
+            cargoMargin.Left = (cargoXMeters * (Field.Width / 16.4592)) - 15;
+            cargoMargin.Top = (cargoYMeters * (Field.Height / 8.2296)) - 15;
+            CargoRectangle.Margin = cargoMargin;
+
+            CargoXText.Text = Math.Round(cargoXMeters, 4).ToString() + "m";
+            CargoYText.Text = Math.Round(cargoYMeters, 4).ToString() + "m";
+        }
+
+        private void updateIndexSpot1()
+        {
+            Boolean spotHasCargo = CommandoDashNT.GetSubTable("SensorData").GetEntry("indexSpot1HasCargo").GetBoolean(false);
+            if (spotHasCargo)
+            {
+                IndexCargo1Image.Visibility = Visibility.Visible;
+            } else
+            {
+                IndexCargo1Image.Visibility = Visibility.Hidden;
+            }
+            IndexSpot1SB.IsActive = spotHasCargo;
+        }
+
+        private void updateIndexSpot2()
+        {
+            Boolean spotHasCargo = CommandoDashNT.GetSubTable("SensorData").GetEntry("indexSpot2HasCargo").GetBoolean(false);
+            if (spotHasCargo)
+            {
+                IndexCargo2Image.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                IndexCargo2Image.Visibility = Visibility.Hidden;
+            }
+            IndexSpot2SB.IsActive = spotHasCargo;
+        }
+
+        private void updateIntakeSpot()
+        {
+            Boolean spotHasCargo = CommandoDashNT.GetSubTable("SensorData").GetEntry("intakeSpotHasCargo").GetBoolean(false);
+            if (spotHasCargo)
+            {
+                IntakeCargoImage.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                IntakeCargoImage.Visibility = Visibility.Hidden;
+            }
+            IntakeSpotSB.IsActive = spotHasCargo;
         }
 
 

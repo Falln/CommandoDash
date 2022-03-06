@@ -450,7 +450,6 @@
                         <Border Height="501" Margin="149,10,42,0" VerticalAlignment="Top" Background="Black">
                             <Image x:Name="cameraStream" />
                         </Border>
-                        <Button Click="Button_Click" Content="TestButton" HorizontalAlignment="Left" Margin="953,702,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
 
                         <!-- Camera Connection -->
                         <Rectangle Margin="9,34,851,578" Fill="{StaticResource ResourceKey=PanelGrey}"/>
@@ -514,13 +513,14 @@
                         <Rectangle Margin="16,16,531,548" Fill="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
                         <Label Content="Shooter Status" HorizontalAlignment="Left" Margin="140,11,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="46" FontSize="16" FontWeight="SemiBold" Grid.Column="1" Width="116"/>
                         <local:StatusTextBlock x:Name="ReadyToFireSB" Style="{StaticResource ResourceKey=ReadyToShootStatus}" ActiveBrush="{StaticResource SolenoidEnabled}" InactiveBrush="{StaticResource SolenoidDisabled}" BorderBrush="{StaticResource SolenoidBorder}"  Margin="32,57,707,583" Grid.Column="1" Text="READY TO FIRE"/>
-                        <TextBox x:Name="ManualCycleBox" KeyDown="robotIPInput_KeyDown" Text="Current Manual " Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="228,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="40" FontSize="14" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
-                        <TextBox x:Name="ShooterRPMBox" KeyDown="robotIPInput_KeyDown" Text="Shooter RPM" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="228,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136" Height="40" FontSize="14" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <TextBox x:Name="ManualCycleBox" KeyDown="robotIPInput_KeyDown" Text="0" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="228,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="40" FontSize="20" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <TextBox x:Name="ShooterRPMBox" KeyDown="robotIPInput_KeyDown" Text="0" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="228,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136" Height="40" FontSize="20" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
                         <Label Grid.Column="1" Content="Manual Cycle Speed" HorizontalAlignment="Left" Margin="224,37,0,0" VerticalAlignment="Top" FontSize="14"/>
                         <Label Grid.Column="1" Content="Shooter RPM" HorizontalAlignment="Left" Margin="224,99,0,0" VerticalAlignment="Top" FontSize="14"/>
 
 
-                        <local:StatusTextBlock x:Name="IsCentricSB" Style="{StaticResource ResourceKey=ReadyToShootStatus}" ActiveBrush="{StaticResource SolenoidEnabled}" InactiveBrush="{StaticResource SolenoidDisabled}" BorderBrush="{StaticResource SolenoidBorder}"  Margin="240,238,549,380" Grid.Column="1" Text="Centric-&#xD;&#xA;Mode"/>
+                        <!-- Gyro and IsCentric -->
+                        <local:StatusTextBlock x:Name="IsCentricSB" Style="{StaticResource ResourceKey=ReadyToShootStatus}" ActiveBrush="{StaticResource SolenoidEnabled}" InactiveBrush="{StaticResource SolenoidDisabled}" BorderBrush="{StaticResource SolenoidBorder}"  Margin="243,246,546,371" Grid.Column="1" Text="Centric-&#xD;&#xA;Mode"/>
                         <Ellipse Stroke="DimGray" StrokeThickness="12" Margin="34,221,707,346" Grid.Column="1" RenderTransformOrigin="0.5,0.5"/>
                         <Ellipse Stroke="Red" StrokeThickness="12" Margin="34,221,707,346" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
                             <Ellipse.Clip>

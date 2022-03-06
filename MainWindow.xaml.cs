@@ -38,6 +38,9 @@ namespace CommandoDash
 
         double robotXFieldOffset = 23;
         double robotYFieldOffset = 18;
+
+        double timesPowerUpdated = 0;
+        double targetNumberTimesPowerUpdated = 10;
         
         public MainWindow()
         {
@@ -114,8 +117,11 @@ namespace CommandoDash
                 ManualCycleBox.Text = CommandoDashNT.GetSubTable("SensorData").GetEntry("manualCycleSpeed").GetDouble(0).ToString()));
 
             //Update ReadyToFire
-            AddSimpleEntryListener(CommandoDashNT.GetEntry("readyToFire"), new Action(() =>
-                ReadyToFireSB.IsActive = CommandoDashNT.GetEntry("readyToFire").GetBoolean(false)));
+            AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("isRobotAimed"), new Action(() =>
+                ReadyToFireSB.IsActive = CommandoDashNT.GetSubTable("SensorData").GetEntry("isRobotAimed").GetBoolean(false) && CommandoDashNT.GetSubTable("SensorData").GetEntry("isAtTargetVelocity").GetBoolean(false)));
+
+            AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("isAtTargetVelocity"), new Action(() =>
+                ReadyToFireSB.IsActive = CommandoDashNT.GetSubTable("SensorData").GetEntry("isRobotAimed").GetBoolean(false) && CommandoDashNT.GetSubTable("SensorData").GetEntry("isAtTargetVelocity").GetBoolean(false)));
 
             //Update Current Usage
             AddSimpleEntryListener(CommandoDashNT.GetSubTable("PowerUsage").GetEntry("batteryVoltage"), new Action(() => updatePowerUsage()));
@@ -303,48 +309,56 @@ namespace CommandoDash
 
         private void updatePowerUsage()
         {
-            NetworkTable powerTable = CommandoDashNT.GetSubTable("PowerUsage");
-            //Update all power ProgressBoxes and TextBoxes
-            //Drive
-            double driveFLCurrent = powerTable.GetEntry("driveFLCurrent").GetDouble(0);
-            double driveFRCurrent = powerTable.GetEntry("driveFRCurrent").GetDouble(0);
-            double driveRLCurrent = powerTable.GetEntry("driveRLCurrent").GetDouble(0);
-            double driveRRCurrent = powerTable.GetEntry("driveRRCurrent").GetDouble(0);
-            double averageDriveCurrent = Math.Round((driveFLCurrent + driveFRCurrent + driveRLCurrent + driveRRCurrent) / 4, 1);
-            DrivePowerProgress.Value = DrivePowerProgress.Maximum - averageDriveCurrent;
-            DrivePowerText.Text = averageDriveCurrent.ToString();
+            if (timesPowerUpdated >= targetNumberTimesPowerUpdated)
+            {
+                NetworkTable powerTable = CommandoDashNT.GetSubTable("PowerUsage");
+                //Update all power ProgressBoxes and TextBoxes
+                //Drive
+                double driveFLCurrent = powerTable.GetEntry("driveFLCurrent").GetDouble(0);
+                double driveFRCurrent = powerTable.GetEntry("driveFRCurrent").GetDouble(0);
+                double driveRLCurrent = powerTable.GetEntry("driveRLCurrent").GetDouble(0);
+                double driveRRCurrent = powerTable.GetEntry("driveRRCurrent").GetDouble(0);
+                double averageDriveCurrent = Math.Round((driveFLCurrent + driveFRCurrent + driveRLCurrent + driveRRCurrent) / 4, 1);
+                DrivePowerProgress.Value = DrivePowerProgress.Maximum - averageDriveCurrent;
+                DrivePowerText.Text = averageDriveCurrent.ToString();
 
-            //Shooter
-            double shooterLCurrent = powerTable.GetEntry("shooterLCurrent").GetDouble(0);
-            double shooterRCurrent = powerTable.GetEntry("shooterRCurrent").GetDouble(0);
-            ShooterPowerProgress.Value = ShooterPowerProgress.Maximum - ((shooterLCurrent + shooterRCurrent)/2);
-            ShooterPowerText.Text = Math.Round((shooterLCurrent + shooterRCurrent)/2, 1).ToString();
+                //Shooter
+                double shooterLCurrent = powerTable.GetEntry("shooterLCurrent").GetDouble(0);
+                double shooterRCurrent = powerTable.GetEntry("shooterRCurrent").GetDouble(0);
+                ShooterPowerProgress.Value = ShooterPowerProgress.Maximum - ((shooterLCurrent + shooterRCurrent) / 2);
+                ShooterPowerText.Text = Math.Round((shooterLCurrent + shooterRCurrent) / 2, 1).ToString();
 
-            //Intake
-            double intakeCurrent = powerTable.GetEntry("intakeCurrent").GetDouble(0);
-            IntakePowerProgress.Value = IntakePowerProgress.Maximum - intakeCurrent;
-            IntakePowerText.Text = Math.Round(intakeCurrent, 1).ToString();
+                //Intake
+                double intakeCurrent = powerTable.GetEntry("intakeCurrent").GetDouble(0);
+                IntakePowerProgress.Value = IntakePowerProgress.Maximum - intakeCurrent;
+                IntakePowerText.Text = Math.Round(intakeCurrent, 1).ToString();
 
-            //Index
-            double rampCurrent = powerTable.GetEntry("rampCurrent").GetDouble(0);
-            double verticalCurrent = powerTable.GetEntry("verticalCurrent").GetDouble(0);
-            IndexPowerProgress.Value = IntakePowerProgress.Maximum - ((verticalCurrent + rampCurrent)/2);
-            IndexPowerText.Text = Math.Round(((verticalCurrent + rampCurrent) / 2), 1).ToString();
+                //Index
+                double rampCurrent = powerTable.GetEntry("rampCurrent").GetDouble(0);
+                double verticalCurrent = powerTable.GetEntry("verticalCurrent").GetDouble(0);
+                IndexPowerProgress.Value = IntakePowerProgress.Maximum - ((verticalCurrent + rampCurrent) / 2);
+                IndexPowerText.Text = Math.Round(((verticalCurrent + rampCurrent) / 2), 1).ToString();
 
-            //Transfer
-            double transferLCurrent = powerTable.GetEntry("transferLCurrent").GetDouble(0);
-            double transferRCurrent = powerTable.GetEntry("transferRCurrent").GetDouble(0);
-            TransferPowerProgress.Value = TransferPowerProgress.Maximum - ((transferRCurrent + transferLCurrent) / 2);
-            TransferPowerText.Text = Math.Round((transferRCurrent + transferLCurrent) / 2, 1).ToString();
+                //Transfer
+                double transferLCurrent = powerTable.GetEntry("transferLCurrent").GetDouble(0);
+                double transferRCurrent = powerTable.GetEntry("transferRCurrent").GetDouble(0);
+                TransferPowerProgress.Value = TransferPowerProgress.Maximum - ((transferRCurrent + transferLCurrent) / 2);
+                TransferPowerText.Text = Math.Round((transferRCurrent + transferLCurrent) / 2, 1).ToString();
 
-            //VRM
-            double vrmCurrent = powerTable.GetEntry("VRMCurrent").GetDouble(0);
-            VRMPowerProgress.Value = VRMPowerProgress.Maximum - vrmCurrent;
-            VRMPowerText.Text = Math.Round(vrmCurrent, 1).ToString();
+                //VRM
+                double vrmCurrent = powerTable.GetEntry("VRMCurrent").GetDouble(0);
+                VRMPowerProgress.Value = VRMPowerProgress.Maximum - vrmCurrent;
+                VRMPowerText.Text = Math.Round(vrmCurrent, 1).ToString();
 
-            //Overall Current and Battery Voltage
-            TotalCurrentSB.Text = Math.Round(powerTable.GetEntry("totalCurrent").GetDouble(0), 1).ToString();
-            BatteryVolatgeSB.Text = Math.Round(powerTable.GetEntry("batteryVoltage").GetDouble(0), 2).ToString();
+                //Overall Current and Battery Voltage
+                TotalCurrentSB.Text = Math.Round(powerTable.GetEntry("totalCurrent").GetDouble(0), 1).ToString();
+                BatteryVolatgeSB.Text = Math.Round(powerTable.GetEntry("batteryVoltage").GetDouble(0), 2).ToString();
+
+                timesPowerUpdated = 0;
+            } else
+            {
+                timesPowerUpdated++;
+            }
         }
 
         private void updateGyroInfo()
@@ -547,15 +561,6 @@ namespace CommandoDash
                 cameraURI = CameraURIInput.Text;
             }
 
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            NetworkTableEntry entry = CommandoDashNT.GetEntry("testData");
-            entry.SetBoolean(!entry.GetBoolean(false));
-            IntakeSolSB.IsActive = !IntakeSolSB.IsActive;
-            LimeTrackingTargetSB.IsActive = !LimeTrackingTargetSB.IsActive;
-            HoundHoundingTargetSB.IsActive = !HoundHoundingTargetSB.IsActive;
         }
 
         private void TaxiRadio_Clicked(object sender, RoutedEventArgs e)

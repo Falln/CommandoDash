@@ -40,7 +40,7 @@ namespace CommandoDash
         double robotYFieldOffset = 18;
 
         double timesPowerUpdated = 0;
-        double targetNumberTimesPowerUpdated = 10;
+        double targetNumberTimesPowerUpdated = 1;
         
         public MainWindow()
         {

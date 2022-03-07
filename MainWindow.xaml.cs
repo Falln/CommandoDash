@@ -116,6 +116,11 @@ namespace CommandoDash
             AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("manualCycleSpeed"), new Action(() =>
                 ManualCycleBox.Text = CommandoDashNT.GetSubTable("SensorData").GetEntry("manualCycleSpeed").GetDouble(0).ToString()));
 
+            //Update VectorMap
+            AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("targetRPM"), new Action(() => updateVectorMapBox()));
+
+            AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("vectorMapRange"), new Action(() => updateVectorMapBox()));
+
             //Update ReadyToFire
             AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("isRobotAimed"), new Action(() =>
                 ReadyToFireSB.IsActive = CommandoDashNT.GetSubTable("SensorData").GetEntry("isRobotAimed").GetBoolean(false) && CommandoDashNT.GetSubTable("SensorData").GetEntry("isAtTargetVelocity").GetBoolean(false)));
@@ -450,6 +455,13 @@ namespace CommandoDash
             IntakeSpotSB.IsActive = spotHasCargo;
         }
 
+        private void updateVectorMapBox()
+        {
+            double targetRPM = Math.Round(CommandoDashNT.GetSubTable("SensorData").GetEntry("targetRPM").GetDouble(0), 0);
+            string vectorMapRange = CommandoDashNT.GetSubTable("SensorData").GetEntry("vectorMapRange").GetString("_._ - _._");
+            VectorMapBox.Text = targetRPM + " | " + vectorMapRange;
+        }
+
 
         //Clicks
         private void closeBtn_Click(object sender, RoutedEventArgs e)
@@ -584,10 +596,10 @@ namespace CommandoDash
             IdealRadioAL.IsChecked = true;
         }
 
-        private void SecondAutoRadio_Clicked(object sender, RoutedEventArgs e)
+        private void DoubleShotRadio_Clicked(object sender, RoutedEventArgs e)
         {
             NetworkTableEntry entry = CommandoDashNT.GetEntry("autoSelection");
-            entry.SetString("SecondAuto");
+            entry.SetString("DoubleShot");
             SecondRadioAL.IsChecked = true;
         }
 
@@ -620,10 +632,10 @@ namespace CommandoDash
             
         }
 
-        private void SecondAutoRadioAL_Clicked(object sender, RoutedEventArgs e)
+        private void DoubleShotRadioAL_Clicked(object sender, RoutedEventArgs e)
         {
             NetworkTableEntry entry = CommandoDashNT.GetEntry("autoSelection");
-            entry.SetString("SecondAuto");
+            entry.SetString("DoubleShot");
             SecondRadio.IsChecked = true;
         }
 

@@ -110,7 +110,7 @@ namespace CommandoDash
 
             //Update Shooter RPM
             AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("shooterRPM"), new Action(() =>
-                ShooterRPMBox.Text = CommandoDashNT.GetSubTable("SensorData").GetEntry("shooterRPM").GetDouble(0).ToString()));
+                ShooterRPMBox.Text = Math.Round(CommandoDashNT.GetSubTable("SensorData").GetEntry("shooterRPM").GetDouble(0), 0).ToString()));
 
             //Update Manual CycleSpeed
             AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("manualCycleSpeed"), new Action(() =>
@@ -458,7 +458,7 @@ namespace CommandoDash
         private void updateVectorMapBox()
         {
             double targetRPM = Math.Round(CommandoDashNT.GetSubTable("SensorData").GetEntry("targetRPM").GetDouble(0), 0);
-            string vectorMapRange = CommandoDashNT.GetSubTable("SensorData").GetEntry("vectorMapRange").GetString("_._ - _._");
+            string vectorMapRange = CommandoDashNT.GetSubTable("SensorData").GetEntry("vectorMapRange").GetString("0.0 - 0.0");
             VectorMapBox.Text = targetRPM + " | " + vectorMapRange;
         }
 

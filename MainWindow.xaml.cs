@@ -93,8 +93,8 @@ namespace CommandoDash
                 LimeSeesTargetSB.IsActive = ntInst.GetTable("limelight").GetEntry("tv").GetDouble(0) == 1 ? true:false));
 
             //Seeing a Cargo
-            AddSimpleEntryListener(ntInst.GetTable("photonvision").GetSubTable("CargoHound").GetEntry("hasTargets"), new Action(() =>
-                HoundSeesTargetSB.IsActive = ntInst.GetTable("photonvision").GetSubTable("CargoHound").GetEntry("hasTargets").GetBoolean(false)));
+            AddSimpleEntryListener(ntInst.GetTable("photonvision").GetSubTable("CargoHound").GetEntry("hasTarget"), new Action(() =>
+                HoundSeesTargetSB.IsActive = ntInst.GetTable("photonvision").GetSubTable("CargoHound").GetEntry("hasTarget").GetBoolean(false)));
 
             //Intake Solenoid
             AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("intakeSolenoidState"), new Action(() =>

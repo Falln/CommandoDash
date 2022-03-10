@@ -374,12 +374,12 @@ namespace CommandoDash
             if (currAngle < 0)
             {
                 Thickness newMargin = GyroAngleText.Margin;
-                newMargin.Left = 71;
+                newMargin.Left = 41;
                 GyroAngleText.Margin = newMargin;
             } else
             {
                 Thickness newMargin = GyroAngleText.Margin;
-                newMargin.Left = 75;
+                newMargin.Left = 45;
                 GyroAngleText.Margin = newMargin;
             }
 
@@ -594,6 +594,8 @@ namespace CommandoDash
             NetworkTableEntry entry = CommandoDashNT.GetEntry("autoSelection");
             entry.SetString("IdealAuto");
             IdealRadioAL.IsChecked = true;
+            AutoLayoutImage.Source = new BitmapImage(new Uri("Images/FRC 2022 PathPlanner Field - Ideal.png", UriKind.Relative));
+            AutoLayoutImageAL.Source = new BitmapImage(new Uri("Images/FRC 2022 PathPlanner Field - Ideal.png", UriKind.Relative));
         }
 
         private void DoubleShotRadio_Clicked(object sender, RoutedEventArgs e)
@@ -601,6 +603,9 @@ namespace CommandoDash
             NetworkTableEntry entry = CommandoDashNT.GetEntry("autoSelection");
             entry.SetString("DoubleShot");
             SecondRadioAL.IsChecked = true;
+            AutoLayoutImage.Source = new BitmapImage(new Uri("Images/DoubleShotField.png", UriKind.Relative));
+            AutoLayoutImageAL.Source = new BitmapImage(new Uri("Images/DoubleShotField.png", UriKind.Relative));
+
         }
 
         private void FullSendRadio_Clicked(object sender, RoutedEventArgs e)
@@ -629,7 +634,8 @@ namespace CommandoDash
             NetworkTableEntry entry = CommandoDashNT.GetEntry("autoSelection");
             entry.SetString("IdealAuto");
             IdealRadio.IsChecked = true;
-            
+            AutoLayoutImage.Source = new BitmapImage(new Uri("Images/FRC 2022 PathPlanner Field - Ideal.png", UriKind.Relative));
+            AutoLayoutImageAL.Source = new BitmapImage(new Uri("Images/FRC 2022 PathPlanner Field - Ideal.png", UriKind.Relative));
         }
 
         private void DoubleShotRadioAL_Clicked(object sender, RoutedEventArgs e)
@@ -637,6 +643,8 @@ namespace CommandoDash
             NetworkTableEntry entry = CommandoDashNT.GetEntry("autoSelection");
             entry.SetString("DoubleShot");
             SecondRadio.IsChecked = true;
+            AutoLayoutImage.Source = new BitmapImage(new Uri("Images/DoubleShotField.png", UriKind.Relative));
+            AutoLayoutImageAL.Source = new BitmapImage(new Uri("Images/DoubleShotField.png", UriKind.Relative));
         }
 
         private void FullSendRadioAL_Clicked(object sender, RoutedEventArgs e)

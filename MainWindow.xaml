@@ -82,7 +82,7 @@
             <Setter Property="BorderBrush" Value="{x:Null}"/>
         </Style>
         <Style TargetType="{x:Type ProgressBar}">
-            <Setter Property="Width" Value="380"/>
+            <Setter Property="Width" Value="350"/>
             <Setter Property="Height" Value="25"/>
             <Setter Property="Value" Value="15"/>
             <Setter Property="Minimum" Value="0"/>
@@ -103,9 +103,9 @@
 
         <!-- TextBlock/Box Styles -->
         <Style TargetType="{x:Type local:StatusTextBlock}" x:Key="StatusTextBlocks">
-            <Setter Property="Height" Value="76"/>
+            <Setter Property="Height" Value="92"/>
             <!--1.428-->
-            <Setter Property="Width" Value="108"/>
+            <Setter Property="Width" Value="130"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Background" Value="{StaticResource ButtonBackground}"/>
@@ -487,48 +487,52 @@
 
                         <!-- Power Consumption -->
 
+
+
                         <!-- Index Status -->
-                        <Image x:Name="IndexCargo1Image" Style="{StaticResource IndexCargoImages}" Grid.Column="1" HorizontalAlignment="Left" Margin="545,75,0,0" VerticalAlignment="Top"/>
-                        <Image x:Name="IndexCargo2Image" Style="{StaticResource IndexCargoImages}" Grid.Column="1" HorizontalAlignment="Left" Margin="590,110,0,0" VerticalAlignment="Top"/>
-                        <Image x:Name="IntakeCargoImage" Style="{StaticResource IndexCargoImages}" Grid.Column="1" HorizontalAlignment="Left" Margin="699,125,0,0" VerticalAlignment="Top"/>
-                        <Image Grid.Column="1" Margin="483,0,134,497" Source="/Images/5889-Index-Robot-PNG (3).png" Stretch="Fill"/>
-                        <Rectangle Margin="793,19,24,521" Fill="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
-                        <Label Grid.Column="1" Content="Index Status" HorizontalAlignment="Left" Margin="796,19,0,0" VerticalAlignment="Top" FontSize="14" FontFamily="Segoe UI Semibold"/>
-                        <local:StatusTextBlock x:Name="IndexSpot1SB" Style="{StaticResource IndexStatusBlocks}" Grid.Column="1" HorizontalAlignment="Left" Margin="825,68,0,0" TextWrapping="Wrap" Text="StatusTextBlock" VerticalAlignment="Top"/>
-                        <local:StatusTextBlock x:Name="IndexSpot2SB" Style="{StaticResource IndexStatusBlocks}" Grid.Column="1" HorizontalAlignment="Left" Margin="825,121,0,0" TextWrapping="Wrap" Text="StatusTextBlock" VerticalAlignment="Top"/>
-                        <local:StatusTextBlock x:Name="IntakeSpotSB" Style="{StaticResource IndexStatusBlocks}" Grid.Column="1" HorizontalAlignment="Left" Margin="825,170,0,0" TextWrapping="Wrap" Text="StatusTextBlock" VerticalAlignment="Top"/>
-                        <Label Grid.Column="1" Content="Index 1" HorizontalAlignment="Left" Margin="816,44,0,0" VerticalAlignment="Top"/>
-                        <Label Grid.Column="1" Content="Index 2" HorizontalAlignment="Left" Margin="816,96,0,0" VerticalAlignment="Top"/>
-                        <Label Grid.Column="1" Content="Intake" HorizontalAlignment="Left" Margin="819,147,0,0" VerticalAlignment="Top"/>
+
+                        <Image x:Name="IndexCargo1Image" Style="{StaticResource IndexCargoImages}" Grid.Column="1" HorizontalAlignment="Left" Margin="496,75,0,0" VerticalAlignment="Top"/>
+                        <Image x:Name="IndexCargo2Image" Style="{StaticResource IndexCargoImages}" Grid.Column="1" HorizontalAlignment="Left" Margin="541,110,0,0" VerticalAlignment="Top"/>
+                        <Image x:Name="IntakeCargoImage" Style="{StaticResource IndexCargoImages}" Grid.Column="1" HorizontalAlignment="Left" Margin="650,125,0,0" VerticalAlignment="Top"/>
+                        <Image Grid.Column="1" Margin="434,0,183,497" Source="/Images/5889-Index-Robot-PNG (3).png" Stretch="Fill"/>
+                        <Rectangle Margin="776,19,41,520" Fill="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
+                        <Label Grid.Column="1" Content="Index Status" HorizontalAlignment="Left" Margin="779,19,0,0" VerticalAlignment="Top" FontSize="14" FontFamily="Segoe UI Semibold"/>
+                        <local:StatusTextBlock x:Name="IndexSpot1SB" Style="{StaticResource IndexStatusBlocks}" Grid.Column="1" HorizontalAlignment="Left" Margin="808,68,0,0" TextWrapping="Wrap" Text="StatusTextBlock" VerticalAlignment="Top"/>
+                        <local:StatusTextBlock x:Name="IndexSpot2SB" Style="{StaticResource IndexStatusBlocks}" Grid.Column="1" HorizontalAlignment="Left" Margin="808,121,0,0" TextWrapping="Wrap" Text="StatusTextBlock" VerticalAlignment="Top"/>
+                        <local:StatusTextBlock x:Name="IntakeSpotSB" Style="{StaticResource IndexStatusBlocks}" Grid.Column="1" HorizontalAlignment="Left" Margin="808,170,0,0" TextWrapping="Wrap" Text="StatusTextBlock" VerticalAlignment="Top"/>
+                        <Label Grid.Column="1" Content="Index 1" HorizontalAlignment="Left" Margin="799,44,0,0" VerticalAlignment="Top"/>
+                        <Label Grid.Column="1" Content="Index 2" HorizontalAlignment="Left" Margin="799,96,0,0" VerticalAlignment="Top"/>
+                        <Label Grid.Column="1" Content="Intake" HorizontalAlignment="Left" Margin="802,147,0,0" VerticalAlignment="Top"/>
 
 
                         <!-- Solenoid Status -->
-                        <local:StatusTextBlock x:Name="IntakeSolSB" Style="{StaticResource ResourceKey=StatusTextBlocks}" ActiveBrush="{StaticResource SolenoidEnabled}" InactiveBrush="{StaticResource SolenoidDisabled}" BorderBrush="{StaticResource SolenoidBorder}"  Margin="442,259,361,401" Grid.Column="1" Text="Intake"/>
-                        <local:StatusTextBlock x:Name="MidSolSB" Style="{StaticResource ResourceKey=StatusTextBlocks}" ActiveBrush="{StaticResource SolenoidEnabled}" InactiveBrush="{StaticResource SolenoidDisabled}" BorderBrush="{StaticResource SolenoidBorder}" Margin="556,259,247,401" Grid.Column="1" Text="Mid"/>
-                        <local:StatusTextBlock x:Name="TraversalSolSB" Style="{StaticResource ResourceKey=StatusTextBlocks}" ActiveBrush="{StaticResource SolenoidEnabled}" InactiveBrush="{StaticResource SolenoidDisabled}" BorderBrush="{StaticResource SolenoidBorder}" Margin="499,340,304,320" Grid.Column="1" Text="Traversal"/>
+                        <local:StatusTextBlock x:Name="IntakeSolSB" Style="{StaticResource ResourceKey=StatusTextBlocks}" ActiveBrush="{StaticResource SolenoidEnabled}" InactiveBrush="{StaticResource SolenoidDisabled}" BorderBrush="{StaticResource SolenoidBorder}"  Margin="35,504,746,140" Text="Intake" Grid.Column="1"/>
+                        <local:StatusTextBlock x:Name="MidSolSB" Style="{StaticResource ResourceKey=StatusTextBlocks}" ActiveBrush="{StaticResource SolenoidEnabled}" InactiveBrush="{StaticResource SolenoidDisabled}" BorderBrush="{StaticResource SolenoidBorder}" Margin="170,505,611,139" Text="Mid" Grid.Column="1"/>
+                        <local:StatusTextBlock x:Name="TraversalSolSB" Style="{StaticResource ResourceKey=StatusTextBlocks}" ActiveBrush="{StaticResource SolenoidEnabled}" InactiveBrush="{StaticResource SolenoidDisabled}" BorderBrush="{StaticResource SolenoidBorder}" Margin="100,601,681,43" Grid.Column="1" Text="Traversal"/>
+
 
                         <!-- Vision Status -->
-                        <local:StatusTextBlock x:Name="LimeSeesTargetSB" Style="{StaticResource ResourceKey=StatusTextBlocks}" ActiveBrush="{StaticResource LimeSeesTarget}" InactiveBrush="{StaticResource LimeDefault}" BorderBrush="{StaticResource LimeBorder}" Margin="683,259,120,401" Grid.Column="1" Text="Seeing HUB"/>
-                        <local:StatusTextBlock x:Name="LimeTrackingTargetSB" Style="{StaticResource ResourceKey=StatusTextBlocks}" ActiveBrush="{StaticResource LimeSeesTarget}" InactiveBrush="{StaticResource LimeDefault}" BorderBrush="{StaticResource LimeBorder}" Margin="793,259,10,401" Grid.Column="1" Text="Auto Aiming"/>
-                        <local:StatusTextBlock x:Name="HoundSeesTargetSB" Style="{StaticResource ResourceKey=StatusTextBlocks}" ActiveBrush="{StaticResource HoundBlueHounding}" InactiveBrush="{StaticResource HoundBlueDefault}" BorderBrush="{StaticResource HoundBlueBorder}" Margin="683,340,120,320" Grid.Column="1" Text="Seeing Cargo"/>
-                        <local:StatusTextBlock x:Name="HoundHoundingTargetSB" Style="{StaticResource ResourceKey=StatusTextBlocks}" ActiveBrush="{StaticResource HoundBlueHounding}" InactiveBrush="{StaticResource HoundBlueDefault}" BorderBrush="{StaticResource HoundBlueBorder}" Margin="793,340,10,320" Grid.Column="1" Text="Hounding"/>
+                        <local:StatusTextBlock x:Name="LimeSeesTargetSB" Style="{StaticResource ResourceKey=StatusTextBlocks}" ActiveBrush="{StaticResource LimeSeesTarget}" InactiveBrush="{StaticResource LimeDefault}" BorderBrush="{StaticResource LimeBorder}" Margin="536,252,245,392" Grid.Column="1" Text="Seeing HUB"/>
+                        <local:StatusTextBlock x:Name="LimeTrackingTargetSB" Style="{StaticResource ResourceKey=StatusTextBlocks}" ActiveBrush="{StaticResource LimeSeesTarget}" InactiveBrush="{StaticResource LimeDefault}" BorderBrush="{StaticResource LimeBorder}" Margin="675,252,106,392" Grid.Column="1" Text="Auto Aiming"/>
+                        <local:StatusTextBlock x:Name="HoundSeesTargetSB" Style="{StaticResource ResourceKey=StatusTextBlocks}" ActiveBrush="{StaticResource HoundBlueHounding}" InactiveBrush="{StaticResource HoundBlueDefault}" BorderBrush="{StaticResource HoundBlueBorder}" Margin="471,354,310,290" Grid.Column="1" Text="Seeing Cargo"/>
+                        <local:StatusTextBlock x:Name="HoundHoundingTargetSB" Style="{StaticResource ResourceKey=StatusTextBlocks}" ActiveBrush="{StaticResource HoundBlueHounding}" InactiveBrush="{StaticResource HoundBlueDefault}" BorderBrush="{StaticResource HoundBlueBorder}" Margin="610,354,171,290" Grid.Column="1" Text="Hounding"/>
 
                         <!-- Robot Status -->
-                        <Rectangle Margin="16,16,525,494" Fill="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
-                        <Label Content="Shooter Status" HorizontalAlignment="Left" Margin="140,11,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="46" FontSize="16" FontWeight="SemiBold" Grid.Column="1" Width="116"/>
-                        <local:StatusTextBlock x:Name="ReadyToFireSB" Style="{StaticResource ResourceKey=ReadyToShootStatus}" ActiveBrush="{StaticResource SolenoidEnabled}" InactiveBrush="{StaticResource SolenoidDisabled}" BorderBrush="{StaticResource SolenoidBorder}"  Margin="35,57,701,521" Grid.Column="1" Text="READY TO FIRE"/>
-                        <TextBox x:Name="ManualCycleBox" Text="0" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="228,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="40" FontSize="20" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
-                        <Label Grid.Column="1" Content="Manual Cycle Speed" HorizontalAlignment="Left" Margin="224,38,0,0" VerticalAlignment="Top" FontSize="14"/>
-                        <TextBox x:Name="VectorMapBox" Text="0" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="228,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="40" FontSize="20" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
-                        <Label Grid.Column="1" Content="Current Vector Map" HorizontalAlignment="Left" Margin="224,98,0,0" VerticalAlignment="Top" FontSize="14"/>
-                        <TextBox x:Name="ShooterRPMBox" Text="0" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="228,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="40" FontSize="20" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
-                        <Label Grid.Column="1" Content="Shooter RPM" HorizontalAlignment="Left" Margin="224,158,0,0" VerticalAlignment="Top" FontSize="14"/>
+                        <Rectangle Margin="974,229,550,280" Fill="{StaticResource ResourceKey=PanelGrey}" Grid.ColumnSpan="2"/>
+                        <Label Content="Shooter Status" HorizontalAlignment="Left" Margin="112,227,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="46" FontSize="16" FontWeight="SemiBold" Grid.Column="1" Width="116"/>
+                        <local:StatusTextBlock x:Name="ReadyToFireSB" Style="{StaticResource ResourceKey=ReadyToShootStatus}" ActiveBrush="{StaticResource SolenoidEnabled}" InactiveBrush="{StaticResource SolenoidDisabled}" BorderBrush="{StaticResource SolenoidBorder}"  Margin="2,270,734,307" Grid.Column="1" Text="READY TO FIRE"/>
+                        <TextBox x:Name="ManualCycleBox" Text="0" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="195,275,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="40" FontSize="20" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Grid.Column="1" Content="Manual Cycle Speed" HorizontalAlignment="Left" Margin="191,251,0,0" VerticalAlignment="Top" FontSize="14"/>
+                        <TextBox x:Name="VectorMapBox" Text="0" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="195,335,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="40" FontSize="20" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Grid.Column="1" Content="Current Vector Map" HorizontalAlignment="Left" Margin="191,311,0,0" VerticalAlignment="Top" FontSize="14"/>
+                        <TextBox x:Name="ShooterRPMBox" Text="0" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="195,395,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="40" FontSize="20" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Grid.Column="1" Content="Shooter RPM" HorizontalAlignment="Left" Margin="191,371,0,0" VerticalAlignment="Top" FontSize="14"/>
 
 
                         <!-- Gyro and IsCentric -->
-                        <local:StatusTextBlock x:Name="IsCentricSB" Style="{StaticResource ResourceKey=ReadyToShootStatus}" ActiveBrush="{StaticResource SolenoidEnabled}" InactiveBrush="{StaticResource SolenoidDisabled}" BorderBrush="{StaticResource SolenoidBorder}"  Margin="255,307,534,310" Grid.Column="1" Text="Centric-&#xD;&#xA;Mode"/>
-                        <Ellipse Stroke="DimGray" StrokeThickness="12" Margin="29,302,712,265" Grid.Column="1" RenderTransformOrigin="0.5,0.5"/>
-                        <Ellipse Stroke="Red" StrokeThickness="12" Margin="29,302,712,265" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                        <local:StatusTextBlock x:Name="IsCentricSB" Style="{StaticResource ResourceKey=ReadyToShootStatus}" ActiveBrush="{StaticResource SolenoidEnabled}" InactiveBrush="{StaticResource SolenoidDisabled}" BorderBrush="{StaticResource SolenoidBorder}"  Margin="226,60,572,563" Text="Centric-&#xD;&#xA;Mode" Grid.Column="1"/>
+                        <Ellipse Stroke="DimGray" StrokeThickness="12" Margin="5,40,745,530" RenderTransformOrigin="0.5,0.5" Grid.Column="1" Height="161" Width="161"/>
+                        <Ellipse Stroke="Red" StrokeThickness="12" Margin="5,40,745,530" RenderTransformOrigin="0.5,0.5" Grid.Column="1" Height="161" Width="161">
                             <Ellipse.Clip>
                                 <RectangleGeometry Rect="0,0,60,60"/>
                                 <!-- x: 0, y: 0, width: 50, height: 100-->
@@ -537,59 +541,59 @@
                                 <RotateTransform x:Name="GyroAngleEllipseAngle" Angle="45"/>
                             </Ellipse.RenderTransform>
                         </Ellipse>
-                        <Label Grid.Column="1" Content="Robot Angle" HorizontalAlignment="Left" Margin="58,272,0,0" VerticalAlignment="Top" Width="146" RenderTransformOrigin="0.5,0.5" FontSize="18"/>
-                        <TextBlock x:Name="GyroAngleText" Grid.Column="1" HorizontalAlignment="Left" Margin="70,361,0,0" TextWrapping="Wrap" Text="0°" VerticalAlignment="Top" Height="51" Width="96" FontSize="36" TextAlignment="Center" Foreground="White"/>
+                        <Label Content="Robot Angle" HorizontalAlignment="Left" Margin="31,11,0,0" VerticalAlignment="Top" Width="110" RenderTransformOrigin="0.5,0.5" FontSize="18" Height="37" Grid.Column="1"/>
+                        <TextBlock x:Name="GyroAngleText" HorizontalAlignment="Left" Margin="45,97,0,0" TextWrapping="Wrap" Text="0°" VerticalAlignment="Top" Height="48" Width="92" FontSize="36" TextAlignment="Center" Foreground="White" Grid.Column="1"/>
 
 
                         <!-- Current Draw -->
-                        <Rectangle Margin="184,468,189,20" Fill="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
-                        <Label Grid.Column="1" Content="Drive" HorizontalAlignment="Left" Margin="205,495,0,0" VerticalAlignment="Top" Height="32" Width="74" FontSize="18" RenderTransformOrigin="0.5,0.5"/>
-                        <Label Grid.Column="1" Content="Subsystem Current Draws" HorizontalAlignment="Center" Margin="0,468,0,0" VerticalAlignment="Top"  FontSize="16" FontWeight="SemiBold" Height="38" Width="220"/>
-                        <TextBlock x:Name="DrivePowerText" Style="{StaticResource CurrentDrawBlock}" Grid.Column="1" HorizontalAlignment="Left" Margin="282,498,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0A"/>
-                        <Label Grid.Column="1" Content="Shooter" HorizontalAlignment="Left" Margin="205,522,0,0" VerticalAlignment="Top" Height="32" Width="81" FontSize="18" RenderTransformOrigin="0.5,0.5" AutomationProperties.IsRequiredForForm="True"/>
-                        <TextBlock x:Name="ShooterPowerText" Style="{StaticResource CurrentDrawBlock}" Grid.Column="1" HorizontalAlignment="Left" Margin="282,525,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0A"/>
-                        <Label Grid.Column="1" Content="Intake" HorizontalAlignment="Left" Margin="205,549,0,0" VerticalAlignment="Top" Height="32" Width="74" FontSize="18" RenderTransformOrigin="0.5,0.5"/>
-                        <TextBlock x:Name="IntakePowerText" Style="{StaticResource CurrentDrawBlock}" Grid.Column="1" HorizontalAlignment="Left" Margin="282,552,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0A"/>
-                        <Label Grid.Column="1" Content="Index" HorizontalAlignment="Left" Margin="205,576,0,0" VerticalAlignment="Top" Height="32" Width="74" FontSize="18" RenderTransformOrigin="0.5,0.5"/>
-                        <TextBlock x:Name="IndexPowerText" Style="{StaticResource CurrentDrawBlock}" Grid.Column="1" HorizontalAlignment="Left" Margin="282,579,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0A"/>
-                        <Label Grid.Column="1" Content="Transfer" HorizontalAlignment="Left" Margin="205,603,0,0" VerticalAlignment="Top" Height="31" Width="74" FontSize="18" RenderTransformOrigin="0.5,0.5"/>
-                        <TextBlock x:Name="TransferPowerText" Style="{StaticResource CurrentDrawBlock}" Grid.Column="1" HorizontalAlignment="Left" Margin="282,606,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0A"/>
-                        <Label Grid.Column="1" Content="VRM" HorizontalAlignment="Left" Margin="205,630,0,0" VerticalAlignment="Top" Height="33" Width="74" FontSize="18" RenderTransformOrigin="0.5,0.5" />
-                        <TextBlock x:Name="VRMPowerText" Style="{StaticResource CurrentDrawBlock}" Grid.Column="1" HorizontalAlignment="Left" Margin="282,633,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0A"/>
-                        <ProgressBar x:Name="DrivePowerProgress" Grid.Column="1" HorizontalAlignment="Left" Margin="321,500,0,0" VerticalAlignment="Top">
+                        <Rectangle Margin="397,473,17,17" Fill="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
+                        <Label Grid.Column="1" Content="Drive" HorizontalAlignment="Left" Margin="407,498,0,0" VerticalAlignment="Top" Height="32" Width="74" FontSize="18" RenderTransformOrigin="0.5,0.5"/>
+                        <Label Grid.Column="1" Content="Subsystem Current Draws" HorizontalAlignment="Left" Margin="555,473,0,0" VerticalAlignment="Top"  FontSize="16" FontWeight="SemiBold" Height="38" Width="196"/>
+                        <TextBlock x:Name="DrivePowerText" Style="{StaticResource CurrentDrawBlock}" Grid.Column="1" HorizontalAlignment="Left" Margin="485,501,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0A"/>
+                        <Label Grid.Column="1" Content="Shooter" HorizontalAlignment="Left" Margin="407,525,0,0" VerticalAlignment="Top" Height="32" Width="82" FontSize="18" RenderTransformOrigin="0.5,0.5" AutomationProperties.IsRequiredForForm="True"/>
+                        <TextBlock x:Name="ShooterPowerText" Style="{StaticResource CurrentDrawBlock}" Grid.Column="1" HorizontalAlignment="Left" Margin="485,528,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0A"/>
+                        <Label Grid.Column="1" Content="Intake" HorizontalAlignment="Left" Margin="407,552,0,0" VerticalAlignment="Top" Height="32" Width="74" FontSize="18" RenderTransformOrigin="0.5,0.5"/>
+                        <TextBlock x:Name="IntakePowerText" Style="{StaticResource CurrentDrawBlock}" Grid.Column="1" HorizontalAlignment="Left" Margin="485,555,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0A"/>
+                        <Label Grid.Column="1" Content="Index" HorizontalAlignment="Left" Margin="407,579,0,0" VerticalAlignment="Top" Height="32" Width="74" FontSize="18" RenderTransformOrigin="0.5,0.5"/>
+                        <TextBlock x:Name="IndexPowerText" Style="{StaticResource CurrentDrawBlock}" Grid.Column="1" HorizontalAlignment="Left" Margin="485,582,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0A"/>
+                        <Label Grid.Column="1" Content="Transfer" HorizontalAlignment="Left" Margin="407,606,0,0" VerticalAlignment="Top" Height="31" Width="74" FontSize="18" RenderTransformOrigin="0.5,0.5"/>
+                        <TextBlock x:Name="TransferPowerText" Style="{StaticResource CurrentDrawBlock}" Grid.Column="1" HorizontalAlignment="Left" Margin="485,609,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0A"/>
+                        <Label Grid.Column="1" Content="VRM" HorizontalAlignment="Left" Margin="407,633,0,0" VerticalAlignment="Top" Height="33" Width="74" FontSize="18" RenderTransformOrigin="0.5,0.5" />
+                        <TextBlock x:Name="VRMPowerText" Style="{StaticResource CurrentDrawBlock}" Grid.Column="1" HorizontalAlignment="Left" Margin="485,636,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0A"/>
+                        <ProgressBar x:Name="DrivePowerProgress" Grid.Column="1" HorizontalAlignment="Left" Margin="523,503,0,0" VerticalAlignment="Top">
                             <ProgressBar.RenderTransform>
                                 <RotateTransform Angle="180"/>
                             </ProgressBar.RenderTransform>
                         </ProgressBar>
-                        <ProgressBar x:Name="ShooterPowerProgress" Grid.Column="1" HorizontalAlignment="Left" Margin="321,527,0,0" VerticalAlignment="Top">
+                        <ProgressBar x:Name="ShooterPowerProgress" Grid.Column="1" HorizontalAlignment="Left" Margin="523,530,0,0" VerticalAlignment="Top">
                             <ProgressBar.RenderTransform>
                                 <RotateTransform Angle="180"/>
                             </ProgressBar.RenderTransform>
                         </ProgressBar>
-                        <ProgressBar x:Name="IntakePowerProgress" Grid.Column="1" HorizontalAlignment="Left" Margin="321,554,0,0" VerticalAlignment="Top">
+                        <ProgressBar x:Name="IntakePowerProgress" Grid.Column="1" HorizontalAlignment="Left" Margin="523,557,0,0" VerticalAlignment="Top">
                             <ProgressBar.RenderTransform>
                                 <RotateTransform Angle="180"/>
                             </ProgressBar.RenderTransform>
                         </ProgressBar>
-                        <ProgressBar x:Name="IndexPowerProgress" Grid.Column="1" HorizontalAlignment="Left" Margin="321,581,0,0" VerticalAlignment="Top">
+                        <ProgressBar x:Name="IndexPowerProgress" Grid.Column="1" HorizontalAlignment="Left" Margin="523,584,0,0" VerticalAlignment="Top">
                             <ProgressBar.RenderTransform>
                                 <RotateTransform Angle="180"/>
                             </ProgressBar.RenderTransform>
                         </ProgressBar>
-                        <ProgressBar x:Name="TransferPowerProgress" Grid.Column="1" HorizontalAlignment="Left" Margin="321,608,0,0" VerticalAlignment="Top">
+                        <ProgressBar x:Name="TransferPowerProgress" Grid.Column="1" HorizontalAlignment="Left" Margin="523,611,0,0" VerticalAlignment="Top">
                             <ProgressBar.RenderTransform>
                                 <RotateTransform Angle="180"/>
                             </ProgressBar.RenderTransform>
                         </ProgressBar>
-                        <ProgressBar x:Name="VRMPowerProgress" Grid.Column="1" HorizontalAlignment="Left" Margin="321,635,0,0" VerticalAlignment="Top">
+                        <ProgressBar x:Name="VRMPowerProgress" Grid.Column="1" HorizontalAlignment="Left" Margin="523,638,0,0" VerticalAlignment="Top">
                             <ProgressBar.RenderTransform>
                                 <RotateTransform Angle="180"/>
                             </ProgressBar.RenderTransform>
                         </ProgressBar>
-                        <Label Grid.Column="1" Content="Total Power Draw" HorizontalAlignment="Left" Margin="355,661,0,0" VerticalAlignment="Top" Height="32" Width="114"/>
-                        <Label Grid.Column="1" Content="Battery Voltage" HorizontalAlignment="Left" Margin="367,686,0,0" VerticalAlignment="Top" Height="30" Width="102"/>
-                        <local:StatusTextBlock x:Name="BatteryVolatgeSB" Style="{StaticResource ResourceKey=PowerStatusBlocks}" ActiveBrush="{StaticResource PowerEnabled}" InactiveBrush="{StaticResource PowerDisabled}" BorderBrush="{StaticResource PowerBorder}"  Margin="460,689,396,24" Grid.Column="1" Text="300A"/>
-                        <local:StatusTextBlock x:Name="TotalCurrentSB" Style="{StaticResource ResourceKey=PowerStatusBlocks}" ActiveBrush="{StaticResource PowerEnabled}" InactiveBrush="{StaticResource PowerDisabled}" BorderBrush="{StaticResource PowerBorder}"  Margin="460,665,396,48" Grid.Column="1" Text="12.7V"/>
+                        <Label Grid.Column="1" Content="Total Power Draw" HorizontalAlignment="Left" Margin="555,664,0,0" VerticalAlignment="Top" Height="32" Width="114"/>
+                        <Label Grid.Column="1" Content="Battery Voltage" HorizontalAlignment="Left" Margin="567,689,0,0" VerticalAlignment="Top" Height="30" Width="102"/>
+                        <local:StatusTextBlock x:Name="BatteryVolatgeSB" Style="{StaticResource ResourceKey=PowerStatusBlocks}" ActiveBrush="{StaticResource PowerEnabled}" InactiveBrush="{StaticResource PowerDisabled}" BorderBrush="{StaticResource PowerBorder}"  Margin="661,692,195,21" Grid.Column="1" Text="300A"/>
+                        <local:StatusTextBlock x:Name="TotalCurrentSB" Style="{StaticResource ResourceKey=PowerStatusBlocks}" ActiveBrush="{StaticResource PowerEnabled}" InactiveBrush="{StaticResource PowerDisabled}" BorderBrush="{StaticResource PowerBorder}"  Margin="661,668,195,45" Grid.Column="1" Text="12.7V"/>
 
 
 
@@ -674,7 +678,9 @@
                     <Grid Background="#FF2A2A2A"/>
                 </TabItem>
                 <TabItem Header="Feedback"  Style="{DynamicResource TabItemBase}">
-                    <Grid Background="#FF2A2A2A"/>
+                    <Grid Background="#FF2A2A2A">
+
+                    </Grid>
                 </TabItem>
             </TabControl>
             <Button x:Name="refreshBtn" Style="{DynamicResource RefreshButton}" Click="refreshBtn_Click" Grid.Column="14" HorizontalAlignment="Center" Margin="0,4,0,0" VerticalAlignment="Top" Grid.Row="2">

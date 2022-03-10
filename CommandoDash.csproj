@@ -26,7 +26,9 @@
     <None Remove="Images\5889-Index-Robot-PNG.png" />
     <None Remove="Images\5889-Index-Robot.png" />
     <None Remove="Images\Blue_Cargo.png" />
+    <None Remove="Images\DoubleShotField.png" />
     <None Remove="Images\FRC 2022 Offical Field.png" />
+    <None Remove="Images\FRC 2022 PathPlanner Field - Ideal.png" />
     <None Remove="Images\FRC 2022 PathPlanner Field.png" />
     <None Remove="Images\FRC 2022 PathPlanner Half-Field - Ideal.png" />
     <None Remove="Images\Logo_Square_WhiteBackground_CommandoRobotics.png" />
@@ -79,8 +81,14 @@
     <Content Include="Images\Blue_Cargo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\DoubleShotField.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\FRC 2022 Offical Field.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\FRC 2022 PathPlanner Field - Ideal.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\FRC 2022 PathPlanner Field.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

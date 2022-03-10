@@ -535,7 +535,7 @@ namespace CommandoDash
 
         private void OverlayCamRadio_Checked(object sender, RoutedEventArgs e)
         {
-            cameraURI = "No known IP";
+            cameraURI = "http://roborio-5889-frc.local:1811/?action=stream";
             CameraURIInput.Text = cameraURI;
             startCamera();
         }

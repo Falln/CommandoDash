@@ -5,6 +5,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <PackageIcon>gear_white_transparent_80x80.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,6 +28,7 @@
     <None Remove="Images\5889-Index-Robot.png" />
     <None Remove="Images\Blue_Cargo.png" />
     <None Remove="Images\DoubleShotField.png" />
+    <None Remove="Images\favicon-16x16.png" />
     <None Remove="Images\FRC 2022 Offical Field.png" />
     <None Remove="Images\FRC 2022 PathPlanner Field - Ideal.png" />
     <None Remove="Images\FRC 2022 PathPlanner Field.png" />
@@ -105,6 +107,15 @@
     <Content Include="Images\refresh_icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\favicon-16x16.png" />
+    <Resource Include="Images\gear_white_transparent.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </Resource>
+    <Resource Include="Images\gear_white_transparent_80x80.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </Resource>
     <Resource Include="Logo_Square_DarkBackground_CommandoRobotics.png" />
     <Resource Include="Logo_Square_WhiteBackground_CommandoRobotics.png" />
     <Resource Include="Red_Cargo.png" />
@@ -114,9 +125,33 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Update="StatusTextBlock.cs">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Images\gear-white-transparent_85x90.png.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="Images\gear_white_transparent.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="Images\gear_white_transparent_80x80.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
 </Project>

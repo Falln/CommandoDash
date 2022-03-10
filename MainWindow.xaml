@@ -9,7 +9,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="CommandoDash.MainWindow"
         xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"    
         mc:Ignorable="d"
-        Icon="/favicon-16x16.png"
+        Icon="Images/favicon-16x16.png"
         Title="MainWindow" Height="840" Width="1920" ResizeMode="NoResize"
         WindowStartupLocation="Manual" Left="0" Top="0"
         WindowStyle="None" BorderThickness="0" Background="#FF92C822">

@@ -141,13 +141,13 @@ namespace CommandoDash
                 IsCentricSB.IsActive = CommandoDashNT.GetSubTable("SensorData").GetEntry("isCentric").GetBoolean(true)));
 
             //Update Index Spot 1
-            AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("indexSpot1HasCargo"), new Action(() => updateIndexSpot1()));
+            AddSimpleEntryListener(CommandoDashNT.GetSubTable("IndexStatus").GetEntry("verticalSensor"), new Action(() => updateIndexSpot1()));
 
             //Update Index Spot 2
-            AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("indexSpot2HasCargo"), new Action(() => updateIndexSpot2()));
+            AddSimpleEntryListener(CommandoDashNT.GetSubTable("IndexStatus").GetEntry("rampSensor"), new Action(() => updateIndexSpot2()));
 
             //Update Intake Spot 
-            AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("intakeSpotHasCargo"), new Action(() => updateIntakeSpot()));
+            AddSimpleEntryListener(CommandoDashNT.GetSubTable("IndexStatus").GetEntry("entranceSensor"), new Action(() => updateIntakeSpot()));
 
             //AutoLayouts
 

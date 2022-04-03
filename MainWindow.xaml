@@ -219,6 +219,18 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style TargetType="{x:Type TextBox}" x:Key="PIDSmallBoxes">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="54"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+        </Style>
+        <Style TargetType="{x:Type TextBox}" x:Key="PIDBigBoxes">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="116"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+        </Style>
 
         <!-- Button Styles -->
         <Style TargetType="{x:Type Button}" x:Key="WindowButtons">
@@ -485,12 +497,8 @@
                         <Image x:Name="AutoLayoutImage" HorizontalAlignment="Left" Height="192" Margin="559,527,0,0" VerticalAlignment="Top" Width="384" Source="/FRC 2022 PathPlanner Field - Ideal.png"/>
                         <Label Content="Autonomous Selection" HorizontalAlignment="Left" Margin="182,539,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="28" FontSize="16" FontWeight="SemiBold"/>
 
-                        <!-- Power Consumption -->
-
-
 
                         <!-- Index Status -->
-
                         <Image x:Name="IndexCargo1Image" Style="{StaticResource IndexCargoImages}" Grid.Column="1" HorizontalAlignment="Left" Margin="496,75,0,0" VerticalAlignment="Top"/>
                         <Image x:Name="IndexCargo2Image" Style="{StaticResource IndexCargoImages}" Grid.Column="1" HorizontalAlignment="Left" Margin="541,110,0,0" VerticalAlignment="Top"/>
                         <Image x:Name="IntakeCargoImage" Style="{StaticResource IndexCargoImages}" Grid.Column="1" HorizontalAlignment="Left" Margin="650,125,0,0" VerticalAlignment="Top"/>
@@ -675,7 +683,127 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="PIDTuning" Style="{DynamicResource TabItemBase}">
-                    <Grid Background="#FF2A2A2A"/>
+                    <Grid Background="#FF2A2A2A">
+                        <!-- Shooter PID -->
+                        <Rectangle Margin="25,25,1707,429" Fill="{StaticResource ResourceKey=PanelGrey}" RenderTransformOrigin="0.5,0.5"/>
+                        <Label Content="Shooter Flywheel PID" HorizontalAlignment="Left" Margin="30,25,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="46" FontSize="16" FontWeight="SemiBold" Width="164"/>
+                        <TextBox x:Name="shooterPBox" Text="0" Style="{StaticResource PIDSmallBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="53,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="P" HorizontalAlignment="Left" Margin="50,59,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="1.158,0.431"/>
+                        <TextBox x:Name="shooterDBox" Text="0" Style="{StaticResource PIDSmallBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="117,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="D" HorizontalAlignment="Left" Margin="114,59,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="1.158,0.431"/>
+                        <TextBox x:Name="shooterKsBox" Text="0" Style="{StaticResource PIDSmallBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="53,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <TextBox x:Name="shooterKvBox" Text="0" Style="{StaticResource PIDSmallBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="116,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Button x:Name="updateShooterPIDBtn" Content="Update Values" Style="{StaticResource CameraConnectionButton}" HorizontalAlignment="Left" Margin="52,268,0,0" VerticalAlignment="Top" Height="28" Width="120" FontSize="12" Click="updateShooterPIDBtn_Click"/>
+                        <TextBox x:Name="shooterOutputBox" Text="0" Style="{StaticResource PIDBigBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="54,184,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="Current Output" HorizontalAlignment="Left" Margin="66,162,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.158,0.431"/>
+                        <TextBox x:Name="shooterSetpointBox" Text="0" Style="{StaticResource PIDBigBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="54,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="Current Setpoint" HorizontalAlignment="Left" Margin="63,209,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.158,0.431"/>
+                        <Label Content="Ks" HorizontalAlignment="Left" Margin="50,108,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="1.158,0.431"/>
+                        <Label Content="Kv" HorizontalAlignment="Left" Margin="114,108,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="1.158,0.431"/>
+
+                        <!-- Drive Wheel PID -->
+                        <Rectangle Margin="241,25,1491,429" Fill="{StaticResource ResourceKey=PanelGrey}" RenderTransformOrigin="0.5,0.5"/>
+                        <Label Content="Drive Wheel PID" HorizontalAlignment="Left" Margin="262,25,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="46" FontSize="16" FontWeight="SemiBold" Width="130"/>
+                        <TextBox x:Name="shooterPBox_Copy" Text="0" Style="{StaticResource PIDSmallBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="269,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="P" HorizontalAlignment="Left" Margin="266,59,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="1.158,0.431"/>
+                        <TextBox x:Name="shooterDBox_Copy" Text="0" Style="{StaticResource PIDSmallBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="333,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="D" HorizontalAlignment="Left" Margin="330,59,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="1.158,0.431"/>
+                        <TextBox x:Name="shooterKsBox_Copy" Text="0" Style="{StaticResource PIDSmallBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="269,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <TextBox x:Name="shooterKvBox_Copy" Text="0" Style="{StaticResource PIDSmallBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="332,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Button x:Name="updateShooterPIDBtn_Copy" Content="Update Values" Style="{StaticResource CameraConnectionButton}" HorizontalAlignment="Left" Margin="268,268,0,0" VerticalAlignment="Top" Height="28" Click="RestartCameraConnection_Click" Width="120" FontSize="12"/>
+                        <TextBox x:Name="shooterOutputBox_Copy2" Text="0" Style="{StaticResource PIDBigBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="270,184,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="Current Output" HorizontalAlignment="Left" Margin="282,162,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.158,0.431"/>
+                        <TextBox x:Name="shooterOutputBox_Copy3" Text="0" Style="{StaticResource PIDBigBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="270,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="Current Setpoint" HorizontalAlignment="Left" Margin="279,209,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.158,0.431"/>
+                        <Label Content="Ks" HorizontalAlignment="Left" Margin="266,108,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="1.158,0.431"/>
+                        <Label Content="Kv" HorizontalAlignment="Left" Margin="330,108,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="1.158,0.431"/>
+
+                        <!-- Drive X PID -->
+                        <Rectangle Margin="453,25,1279,480" Fill="{StaticResource ResourceKey=PanelGrey}" RenderTransformOrigin="0.5,0.5"/>
+                        <Label Content="Drive X PID" HorizontalAlignment="Left" Margin="492,25,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="46" FontSize="16" FontWeight="SemiBold" Width="94"/>
+                        <TextBox x:Name="shooterPBox_Copy2" Text="0" Style="{StaticResource PIDSmallBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="482,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="P" HorizontalAlignment="Left" Margin="479,59,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="1.158,0.431"/>
+                        <TextBox x:Name="shooterDBox_Copy2" Text="0" Style="{StaticResource PIDSmallBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="546,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="D" HorizontalAlignment="Left" Margin="543,59,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="1.158,0.431"/>
+                        <Button x:Name="updateShooterPIDBtn_Copy2" Content="Update Values" Style="{StaticResource CameraConnectionButton}" HorizontalAlignment="Left" Margin="480,216,0,0" VerticalAlignment="Top" Height="28" Click="RestartCameraConnection_Click" Width="120" FontSize="12"/>
+                        <TextBox x:Name="shooterOutputBox_Copy4" Text="0" Style="{StaticResource PIDBigBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="482,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="Current Output" HorizontalAlignment="Left" Margin="494,110,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.158,0.431"/>
+                        <TextBox x:Name="shooterOutputBox_Copy5" Text="0" Style="{StaticResource PIDBigBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="482,179,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="Current Setpoint" HorizontalAlignment="Left" Margin="491,157,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.158,0.431"/>
+                        <Rectangle Margin="670,25,1062,480" Fill="{StaticResource ResourceKey=PanelGrey}" RenderTransformOrigin="0.5,0.5"/>
+                        <Label Content="Drive Y PID" HorizontalAlignment="Left" Margin="709,25,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="46" FontSize="16" FontWeight="SemiBold" Width="94"/>
+                        <TextBox x:Name="shooterPBox_Copy3" Text="0" Style="{StaticResource PIDSmallBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="699,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="P" HorizontalAlignment="Left" Margin="696,59,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="1.158,0.431"/>
+                        <TextBox x:Name="shooterDBox_Copy3" Text="0" Style="{StaticResource PIDSmallBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="763,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="D" HorizontalAlignment="Left" Margin="760,59,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="1.158,0.431"/>
+                        <Button x:Name="updateShooterPIDBtn_Copy3" Content="Update Values" Style="{StaticResource CameraConnectionButton}" HorizontalAlignment="Left" Margin="697,216,0,0" VerticalAlignment="Top" Height="28" Click="RestartCameraConnection_Click" Width="120" FontSize="12"/>
+                        <TextBox x:Name="shooterOutputBox_Copy6" Text="0" Style="{StaticResource PIDBigBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="699,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="Current Output" HorizontalAlignment="Left" Margin="711,110,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.158,0.431"/>
+                        <TextBox x:Name="shooterOutputBox_Copy7" Text="0" Style="{StaticResource PIDBigBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="699,179,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="Current Setpoint" HorizontalAlignment="Left" Margin="708,157,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.158,0.431"/>
+                        <Rectangle Margin="884,25,848,480" Fill="{StaticResource ResourceKey=PanelGrey}" RenderTransformOrigin="0.5,0.5"/>
+                        <Label Content="Drive R PID" HorizontalAlignment="Left" Margin="924,25,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="46" FontSize="16" FontWeight="SemiBold" Width="94"/>
+                        <TextBox x:Name="shooterPBox_Copy4" Text="0" Style="{StaticResource PIDSmallBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="914,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="P" HorizontalAlignment="Left" Margin="910,59,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="1.158,0.431"/>
+                        <TextBox x:Name="shooterDBox_Copy4" Text="0" Style="{StaticResource PIDSmallBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="978,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="D" HorizontalAlignment="Left" Margin="974,59,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="1.158,0.431"/>
+                        <Button x:Name="updateShooterPIDBtn_Copy4" Content="Update Values" Style="{StaticResource CameraConnectionButton}" HorizontalAlignment="Left" Margin="912,216,0,0" VerticalAlignment="Top" Height="28" Click="RestartCameraConnection_Click" Width="120" FontSize="12"/>
+                        <TextBox x:Name="shooterOutputBox_Copy8" Text="0" Style="{StaticResource PIDBigBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="914,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="Current Output" HorizontalAlignment="Left" Margin="926,110,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.158,0.431"/>
+                        <TextBox x:Name="shooterOutputBox_Copy9" Text="0" Style="{StaticResource PIDBigBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="914,179,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="Current Setpoint" HorizontalAlignment="Left" Margin="922,157,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.158,0.431"/>
+                        <Rectangle Margin="25,350,1707,154" Fill="{StaticResource ResourceKey=PanelGrey}" RenderTransformOrigin="0.5,0.5"/>
+                        <Label Content="AutoAim PID" HorizontalAlignment="Left" Margin="59,350,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="46" FontSize="16" FontWeight="SemiBold" Width="106"/>
+                        <TextBox x:Name="shooterPBox_Copy5" Text="0" Style="{StaticResource PIDSmallBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="55,408,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="P" HorizontalAlignment="Left" Margin="51,384,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="1.158,0.431"/>
+                        <TextBox x:Name="shooterDBox_Copy5" Text="0" Style="{StaticResource PIDSmallBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="119,408,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="D" HorizontalAlignment="Left" Margin="115,384,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="1.158,0.431"/>
+                        <Button x:Name="updateShooterPIDBtn_Copy5" Content="Update Values" Style="{StaticResource CameraConnectionButton}" HorizontalAlignment="Left" Margin="53,542,0,0" VerticalAlignment="Top" Height="28" Click="RestartCameraConnection_Click" Width="120" FontSize="12"/>
+                        <TextBox x:Name="shooterOutputBox_Copy10" Text="0" Style="{StaticResource PIDBigBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="55,458,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="Current Output" HorizontalAlignment="Left" Margin="67,436,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.158,0.431"/>
+                        <TextBox x:Name="shooterOutputBox_Copy11" Text="0" Style="{StaticResource PIDBigBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="55,504,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="Current Setpoint" HorizontalAlignment="Left" Margin="63,482,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.158,0.431"/>
+                        
+                        <!-- Hound X PID -->
+                        <Rectangle Margin="241,350,1491,154" Fill="{StaticResource ResourceKey=PanelGrey}" RenderTransformOrigin="0.5,0.5"/>
+                        <Label Content="Hound X PID" HorizontalAlignment="Left" Margin="275,350,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="46" FontSize="16" FontWeight="SemiBold" Width="105"/>
+                        <TextBox x:Name="houndXPBox" Text="0" Style="{StaticResource PIDSmallBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="271,408,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="P" HorizontalAlignment="Left" Margin="267,384,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="1.158,0.431"/>
+                        <TextBox x:Name="houndXDBox" Text="0" Style="{StaticResource PIDSmallBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="335,408,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="D" HorizontalAlignment="Left" Margin="331,384,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="1.158,0.431"/>
+                        <Button x:Name="updateHoundXPIDBtn" Content="Update Values" Style="{StaticResource CameraConnectionButton}" HorizontalAlignment="Left" Margin="269,542,0,0" VerticalAlignment="Top" Height="28" Width="120" FontSize="12" Click="updateHoundXPIDBtn_Click"/>
+                        <TextBox x:Name="houndXOutputBox" Text="0" Style="{StaticResource PIDBigBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="271,458,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="Current Output" HorizontalAlignment="Left" Margin="283,436,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.158,0.431"/>
+                        <TextBox x:Name="houndXSetpointBox" Text="0" Style="{StaticResource PIDBigBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="271,504,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="Current Setpoint" HorizontalAlignment="Left" Margin="279,482,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.158,0.431"/>
+
+                        <!-- Hound Y PID -->
+                        <Rectangle Margin="452,350,1280,154" Fill="{StaticResource ResourceKey=PanelGrey}" RenderTransformOrigin="0.5,0.5"/>
+                        <Label Content="Hound Y PID" HorizontalAlignment="Left" Margin="487,350,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="46" FontSize="16" FontWeight="SemiBold" Width="104"/>
+                        <TextBox x:Name="houndYPBox" Text="0" Style="{StaticResource PIDSmallBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="482,408,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="P" HorizontalAlignment="Left" Margin="478,384,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="1.158,0.431"/>
+                        <TextBox x:Name="houndYDBox" Text="0" Style="{StaticResource PIDSmallBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="546,408,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="D" HorizontalAlignment="Left" Margin="542,384,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="1.158,0.431"/>
+                        <Button x:Name="updateHoundYPIDBtn" Content="Update Values" Style="{StaticResource CameraConnectionButton}" HorizontalAlignment="Left" Margin="480,542,0,0" VerticalAlignment="Top" Height="28" Width="120" FontSize="12" Click="updateHoundYPIDBtn_Click"/>
+                        <TextBox x:Name="houndYOutputBox" Text="0" Style="{StaticResource PIDBigBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="482,458,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="Current Output" HorizontalAlignment="Left" Margin="494,436,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.158,0.431"/>
+                        <TextBox x:Name="houndYSetpointBox" Text="0" Style="{StaticResource PIDBigBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="482,504,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="Current Setpoint" HorizontalAlignment="Left" Margin="490,482,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.158,0.431"/>
+
+                        <!-- Hound R PID -->
+                        <Rectangle Margin="669,350,1063,154" Fill="{StaticResource ResourceKey=PanelGrey}" RenderTransformOrigin="0.5,0.5"/>
+                        <Label Content="Hound R PID" HorizontalAlignment="Left" Margin="703,350,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="46" FontSize="16" FontWeight="SemiBold" Width="106"/>
+                        <TextBox x:Name="houndRPBox" Text="0" Style="{StaticResource PIDSmallBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="699,408,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="P" HorizontalAlignment="Left" Margin="695,384,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="1.158,0.431"/>
+                        <TextBox x:Name="houndRDBox" Text="0" Style="{StaticResource PIDSmallBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="763,408,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="D" HorizontalAlignment="Left" Margin="759,384,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="1.158,0.431"/>
+                        <Button x:Name="updateHoundRPIDBtn" Content="Update Values" Style="{StaticResource CameraConnectionButton}" HorizontalAlignment="Left" Margin="697,542,0,0" VerticalAlignment="Top" Height="28" Width="120" FontSize="12" Click="updateHoundRPIDBtn_Click"/>
+                        <TextBox x:Name="houndROutputBox" Text="0" Style="{StaticResource PIDBigBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="699,458,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="Current Output" HorizontalAlignment="Left" Margin="711,436,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.158,0.431"/>
+                        <TextBox x:Name="houndRSetpointBox" Text="0" Style="{StaticResource PIDBigBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="699,504,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
+                        <Label Content="Current Setpoint" HorizontalAlignment="Left" Margin="707,482,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.158,0.431"/>
+
+                    </Grid>
                 </TabItem>
                 <TabItem Header="Feedback"  Style="{DynamicResource TabItemBase}">
                     <Grid Background="#FF2A2A2A">

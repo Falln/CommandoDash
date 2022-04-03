@@ -29,6 +29,7 @@ namespace CommandoDash
         NetworkTableInstance ntInst;
         NetworkTable FMSInfoNT;
         NetworkTable CommandoDashNT;
+        NetworkTable PIDTuningNT;
         MjpegDecoder CDDCameraStream;
 
         string cameraURI = "";
@@ -58,6 +59,7 @@ namespace CommandoDash
             //NT Tables
             FMSInfoNT = ntInst.GetTable("FMSInfo");
             CommandoDashNT = ntInst.GetTable("CommandoDash");
+            PIDTuningNT = CommandoDashNT.GetSubTable("PIDTuning");
 
             //Setup Default States
             defaultStates();
@@ -154,6 +156,22 @@ namespace CommandoDash
 
             //Update Cargo Field2d position
             AddSimpleEntryListener(ntInst.GetTable("SmartDashboard").GetSubTable("Field").GetEntry("SeenCargo"), new Action(() => updateCargoPosition()));
+
+            //PIDTuning Updates
+            //Update shooter setpoint
+            AddSimpleEntryListener(PIDTuningNT.GetEntry("shooterSetpoint"), new Action(() =>
+                shooterSetpointBox.Text = Math.Round(PIDTuningNT.GetEntry("shooterSetpoint").GetDouble(0), 1).ToString()));
+
+            //Hound X Y and R setpoint updates
+            AddSimpleEntryListener(PIDTuningNT.GetEntry("houndXSetpoint"), new Action(() =>
+                houndXSetpointBox.Text = Math.Round(PIDTuningNT.GetEntry("houndXSetpoint").GetDouble(0), 1).ToString()));
+
+            AddSimpleEntryListener(PIDTuningNT.GetEntry("houndYSetpoint"), new Action(() =>
+                houndYSetpointBox.Text = Math.Round(PIDTuningNT.GetEntry("houndYSetpoint").GetDouble(0), 1).ToString()));
+
+            AddSimpleEntryListener(PIDTuningNT.GetEntry("houndRSetpoint"), new Action(() =>
+                houndRSetpointBox.Text = Math.Round(PIDTuningNT.GetEntry("houndRSetpoint").GetDouble(0), 1).ToString()));
+
         }
 
         public void defaultStates()
@@ -252,6 +270,10 @@ namespace CommandoDash
                 robotIPInput.Text = ntInst.GetConnections()[0].RemoteIp;
                 robotIP = robotIPInput.Text;
                 updateRobotMode();
+                shooterPBox.Text = PIDTuningNT.GetEntry("shooterP").GetDouble(0).ToString();
+                shooterDBox.Text = PIDTuningNT.GetEntry("shooterD").GetDouble(0).ToString();
+                shooterKsBox.Text = PIDTuningNT.GetEntry("shooterKs").GetDouble(0).ToString();
+                shooterKvBox.Text = PIDTuningNT.GetEntry("shooterKv").GetDouble(0).ToString();
             }
             else
             {
@@ -652,6 +674,32 @@ namespace CommandoDash
             NetworkTableEntry entry = CommandoDashNT.GetEntry("autoSelection");
             entry.SetString("FullSend");
             FullSendRadio.IsChecked = true;
+        }
+
+        private void updateShooterPIDBtn_Click(object sender, RoutedEventArgs e)
+        {
+            PIDTuningNT.GetEntry("shooterP").SetDouble(Double.Parse(shooterPBox.Text));
+            PIDTuningNT.GetEntry("shooterD").SetDouble(Double.Parse(shooterDBox.Text));
+            PIDTuningNT.GetEntry("shooterKs").SetDouble(Double.Parse(shooterKsBox.Text));
+            PIDTuningNT.GetEntry("shooterKv").SetDouble(Double.Parse(shooterKvBox.Text));
+        }
+
+        private void updateHoundXPIDBtn_Click(object sender, RoutedEventArgs e)
+        {
+            PIDTuningNT.GetEntry("houndXP").SetDouble(Double.Parse(houndXPBox.Text));
+            PIDTuningNT.GetEntry("houndXD").SetDouble(Double.Parse(houndXDBox.Text));
+        }
+
+        private void updateHoundYPIDBtn_Click(object sender, RoutedEventArgs e)
+        {
+            PIDTuningNT.GetEntry("houndYP").SetDouble(Double.Parse(houndYPBox.Text));
+            PIDTuningNT.GetEntry("houndYD").SetDouble(Double.Parse(houndYDBox.Text));
+        }
+
+        private void updateHoundRPIDBtn_Click(object sender, RoutedEventArgs e)
+        {
+            PIDTuningNT.GetEntry("houndRP").SetDouble(Double.Parse(houndRPBox.Text));
+            PIDTuningNT.GetEntry("houndRD").SetDouble(Double.Parse(houndRDBox.Text));
         }
     }
 }

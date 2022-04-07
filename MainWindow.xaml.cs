@@ -149,6 +149,14 @@ namespace CommandoDash
             //Update Intake Spot 
             AddSimpleEntryListener(CommandoDashNT.GetSubTable("IndexStatus").GetEntry("entranceSensor"), new Action(() => updateIntakeSpot()));
 
+            //Update Intake Transfer Spot
+            AddSimpleEntryListener(CommandoDashNT.GetSubTable("IndexStatus").GetEntry("entranceToRampBlock"), new Action(() =>
+                IntakeCargoTransfer.Visibility = CommandoDashNT.GetSubTable("IndexStatus").GetEntry("entranceToRampBlock").GetBoolean(false) ? Visibility.Visible : Visibility.Hidden));
+
+            //Update Vertical Transfer Spot
+            AddSimpleEntryListener(CommandoDashNT.GetSubTable("IndexStatus").GetEntry("rampToVerticalBlock"), new Action(() => 
+                VerticalCargoTransfer.Visibility = CommandoDashNT.GetSubTable("IndexStatus").GetEntry("rampToVerticalBlock").GetBoolean(false) ? Visibility.Visible : Visibility.Hidden));
+
             //AutoLayouts
 
             //Update Robot Field2d position
@@ -171,6 +179,10 @@ namespace CommandoDash
 
             AddSimpleEntryListener(PIDTuningNT.GetEntry("houndRSetpoint"), new Action(() =>
                 houndRSetpointBox.Text = Math.Round(PIDTuningNT.GetEntry("houndRSetpoint").GetDouble(0), 1).ToString()));
+
+            //Update where the tilt arm should be
+            AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("tiltAngle"), new Action(() =>
+                ClimbArmAngle.Angle = -CommandoDashNT.GetSubTable("SensorData").GetEntry("tiltAngle").GetDouble(0)-5));
 
         }
 
@@ -306,6 +318,8 @@ namespace CommandoDash
                 IndexCargo1Image.Source = new BitmapImage(new Uri("Images/Red_Cargo.png", UriKind.Relative));
                 IndexCargo2Image.Source = new BitmapImage(new Uri("Images/Red_Cargo.png", UriKind.Relative));
                 IntakeCargoImage.Source = new BitmapImage(new Uri("Images/Red_Cargo.png", UriKind.Relative));
+                IntakeCargoTransfer.Source = new BitmapImage(new Uri("Images/Red_Cargo.png", UriKind.Relative));
+                VerticalCargoTransfer.Source = new BitmapImage(new Uri("Images/Red_Cargo.png", UriKind.Relative));
 
                 IndexSpot1SB.ActiveBrush = (Brush)this.Resources["IndexRedEnabled"];
                 IndexSpot2SB.ActiveBrush = (Brush)this.Resources["IndexRedEnabled"];
@@ -326,6 +340,8 @@ namespace CommandoDash
                 IndexCargo1Image.Source = new BitmapImage(new Uri("Images/Blue_Cargo.png", UriKind.Relative));
                 IndexCargo2Image.Source = new BitmapImage(new Uri("Images/Blue_Cargo.png", UriKind.Relative));
                 IntakeCargoImage.Source = new BitmapImage(new Uri("Images/Blue_Cargo.png", UriKind.Relative));
+                IntakeCargoTransfer.Source = new BitmapImage(new Uri("Images/Blue_Cargo.png", UriKind.Relative));
+                VerticalCargoTransfer.Source = new BitmapImage(new Uri("Images/Blue_Cargo.png", UriKind.Relative));
 
                 IndexSpot1SB.ActiveBrush = (Brush)this.Resources["IndexBlueEnabled"];
                 IndexSpot2SB.ActiveBrush = (Brush)this.Resources["IndexBlueEnabled"];
@@ -438,7 +454,7 @@ namespace CommandoDash
 
         private void updateIndexSpot1()
         {
-            Boolean spotHasCargo = CommandoDashNT.GetSubTable("SensorData").GetEntry("indexSpot1HasCargo").GetBoolean(false);
+            Boolean spotHasCargo = CommandoDashNT.GetSubTable("IndexStatus").GetEntry("verticalSensor").GetBoolean(false);
             if (spotHasCargo)
             {
                 IndexCargo1Image.Visibility = Visibility.Visible;
@@ -451,7 +467,7 @@ namespace CommandoDash
 
         private void updateIndexSpot2()
         {
-            Boolean spotHasCargo = CommandoDashNT.GetSubTable("SensorData").GetEntry("indexSpot2HasCargo").GetBoolean(false);
+            Boolean spotHasCargo = CommandoDashNT.GetSubTable("IndexStatus").GetEntry("rampSensor").GetBoolean(false);
             if (spotHasCargo)
             {
                 IndexCargo2Image.Visibility = Visibility.Visible;
@@ -465,7 +481,7 @@ namespace CommandoDash
 
         private void updateIntakeSpot()
         {
-            Boolean spotHasCargo = CommandoDashNT.GetSubTable("SensorData").GetEntry("intakeSpotHasCargo").GetBoolean(false);
+            Boolean spotHasCargo = CommandoDashNT.GetSubTable("IndexStatus").GetEntry("entranceSensor").GetBoolean(false);
             if (spotHasCargo)
             {
                 IntakeCargoImage.Visibility = Visibility.Visible;

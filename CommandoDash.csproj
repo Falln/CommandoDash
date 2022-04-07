@@ -10,6 +10,9 @@
 
   <ItemGroup>
     <None Remove="Blue_Cargo.png" />
+    <None Remove="Climb Arm Blue NoB.png" />
+    <None Remove="Climb Arm Navy NoBackground.png" />
+    <None Remove="Climb Arm NoBackground.png" />
     <None Remove="close.png" />
     <None Remove="CommandoLogov1.png" />
     <None Remove="CommandoLogov1_preview_rev_1.png" />
@@ -27,6 +30,9 @@
     <None Remove="Images\5889-Index-Robot-PNG.png" />
     <None Remove="Images\5889-Index-Robot.png" />
     <None Remove="Images\Blue_Cargo.png" />
+    <None Remove="Images\Climb Arm Blue NoBackground.png" />
+    <None Remove="Images\Climb Arm Navy NoBackground.png" />
+    <None Remove="Images\Climb Arm NoBackground.png" />
     <None Remove="Images\DoubleShotField.png" />
     <None Remove="Images\favicon-16x16.png" />
     <None Remove="Images\FRC 2022 Offical Field.png" />
@@ -56,6 +62,9 @@
 
   <ItemGroup>
     <Resource Include="Blue_Cargo.png" />
+    <Resource Include="Climb Arm Blue NoB.png" />
+    <Resource Include="Climb Arm Navy NoBackground.png" />
+    <Resource Include="Climb Arm NoBackground.png" />
     <Resource Include="close.png" />
     <Resource Include="CommandoLogov1.png" />
     <Resource Include="CommandoLogov1_preview_rev_1.png" />
@@ -83,6 +92,12 @@
     <Content Include="Images\Blue_Cargo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Climb Arm Navy NoBackground.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Climb Arm NoBackground.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\DoubleShotField.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -107,6 +122,7 @@
     <Content Include="Images\refresh_icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\Climb Arm Blue NoBackground.png" />
     <Resource Include="Images\favicon-16x16.png" />
     <Resource Include="Images\gear_white_transparent.png">
       <Pack>True</Pack>

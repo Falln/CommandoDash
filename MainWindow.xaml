@@ -100,6 +100,13 @@
             <Setter Property="Source" Value="/Images/Blue_Cargo.png"/>
             <Setter Property="Visibility" Value="Hidden"/>
         </Style>
+        <Style TargetType="{x:Type Image}" x:Key="IndexCargoTransferImages">
+            <Setter Property="Width" Value="60"/>
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="Source" Value="/Images/Blue_Cargo.png"/>
+            <Setter Property="Visibility" Value="Hidden"/>
+            <Setter Property="Opacity" Value="0.5"/>
+        </Style>
 
         <!-- TextBlock/Box Styles -->
         <Style TargetType="{x:Type local:StatusTextBlock}" x:Key="StatusTextBlocks">
@@ -499,10 +506,22 @@
 
 
                         <!-- Index Status -->
-                        <Image x:Name="IndexCargo1Image" Style="{StaticResource IndexCargoImages}" Grid.Column="1" HorizontalAlignment="Left" Margin="496,75,0,0" VerticalAlignment="Top"/>
-                        <Image x:Name="IndexCargo2Image" Style="{StaticResource IndexCargoImages}" Grid.Column="1" HorizontalAlignment="Left" Margin="541,110,0,0" VerticalAlignment="Top"/>
-                        <Image x:Name="IntakeCargoImage" Style="{StaticResource IndexCargoImages}" Grid.Column="1" HorizontalAlignment="Left" Margin="650,125,0,0" VerticalAlignment="Top"/>
-                        <Image Grid.Column="1" Margin="434,0,183,497" Source="/Images/5889-Index-Robot-PNG (3).png" Stretch="Fill"/>
+                        <Image x:Name="IndexCargo1Image" Style="{StaticResource IndexCargoImages}" Grid.Column="1" HorizontalAlignment="Left" Margin="485,49,0,0" VerticalAlignment="Top"/>
+                        <Image x:Name="IndexCargo2Image" Style="{StaticResource IndexCargoImages}" Grid.Column="1" HorizontalAlignment="Left" Margin="511,98,0,0" VerticalAlignment="Top"/>
+                        <Image x:Name="IntakeCargoImage" Style="{StaticResource IndexCargoImages}" Grid.Column="1" HorizontalAlignment="Left" Margin="649,132,0,0" VerticalAlignment="Top"/>
+                        <Image x:Name="IntakeCargoTransfer" Style="{StaticResource IndexCargoTransferImages}" Grid.Column="1" HorizontalAlignment="Left" Margin="580,128,0,0" VerticalAlignment="Top"/>
+                        <Image x:Name="VerticalCargoTransfer" Style="{StaticResource IndexCargoTransferImages}" Grid.Column="1" HorizontalAlignment="Left" Margin="491,79,0,0" VerticalAlignment="Top"/>
+                        <Image Grid.Column="1" Margin="433,8,184,489" Source="/Images/5889-Index-Robot-PNG (3).png" Stretch="Fill"/>
+                        <Image Grid.Column="1" HorizontalAlignment="Left" Height="180" Margin="527,0,0,0" VerticalAlignment="Top" Width="76" Source="/Images/Climb Arm Blue NoBackground.png" Stretch="Fill" RenderTransformOrigin="0.503,0.922">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform x:Name="ClimbArmAngle" Angle="-5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                        </Image>
                         <Rectangle Margin="776,19,41,520" Fill="{StaticResource ResourceKey=PanelGrey}" Grid.Column="1"/>
                         <Label Grid.Column="1" Content="Index Status" HorizontalAlignment="Left" Margin="779,19,0,0" VerticalAlignment="Top" FontSize="14" FontFamily="Segoe UI Semibold"/>
                         <local:StatusTextBlock x:Name="IndexSpot1SB" Style="{StaticResource IndexStatusBlocks}" Grid.Column="1" HorizontalAlignment="Left" Margin="808,68,0,0" TextWrapping="Wrap" Text="StatusTextBlock" VerticalAlignment="Top"/>
@@ -602,12 +621,6 @@
                         <Label Grid.Column="1" Content="Battery Voltage" HorizontalAlignment="Left" Margin="567,689,0,0" VerticalAlignment="Top" Height="30" Width="102"/>
                         <local:StatusTextBlock x:Name="BatteryVolatgeSB" Style="{StaticResource ResourceKey=PowerStatusBlocks}" ActiveBrush="{StaticResource PowerEnabled}" InactiveBrush="{StaticResource PowerDisabled}" BorderBrush="{StaticResource PowerBorder}"  Margin="661,692,195,21" Grid.Column="1" Text="300A"/>
                         <local:StatusTextBlock x:Name="TotalCurrentSB" Style="{StaticResource ResourceKey=PowerStatusBlocks}" ActiveBrush="{StaticResource PowerEnabled}" InactiveBrush="{StaticResource PowerDisabled}" BorderBrush="{StaticResource PowerBorder}"  Margin="661,668,195,45" Grid.Column="1" Text="12.7V"/>
-
-
-
-
-
-
                     </Grid>
                 </TabItem>
                 <TabItem Header="AutoLayouts"  Style="{DynamicResource TabItemBase}">
@@ -763,7 +776,7 @@
                         <Label Content="Current Output" HorizontalAlignment="Left" Margin="67,436,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.158,0.431"/>
                         <TextBox x:Name="shooterOutputBox_Copy11" Text="0" Style="{StaticResource PIDBigBoxes}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="55,504,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFB1B1B1" BorderBrush="{x:Null}" />
                         <Label Content="Current Setpoint" HorizontalAlignment="Left" Margin="63,482,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.158,0.431"/>
-                        
+
                         <!-- Hound X PID -->
                         <Rectangle Margin="241,350,1491,154" Fill="{StaticResource ResourceKey=PanelGrey}" RenderTransformOrigin="0.5,0.5"/>
                         <Label Content="Hound X PID" HorizontalAlignment="Left" Margin="275,350,0,0" VerticalAlignment="Top" Foreground="#FFFEFEFE" Height="46" FontSize="16" FontWeight="SemiBold" Width="105"/>

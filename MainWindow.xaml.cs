@@ -30,6 +30,7 @@ namespace CommandoDash
         NetworkTable FMSInfoNT;
         NetworkTable CommandoDashNT;
         NetworkTable PIDTuningNT;
+        NetworkTable VectorMapNT;
         MjpegDecoder CDDCameraStream;
 
         string cameraURI = "";
@@ -60,6 +61,7 @@ namespace CommandoDash
             FMSInfoNT = ntInst.GetTable("FMSInfo");
             CommandoDashNT = ntInst.GetTable("CommandoDash");
             PIDTuningNT = CommandoDashNT.GetSubTable("PIDTuning");
+            VectorMapNT = CommandoDashNT.GetSubTable("VectorMap");
 
             //Setup Default States
             defaultStates();
@@ -114,9 +116,15 @@ namespace CommandoDash
             AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("shooterRPM"), new Action(() =>
                 ShooterRPMBox.Text = Math.Round(CommandoDashNT.GetSubTable("SensorData").GetEntry("shooterRPM").GetDouble(0), 0).ToString()));
 
+            AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("shooterRPM"), new Action(() =>
+                ShooterRPMBox_Copy.Text = Math.Round(CommandoDashNT.GetSubTable("SensorData").GetEntry("shooterRPM").GetDouble(0), 0).ToString()));
+
             //Update Manual CycleSpeed
             AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("manualCycleSpeed"), new Action(() =>
                 ManualCycleBox.Text = CommandoDashNT.GetSubTable("SensorData").GetEntry("manualCycleSpeed").GetDouble(0).ToString()));
+
+            AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("manualCycleSpeed"), new Action(() =>
+                ManualCycleBox_Copy.Text = CommandoDashNT.GetSubTable("SensorData").GetEntry("manualCycleSpeed").GetDouble(0).ToString()));
 
             //Update VectorMap
             AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("targetRPM"), new Action(() => updateVectorMapBox()));
@@ -183,6 +191,9 @@ namespace CommandoDash
             //Update where the tilt arm should be
             AddSimpleEntryListener(CommandoDashNT.GetSubTable("SensorData").GetEntry("tiltAngle"), new Action(() =>
                 ClimbArmAngle.Angle = -CommandoDashNT.GetSubTable("SensorData").GetEntry("tiltAngle").GetDouble(0)-5));
+
+            //Update VectorMap RPMs
+            AddSimpleEntryListener(VectorMapNT.GetEntry("0.0 - 2.0"), new Action(() => updateVectorMapRPMs()));
 
         }
 
@@ -498,6 +509,25 @@ namespace CommandoDash
             double targetRPM = Math.Round(CommandoDashNT.GetSubTable("SensorData").GetEntry("targetRPM").GetDouble(0), 0);
             string vectorMapRange = CommandoDashNT.GetSubTable("SensorData").GetEntry("vectorMapRange").GetString("0.0 - 0.0");
             VectorMapBox.Text = targetRPM + " | " + vectorMapRange;
+            VectorMapBox_Copy.Text = targetRPM + " | " + vectorMapRange;
+        }
+
+        private void updateVectorMapRPMs()
+        {
+            ZeroTo2RPMBox.Text = VectorMapNT.GetEntry("0.0 - 2.0").GetDouble(-1).ToString();
+            TwoTo2Pt5RPMBox.Text = VectorMapNT.GetEntry("2.0 - 2.5").GetDouble(-1).ToString();
+            TwoPt5To3RPMBox.Text = VectorMapNT.GetEntry("2.5 - 3.0").GetDouble(-1).ToString();
+            ThreeTo3Pt5RPMBox.Text = VectorMapNT.GetEntry("3.0 - 3.5").GetDouble(-1).ToString();
+            ThreePt5To4RPMBox.Text = VectorMapNT.GetEntry("3.5 - 4.0").GetDouble(-1).ToString();
+            FourTo4Pt5RPMBox.Text = VectorMapNT.GetEntry("4.0 - 4.5").GetDouble(-1).ToString();
+            FourPt5To5RPMBox.Text = VectorMapNT.GetEntry("4.5 - 5.0").GetDouble(-1).ToString();
+            FiveTo5Pt5RPMBox.Text = VectorMapNT.GetEntry("5.0 - 5.5").GetDouble(-1).ToString();
+            FivePt5To6RPMBox.Text = VectorMapNT.GetEntry("5.5 - 6.0").GetDouble(-1).ToString();
+            SixTo6Pt25RPMBox.Text = VectorMapNT.GetEntry("6.0 - 6.25").GetDouble(-1).ToString();
+            SixPt25To6Pt5RPMBox.Text = VectorMapNT.GetEntry("6.25 - 6.5").GetDouble(-1).ToString();
+            SixPt5To7RPMBox.Text = VectorMapNT.GetEntry("6.5 - 7.0").GetDouble(-1).ToString();
+            SevenTo7Pt5RPMBox.Text = VectorMapNT.GetEntry("7.0 - 7.5").GetDouble(-1).ToString();
+            SevenPt5To8RPMBox.Text = VectorMapNT.GetEntry("7.5 - 8.0").GetDouble(-1).ToString();
         }
 
 
@@ -716,6 +746,118 @@ namespace CommandoDash
         {
             PIDTuningNT.GetEntry("houndRP").SetDouble(Double.Parse(houndRPBox.Text));
             PIDTuningNT.GetEntry("houndRD").SetDouble(Double.Parse(houndRDBox.Text));
+        }
+
+        private void ZeroTo2RPMBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                VectorMapNT.GetEntry("0.0 - 2.0").SetDouble(Double.Parse(ZeroTo2RPMBox.Text));
+            }
+        }
+
+        private void TwoTo2Pt5RPMBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                VectorMapNT.GetEntry("2.0 - 2.5").SetDouble(Double.Parse(TwoTo2Pt5RPMBox.Text));
+            }
+        }
+
+        private void TwoPt5To3RPMBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                VectorMapNT.GetEntry("2.5 - 3.0").SetDouble(Double.Parse(TwoPt5To3RPMBox.Text));
+            }
+        }
+
+        private void ThreeTo3Pt5RPMBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                VectorMapNT.GetEntry("3.0 - 3.5").SetDouble(Double.Parse(ThreeTo3Pt5RPMBox.Text));
+            }
+        }
+
+        private void ThreePt5To4RPMBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                VectorMapNT.GetEntry("3.5 - 4.0").SetDouble(Double.Parse(ThreePt5To4RPMBox.Text));
+            }
+        }
+
+        private void FourTo4Pt5RPMBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                VectorMapNT.GetEntry("4.0 - 4.5").SetDouble(Double.Parse(FourTo4Pt5RPMBox.Text));
+            }
+        }
+
+        private void FourPt5To5RPMBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                VectorMapNT.GetEntry("4.5 - 5.0").SetDouble(Double.Parse(FourPt5To5RPMBox.Text));
+            }
+        }
+
+        private void FiveTo5Pt5RPMBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                VectorMapNT.GetEntry("5.0 - 5.5").SetDouble(Double.Parse(FiveTo5Pt5RPMBox.Text));
+            }
+        }
+
+        private void FivePt5To6RPMBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                VectorMapNT.GetEntry("5.5 - 6.0").SetDouble(Double.Parse(FivePt5To6RPMBox.Text));
+            }
+        }
+
+        private void SixTo6Pt25RPMBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                VectorMapNT.GetEntry("6.0 - 6.25").SetDouble(Double.Parse(SixTo6Pt25RPMBox.Text));
+            }
+        }
+
+        private void SixPt25To6Pt5RPMBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                VectorMapNT.GetEntry("6.25 - 6.5").SetDouble(Double.Parse(SixPt25To6Pt5RPMBox.Text));
+            }
+        }
+
+        private void SixPt5To7RPMBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                VectorMapNT.GetEntry("6.5 - 7.0").SetDouble(Double.Parse(SixPt5To7RPMBox.Text));
+            }
+        }
+
+        private void SevenTo7Pt5RPMBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                VectorMapNT.GetEntry("7.0 - 7.5").SetDouble(Double.Parse(SevenTo7Pt5RPMBox.Text));
+            }
+        }
+
+        private void SevenPt5To8RPMBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                VectorMapNT.GetEntry("7.5 - 8.0").SetDouble(Double.Parse(SevenPt5To8RPMBox.Text));
+            }
         }
     }
 }
